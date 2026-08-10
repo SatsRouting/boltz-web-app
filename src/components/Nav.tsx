@@ -40,11 +40,12 @@ const Nav = (props: { network: string; isPro?: boolean }) => {
             <Warnings />
             <div class="nav-inner">
                 <A id="logo" href="/" onClick={() => setHideHero(false)}>
-                    <div
-                        id="logo-mask"
-                        boltz-theme={props.isPro ? "pro" : "default"}
-                        role="img"
-                        aria-label="Boltz logo"
+                    {/* Logo SATS Routing (PNG a colori). Il vecchio wordmark
+                    monocromatico via CSS mask è conservato in nav.scss (#logo-mask). */}
+                    <img
+                        id="logo-img"
+                        src="/logo.png"
+                        alt="SATS Routing logo"
                     />
                 </A>
                 <Show when={props.network !== "mainnet"}>
@@ -100,9 +101,11 @@ const Nav = (props: { network: string; isPro?: boolean }) => {
                     <A href="/history" onClick={() => setHamburger(false)}>
                         {t("history")}
                     </A>
+                    {/* Sezione "Products" (Boltz Pro/Client/BTCPay) nascosta per SATS Routing
                     <A href="/products" onClick={() => setHamburger(false)}>
                         {t("products")}
                     </A>
+                    */}
                     <Show when={config.supportUrl}>
                         <ExternalLink class="external" href={config.supportUrl}>
                             {t("help")}

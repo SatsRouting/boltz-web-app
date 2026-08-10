@@ -178,31 +178,37 @@ const Web3SignerProvider = (props: {
 
     const hasEvm = hasEvmAssets();
 
+    // Ledger/Trezor need an EVM asset RPC from config; skip when filterAssets
+    // leaves only UTXO assets (e.g. self-hosted BTC + L-BTC).
     const [providers, setProviders] = createSignal<
         Record<string, EIP6963ProviderDetail>
-    >({
-        [HardwareRdns.Ledger]: {
-            provider: new LedgerSigner(t),
-            info: {
-                name: "Ledger",
-                uuid: "ledger",
-                icon: LedgerIcon,
-                isHardware: true,
-                rdns: HardwareRdns.Ledger,
-                disabled: navigator.hid === undefined,
-            },
-        },
-        [HardwareRdns.Trezor]: {
-            provider: new TrezorSigner(),
-            info: {
-                name: "Trezor",
-                uuid: "trezor",
-                icon: TrezorIcon,
-                isHardware: true,
-                rdns: HardwareRdns.Trezor,
-            },
-        },
-    });
+    >(
+        hasEvm
+            ? {
+                  [HardwareRdns.Ledger]: {
+                      provider: new LedgerSigner(t),
+                      info: {
+                          name: "Ledger",
+                          uuid: "ledger",
+                          icon: LedgerIcon,
+                          isHardware: true,
+                          rdns: HardwareRdns.Ledger,
+                          disabled: navigator.hid === undefined,
+                      },
+                  },
+                  [HardwareRdns.Trezor]: {
+                      provider: new TrezorSigner(),
+                      info: {
+                          name: "Trezor",
+                          uuid: "trezor",
+                          icon: TrezorIcon,
+                          isHardware: true,
+                          rdns: HardwareRdns.Trezor,
+                      },
+                  },
+              }
+            : {},
+    );
     const [connectedWallet, setConnectedWallet] = createSignal<
         ConnectedWallet | undefined
     >(undefined);

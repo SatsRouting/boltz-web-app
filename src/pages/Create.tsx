@@ -1076,10 +1076,10 @@ const Create = () => {
                 <Show when={embeddedMode()}>
                     <div class="embedded-branding">
                         <a
-                            href="https://boltz.exchange"
+                            href="https://satsrouting.exchange"
                             target="_blank"
                             rel="noopener noreferrer">
-                            Powered by Boltz
+                            Powered by SATS Routing
                         </a>
                     </div>
                 </Show>

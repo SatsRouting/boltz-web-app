@@ -3,7 +3,8 @@ import { Show } from "solid-js";
 import reload_svg from "../assets/reload.svg";
 import { config } from "../config";
 import { useGlobalContext } from "../context/Global";
-import ProBanner from "./ProBanner";
+// ProBanner (Boltz Pro) nascosto per SATS Routing (codice conservato)
+// import ProBanner from "./ProBanner";
 
 const Warnings = () => {
     const { t, online, fetchPairs, wasmSupported } = useGlobalContext();
@@ -26,9 +27,11 @@ const Warnings = () => {
             <Show when={config.isBeta}>
                 <div class="banner banner-yellow">{t("beta_caution")}</div>
             </Show>
+            {/* ProBanner (Boltz Pro) nascosto per SATS Routing
             <Show when={config.isPro}>
                 <ProBanner />
             </Show>
+            */}
         </div>
     );
 };

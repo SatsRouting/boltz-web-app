@@ -30,10 +30,10 @@ const modeLabels = Object.freeze({
 // Configuration for both regular and pro versions
 const config = {
     regular: {
-        boltzUrl: "https://boltz.exchange",
-        boltzTitle: "Boltz | Non-Custodial Bitcoin Bridge",
+        boltzUrl: "https://satsrouting.exchange",
+        boltzTitle: "SATS Routing | Non-Custodial Bitcoin Bridge",
         boltzDescription:
-            "Swap between different Bitcoin layers and stablecoins while staying in full control. Fast and non-custodial Bitcoin / Lightning / Liquid / Rootstock / TBTC / WBTC / USDT / USDC swaps.",
+            "Swap between Bitcoin, Lightning and Liquid while staying in full control. Fast and non-custodial Bitcoin / Lightning / Liquid swaps.",
         boltzColor100: "#FFE96D",
         boltzColor200: "#E1C218",
         backgroundColor: "#142840",
@@ -41,19 +41,19 @@ const config = {
         ldJson: {
             "@context": "https://schema.org",
             "@type": "Organization",
-            name: "Boltz Exchange",
-            url: "https://boltz.exchange",
-            logo: "https://boltz.exchange/boltz.svg",
-            sameAs: ["https://x.com/boltzhq"],
-            hasPart: {
-                "@context": "https://schema.org",
-                "@type": "WebApplication",
-                name: "Boltz Pro | Stack Sats Non-Custodially",
-                url: "https://pro.boltz.exchange",
-                logo: "https://pro.boltz.exchange/boltz-pro-preview.jpg",
-                description:
-                    "Earn sats for swapping Bitcoin in directions that help balance our liquidity. Fast and non-custodial Lightning / Bitcoin / Liquid / Rootstock swaps.",
-            },
+            name: "SATS Routing",
+            url: "https://satsrouting.exchange",
+            logo: "https://satsrouting.exchange/boltz.svg",
+            // sameAs: ["https://x.com/boltzhq"],
+            // hasPart: {
+            //     "@context": "https://schema.org",
+            //     "@type": "WebApplication",
+            //     name: "Boltz Pro | Stack Sats Non-Custodially",
+            //     url: "https://pro.boltz.exchange",
+            //     logo: "https://pro.boltz.exchange/boltz-pro-preview.jpg",
+            //     description:
+            //         "Earn sats for swapping Bitcoin in directions that help balance our liquidity. Fast and non-custodial Lightning / Bitcoin / Liquid / Rootstock swaps.",
+            // },
         },
     },
     pro: {
