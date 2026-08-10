@@ -6,7 +6,7 @@ const dict = {
         fast: "Fast",
         l2: "Built on Layer 2",
         l2_sub: "SATS Routing utilizes Layer 2 scaling technologies like the Lightning Network",
-        assets_sub: "Bitcoin Layers and Stablecoins",
+        assets_sub: "Bitcoin Layers",
         safe: "Safe",
         non_custodial: "Non-Custodial",
         non_custodial_sub:
@@ -105,7 +105,7 @@ const dict = {
         copy_amount: "Amount",
         copy_bip21: "BIP21",
         rescue_a_swap_subline:
-            "If you sent BTC or LBTC into a Boltz swap, upload or enter your rescue key to rescue a swap that is not available in this browser’s swap history.",
+            "If you sent BTC or LBTC into a SATS Routing swap, upload or enter your rescue key to rescue a swap that is not available in this browser’s swap history.",
         rescue_a_swap_mnemonic:
             "Enter your rescue key to rescue a swap that is not available in this browser’s swap history.",
         refund_past_swaps: "Past swaps",
@@ -160,7 +160,7 @@ const dict = {
         headline: "Non-Custodial Bitcoin Bridge",
         headline_pro: "Stack Sats Non-Custodially",
         subline:
-            "Swap between different Bitcoin layers and Stablecoins while staying in full control.",
+            "Swap between different Bitcoin layers while staying in full control.",
         subline_pro:
             "Earn sats for swapping Bitcoin in directions that help balance our liquidity.",
         start_swapping: "Start Swapping",
@@ -173,7 +173,7 @@ const dict = {
         num_channels: "Number of Channels",
         beta_caution: "BETA - USE WITH CAUTION!",
         pro: "pro",
-        pro_banner: "Looking to use Boltz Pro via API?",
+        pro_banner: "Looking to use SATS Routing Pro via API?",
         warning_return:
             "Return to this page after paying the invoice! The payment might show pending until you return to this page.",
         warning_expiry:
@@ -388,28 +388,28 @@ const dict = {
         products: "Products",
         products_description:
             "A suite of products for seamless interoperability between Bitcoin layers",
-        products_plugin_title: "Boltz BTCPay Plugin",
+        products_plugin_title: "SATS Routing BTCPay Plugin",
         products_plugin_description:
             "A non-custodial solution to easily accept Lightning payments without running a Lightning node",
-        products_client_title: "Boltz Client",
+        products_client_title: "SATS Routing Client",
         products_client_description:
             "Our enterprise-grade swap daemon for server integrations and liquidity management",
-        products_pro_title: "Boltz Pro",
+        products_pro_title: "SATS Routing Pro",
         products_pro_description:
             "A platform for earning sats non-custodially by providing just-in-time liquidity",
         learn_more: "Learn more",
-        get_started: "Open Boltz Pro",
+        get_started: "Open SATS Routing Pro",
         documentation: "Documentation",
         view_on_github: "View on Github",
         chat_with_us: "Chat with us",
 
         // Plugin
-        boltz_plugin_name: "Boltz BTCPay Plugin",
+        boltz_plugin_name: "SATS Routing BTCPay Plugin",
         boltz_plugin_description:
             "Non-custodial solution to easily accept Lightning payments",
         boltz_plugin_step_install_title: "Add the plugin",
         boltz_plugin_step_install_description:
-            "Install the Boltz plugin on your BTCPay Server",
+            "Install the SATS Routing plugin on your BTCPay Server",
         boltz_plugin_step_setup_title: "Set up your wallet",
         boltz_plugin_step_setup_description:
             "Connect your external wallet or create a new one",
@@ -430,12 +430,12 @@ const dict = {
             "Autoswap to mainchain Bitcoin based on your preferences",
         boltz_plugin_feature_self_custodial_title: "Non-custodial",
         boltz_plugin_feature_self_custodial_description:
-            "Stay in full control of your Bitcoin, powered by Boltz Atomic Swaps",
+            "Stay in full control of your Bitcoin, powered by SATS Routing Atomic Swaps",
 
         boltz_plugin_questions_title: "Questions?",
         boltz_plugin_questions_subtitle: "We'd love to hear from you!",
         // Client
-        boltz_client_name: "Boltz Client",
+        boltz_client_name: "SATS Routing Client",
         boltz_client_description:
             "Enterprise-grade swap daemon for server integrations and liquidity management",
         boltz_client_features_title: "Built for Professionals",
@@ -458,23 +458,23 @@ const dict = {
             "Built-in wallet system and comprehensive API for seamless integration into your infrastructure.",
         boltz_client_cli_second_paragraph:
             "Monitor, control, and automate everything from the command line or your own applications.",
-        boltz_client_cta_title: "Ready to add Boltz to your infrastructure?",
+        boltz_client_cta_title: "Ready to add SATS Routing to your infrastructure?",
         boltz_client_cta_subtitle:
-            "Join enterprises and node runners trusting Boltz Client",
+            "Join enterprises and node runners trusting SATS Routing Client",
 
         // Pro
-        boltz_pro_name: "Boltz Pro",
+        boltz_pro_name: "SATS Routing Pro",
         boltz_pro_description: "A platform for earning sats non-custodially",
         boltz_pro_how_it_works_title: "How it works",
         boltz_pro_how_it_works_description:
             "You get paid for swapping in directions that help us rebalance our liquidity",
-        boltz_pro_chart_title: "Boltz Pro Fee History Sample",
-        boltz_pro_chart_y_axis: "Boltz Pro Fee",
+        boltz_pro_chart_title: "SATS Routing Pro Fee History Sample",
+        boltz_pro_chart_y_axis: "SATS Routing Pro Fee",
         boltz_pro_chart_x_axis: "Date",
         boltz_pro_negative_fee: "You earn sats",
         boltz_pro_lower_fee: "You save sats",
-        boltz_pro_regular_fee: "Regular Boltz Fee",
-        boltz_pro_target_audience_title: "Who is Boltz Pro For?",
+        boltz_pro_regular_fee: "Regular SATS Routing Fee",
+        boltz_pro_target_audience_title: "Who is SATS Routing Pro For?",
         boltz_pro_target_audience_subtitle:
             "Built for professionals seeking earn opportunities, not for everyday payments",
         boltz_pro_perfect_for_title: "Built For",
@@ -493,12 +493,12 @@ const dict = {
             "Scenarios requiring guaranteed instant settlement",
         boltz_pro_cta_title: "Start earning sats now!",
         boltz_pro_cta_subtitle:
-            "Head over to Boltz Pro and check out the latest earn opportunities",
+            "Head over to SATS Routing Pro and check out the latest earn opportunities",
         boltz_pro_options_title: "3 ways to use it",
         boltz_pro_options_subtitle: "Choose what fits you best",
-        boltz_pro_option_client_title: "Boltz Client",
+        boltz_pro_option_client_title: "SATS Routing Client",
         boltz_pro_option_client_description:
-            "Fully automate Boltz Pro via API & CLI",
+            "Fully automate SATS Routing Pro via API & CLI",
         boltz_pro_option_web_title: "Web App",
         boltz_pro_option_web_description:
             "Monitor and execute swap opportunities via web",
@@ -537,7 +537,7 @@ const dict = {
         rescue_external_resume: "Resume",
 
         evm_rescue_prompt:
-            'If you sent funds into a Boltz swap on an EVM chain, use "Refund Swap"; if you were receiving funds from an EVM chain, use "Resume Swap" to rescue a swap that is not available in this browser’s swap history.',
+            'If you sent funds into a SATS Routing swap on an EVM chain, use "Refund Swap"; if you were receiving funds from an EVM chain, use "Resume Swap" to rescue a swap that is not available in this browser’s swap history.',
         evm_rescue_refund_title: "Refund Swap",
         start_scanning: "Start scanning",
         stop_scanning: "Stop scanning",
@@ -554,16 +554,16 @@ const dict = {
         upload_rescue_key: "Select Rescue Key",
 
         suspension_status: "Swap Services Disabled",
-        suspension_p1: "Update: Boltz will stay disabled until further notice.",
+        suspension_p1: "Update: SATS Routing will stay disabled until further notice.",
         suspension_p2:
             "Our API remains available to process refunds cooperatively. In any case, unilateral refunds will work, as they do not depend on our infrastructure.",
         suspension_p3: "Our support team stays reachable.",
         suspension_p4:
-            "To be clear: this is not a response to a single incident. Over the past months we have seen a steady rise in automated, AI-assisted probing of our infrastructure, and we have dealt with several exploits. Each was contained, but the pattern is clear: attackers now iterate faster than a team our size can find and patch. In the past few days alone we saw a drastic acceleration, and we do not believe this asymmetry will reverse. After reviewing the results of our own recent security scans, we cannot responsibly re-enable Boltz swaps, especially as we are being actively targeted by what appear to be multiple resourceful groups while we race to deploy fixes.",
+            "To be clear: this is not a response to a single incident. Over the past months we have seen a steady rise in automated, AI-assisted probing of our infrastructure, and we have dealt with several exploits. Each was contained, but the pattern is clear: attackers now iterate faster than a team our size can find and patch. In the past few days alone we saw a drastic acceleration, and we do not believe this asymmetry will reverse. After reviewing the results of our own recent security scans, we cannot responsibly re-enable SATS Routing swaps, especially as we are being actively targeted by what appear to be multiple resourceful groups while we race to deploy fixes.",
         suspension_p5:
             "What we are seeing is a major paradigm shift for Bitcoin services operating on an open source stack, and it needs careful analysis. Do not expect swap services to resume shortly.",
         suspension_p6:
-            "To be explicit: no user funds were ever at risk. Boltz is non-custodial by design. And as a fully bootstrapped company, the losses were ours alone.",
+            "To be explicit: no user funds were ever at risk. SATS Routing is non-custodial by design. And as a fully bootstrapped company, the losses were ours alone.",
         suspension_p7:
             "We don't know yet how things will continue from here, but we'll keep you posted as soon as we have had the time to catch our breath and make a decision 🙏",
         suspension_date: "3 August 2026 · View on X",
@@ -574,12 +574,12 @@ const dict = {
         status: "Status",
         fast: "Schnell",
         l2: "Auf Layer-2 gebaut",
-        l2_sub: "Boltz nutzt Layer-2 Skalierungstechnologien wie das Lightning-Netzwerk",
-        assets_sub: "Bitcoin-Layer und Stablecoins",
+        l2_sub: "SATS Routing nutzt Layer-2 Skalierungstechnologien wie das Lightning-Netzwerk",
+        assets_sub: "Bitcoin-Layer",
         safe: "Sicher",
         non_custodial: "Non-Custodial",
         non_custodial_sub:
-            "Swaps auf Boltz sind atomar, Kryptografie stellt sicher, dass Nutzer stets die Kontrolle über ihre Bitcoin behalten",
+            "Swaps auf SATS Routing sind atomar, Kryptografie stellt sicher, dass Nutzer stets die Kontrolle über ihre Bitcoin behalten",
         node: "Lightning-Knoten",
         error: "Fehler",
         error_subline:
@@ -603,7 +603,7 @@ const dict = {
         help: "Hilfe",
         network_fee: "Netzwerkgebühr",
         swap_fees: "Swap-Gebühren",
-        fee: "Boltzgebühr",
+        fee: "SATS Routing Gebühr",
         denomination: "Denominierung",
         send: "Sende",
         checking_previous_transaction: "Vorherige Transaktion wird geprüft",
@@ -721,7 +721,7 @@ const dict = {
         already_refunded: "Swap wurde bereits erstattet!",
         api_offline: "API ist offline",
         api_offline_msg:
-            "Konnte keine Verbindung zur Boltz API herstellen. Bitte versuche es später noch einmal.",
+            "Konnte keine Verbindung zur SATS Routing API herstellen. Bitte versuche es später noch einmal.",
         refund_explainer:
             "Du kannst nach dem Timeout eine Rückerstattung beantragen!",
         wasm_not_supported: "Bitte aktiviere WebAssembly in deinem Browser!",
@@ -731,7 +731,7 @@ const dict = {
         headline: "Non-Custodial Bitcoin Bridge",
         headline_pro: "Stacke Sats mit voller Kontrolle",
         subline:
-            "Tausche zwischen verschiedenen Bitcoin-Layern und Stablecoins, während du immer die volle Kontrolle behältst.",
+            "Tausche zwischen verschiedenen Bitcoin-Layern, während du immer die volle Kontrolle behältst.",
         subline_pro:
             "Verdiene Sats für Swaps, die uns helfen unsere Liquidität zu managen.",
         start_swapping: "Starte Swap",
@@ -744,7 +744,7 @@ const dict = {
         num_channels: "Anzahl der Kanäle",
         beta_caution: "BETA - OBACHT!",
         pro: "pro",
-        pro_banner: "Möchten Sie Boltz Pro über die API nutzen?",
+        pro_banner: "Möchten Sie SATS Routing Pro über die API nutzen?",
         warning_return:
             "Kehre nach dem Bezahlen der Rechnung zu dieser Seite zurück! Die Zahlung wird möglicherweise als ausstehend angezeigt, bis du zu dieser Seite zurückkehrst.",
         warning_expiry:
@@ -863,7 +863,7 @@ const dict = {
         no_wallet_connected: "Kein Wallet verbunden",
         no_lockup_transaction: "Keine Lockup-Transaktion gefunden",
         routing_fee_limit: "Routing Gebühr Limit",
-        download_boltz_rescue_key: "Boltz Rettungsschlüssel",
+        download_boltz_rescue_key: "SATS Routing Rettungsschlüssel",
         download_boltz_rescue_key_subline:
             "Sichere alle deine Swaps mit einem einzigen Rettungsschlüssel 🙌",
         download_boltz_rescue_key_subline_second:
@@ -878,12 +878,12 @@ const dict = {
             "Andernfalls kann es zum **VERLUST VON GELDMITTELN** kommen.",
         download_new_key: "Rettungsschlüssel herunterladen",
         verify_boltz_rescue_key:
-            "Existierenden Boltz Rettungsschlüssel verifizieren",
+            "Existierenden SATS Routing Rettungsschlüssel verifizieren",
         verify_boltz_rescue_key_subline:
-            "Bitte wähle den zuvor heruntergeladenen Boltz Rettungsschlüssel aus, um ihn zu verifizieren.",
+            "Bitte wähle den zuvor heruntergeladenen SATS Routing Rettungsschlüssel aus, um ihn zu verifizieren.",
         verify_key: "Schlüssel verifizieren",
         verify_key_failed:
-            "Die Verifizierung des Boltz Rettungsschlüssels ist fehlgeschlagen. Wir empfehlen, einen neuen Rettungsschlüssel herunterzuladen.",
+            "Die Verifizierung des SATS Routing Rettungsschlüssels ist fehlgeschlagen. Wir empfehlen, einen neuen Rettungsschlüssel herunterzuladen.",
         rescue_key: "Rettungsschlüssel",
         reset_rescue_key_tooltip:
             "Generiere einen neuen Rettungsschlüssel und lösche alle Swap-Daten",
@@ -904,7 +904,7 @@ const dict = {
         generate_key: "Neuen Schlüssel generieren",
         show_rescue_key_instead:
             "Stattdessen den 12-Wort-Rettungsschlüssel anzeigen",
-        backup_boltz_rescue_key: "Boltz Rettungsschlüssel sichern",
+        backup_boltz_rescue_key: "SATS Routing Rettungsschlüssel sichern",
         backup_boltz_rescue_key_subline_second:
             "Dieser neue Schlüssel funktioniert auf jedem Gerät und ist für alle Swaps gültig.",
         backup_boltz_rescue_key_subline_third:
@@ -971,28 +971,28 @@ const dict = {
         products: "Produkte",
         products_description:
             "Eine Produktsuite für nahtlose Interoperabilität zwischen Bitcoin-Layern",
-        products_plugin_title: "Boltz BTCPay Plugin",
+        products_plugin_title: "SATS Routing BTCPay Plugin",
         products_plugin_description:
             "Eine Lösung um Lightning-Zahlungen non-custodial und einfach zu akzeptieren",
-        products_client_title: "Boltz Client",
+        products_client_title: "SATS Routing Client",
         products_client_description:
             "Unsere Enterpriselösung für Serverintegrationen und Liquiditätsverwaltung",
-        products_pro_title: "Boltz Pro",
+        products_pro_title: "SATS Routing Pro",
         products_pro_description:
             "Eine Plattform, die es ermöglicht mit Swaps Sats zu verdienen",
         learn_more: "Mehr erfahren",
-        get_started: "Öffne Boltz Pro",
+        get_started: "Öffne SATS Routing Pro",
         documentation: "Dokumentation",
         view_on_github: "Auf Github ansehen",
         chat_with_us: "Chatte mit uns",
 
         // Plugin
-        boltz_plugin_name: "Boltz BTCPay Plugin",
+        boltz_plugin_name: "SATS Routing BTCPay Plugin",
         boltz_plugin_description:
             "Non-custodial Lösung für einfache Akzeptierung von Lightning-Zahlungen",
         boltz_plugin_step_install_title: "Plugin hinzufügen",
         boltz_plugin_step_install_description:
-            "Installiere das Boltz Plugin auf deinem BTCPay Server",
+            "Installiere das SATS Routing Plugin auf deinem BTCPay Server",
         boltz_plugin_step_setup_title: "Wallet einrichten",
         boltz_plugin_step_setup_description:
             "Verbinde dein externes Wallet oder erstelle ein neues",
@@ -1013,11 +1013,11 @@ const dict = {
             "Autoswap zu Bitcoin basierend auf deinen Präferenzen",
         boltz_plugin_feature_self_custodial_title: "Non-custodial",
         boltz_plugin_feature_self_custodial_description:
-            "Behalte jederzeit die volle Kontrolle über deine Bitcoin, powered by Boltz Atomic Swaps",
+            "Behalte jederzeit die volle Kontrolle über deine Bitcoin, powered by SATS Routing Atomic Swaps",
         boltz_plugin_questions_title: "Fragen?",
         boltz_plugin_questions_subtitle: "Wir würden gerne von dir hören!",
         // Client
-        boltz_client_name: "Boltz Client",
+        boltz_client_name: "SATS Routing Client",
         boltz_client_description:
             "Enterprise-Grade Swap-Daemon für Serverintegrationen und Liquiditätsverwaltung",
         boltz_client_features_title: "Gebaut für Unternehmen und Profis",
@@ -1040,24 +1040,24 @@ const dict = {
             "Integriertes Wallet-System und umfassende API für nahtlose Integration in deine Infrastruktur.",
         boltz_client_cli_second_paragraph:
             "Überwache, steuere und automatisiere mit deinen eigenen Anwendungen oder via CLI.",
-        boltz_client_cta_title: "Füge Boltz deiner Infrastruktur hinzu!",
+        boltz_client_cta_title: "Füge SATS Routing deiner Infrastruktur hinzu!",
         boltz_client_cta_subtitle:
-            "Werde Teil der Community von Unternehmen und Node-Betreibern, die Boltz Client benutzen",
+            "Werde Teil der Community von Unternehmen und Node-Betreibern, die SATS Routing Client benutzen",
 
         // Pro
-        boltz_pro_name: "Boltz Pro",
+        boltz_pro_name: "SATS Routing Pro",
         boltz_pro_description:
             "Eine Plattform, die es ermöglicht mit Swaps Sats zu verdienen",
         boltz_pro_how_it_works_title: "Wie es funktioniert",
         boltz_pro_how_it_works_description:
             "Du wirst bezahlt für Swaps in Richtungen die uns helfen unsere Liquidität auszugleichen",
-        boltz_pro_chart_title: "Boltz Pro Gebührenverlauf Beispiel",
-        boltz_pro_chart_y_axis: "Boltz Pro Gebühr",
+        boltz_pro_chart_title: "SATS Routing Pro Gebührenverlauf Beispiel",
+        boltz_pro_chart_y_axis: "SATS Routing Pro Gebühr",
         boltz_pro_chart_x_axis: "Datum",
         boltz_pro_negative_fee: "Du verdienst Sats",
         boltz_pro_lower_fee: "Du sparst Sats",
-        boltz_pro_regular_fee: "Normale Boltz Gebühr",
-        boltz_pro_target_audience_title: "Für wen ist Boltz Pro?",
+        boltz_pro_regular_fee: "Normale SATS Routing Gebühr",
+        boltz_pro_target_audience_title: "Für wen ist SATS Routing Pro?",
         boltz_pro_target_audience_subtitle:
             "Gebaut für Profis die Sats verdienen wollen, nicht für alltägliche Zahlungen",
         boltz_pro_perfect_for_title: "Gebaut für",
@@ -1066,7 +1066,7 @@ const dict = {
         boltz_pro_perfect_for_2:
             "Profis die mit externen Knoten-Betreibern zusammenarbeiten um Liquidität zu verwalten",
         boltz_pro_perfect_for_3:
-            "Nutzer die Lightning-Wallets innerhalb von Boltz Pro Routing-Limits aufladen wollen",
+            "Nutzer die Lightning-Wallets innerhalb von SATS Routing Pro Routing-Limits aufladen wollen",
         boltz_pro_not_designed_for_title: "Nicht geeignet für",
         boltz_pro_not_designed_for_1:
             "Zahlung mit Lightning im Alltag, wie z.B. im Café",
@@ -1077,14 +1077,14 @@ const dict = {
         boltz_pro_cta_title: "Fange jetzt an Sats zu verdienen!",
         boltz_pro_cta_subtitle:
             "Schaue dir die aktuellen Möglichkeiten Sats zu verdienen an",
-        boltz_pro_options_title: "3 Wege Boltz Pro zu nutzen",
+        boltz_pro_options_title: "3 Wege SATS Routing Pro zu nutzen",
         boltz_pro_options_subtitle: "Wähle was am besten zu dir passt",
-        boltz_pro_option_client_title: "Boltz Client",
+        boltz_pro_option_client_title: "SATS Routing Client",
         boltz_pro_option_client_description:
-            "Automatisiere Boltz Pro vollständig mit API & CLI",
+            "Automatisiere SATS Routing Pro vollständig mit API & CLI",
         boltz_pro_option_web_title: "Web App",
         boltz_pro_option_web_description:
-            "Beobachte und swappe mit unserer Boltz Pro Web App",
+            "Beobachte und swappe mit unserer SATS Routing Pro Web App",
         boltz_pro_option_chat_title: "Chat-Bots",
         boltz_pro_option_chat_description_prefix:
             "Erhalte Benachrichtigungen in",
@@ -1122,7 +1122,7 @@ const dict = {
             "Benötigt Rettungsschlüssel und Wallet",
         rescue_external_resume: "Fortsetzen",
         evm_rescue_prompt:
-            'Wenn du Guthaben in einen Boltz-Swap auf einer EVM-Chain gesendet hast, nutze "Swap erstatten"; wenn du Guthaben von einer EVM-Chain empfangen hast, nutze "Swap fortsetzen", um einen Swap zu retten, der nicht im Verlauf dieses Browsers verfügbar ist.',
+            'Wenn du Guthaben in einen SATS Routing-Swap auf einer EVM-Chain gesendet hast, nutze "Swap erstatten"; wenn du Guthaben von einer EVM-Chain empfangen hast, nutze "Swap fortsetzen", um einen Swap zu retten, der nicht im Verlauf dieses Browsers verfügbar ist.',
         evm_rescue_refund_title: "Swap erstatten",
         start_scanning: "Scannen starten",
         stop_scanning: "Scannen stoppen",
@@ -1139,16 +1139,16 @@ const dict = {
         upload_rescue_key: "Rettungsschlüssel auswählen",
 
         suspension_status: "Swap-Dienste deaktiviert",
-        suspension_p1: "Update: Boltz bleibt bis auf Weiteres deaktiviert.",
+        suspension_p1: "Update: SATS Routing bleibt bis auf Weiteres deaktiviert.",
         suspension_p2:
             "Unsere API bleibt verfügbar, um Erstattungen kooperativ abzuwickeln. In jedem Fall funktionieren einseitige Erstattungen, da sie nicht von unserer Infrastruktur abhängen.",
         suspension_p3: "Unser Support-Team bleibt erreichbar.",
         suspension_p4:
-            "Um es klar zu sagen: Dies ist keine Reaktion auf einen einzelnen Vorfall. In den vergangenen Monaten haben wir einen stetigen Anstieg automatisierter, KI-gestützter Angriffsversuche auf unsere Infrastruktur beobachtet und mehrere Exploits bewältigt. Jeder davon wurde eingedämmt, aber das Muster ist eindeutig: Angreifer iterieren inzwischen schneller, als ein Team unserer Größe Lücken finden und schließen kann. Allein in den letzten Tagen haben wir eine drastische Beschleunigung gesehen, und wir glauben nicht, dass sich diese Asymmetrie umkehren wird. Nach Auswertung unserer eigenen jüngsten Sicherheitsscans können wir Boltz-Swaps nicht verantwortungsvoll wieder aktivieren, zumal wir aktiv von offenbar mehreren gut ausgestatteten Gruppen ins Visier genommen werden, während wir mit Hochdruck an Fixes arbeiten.",
+            "Um es klar zu sagen: Dies ist keine Reaktion auf einen einzelnen Vorfall. In den vergangenen Monaten haben wir einen stetigen Anstieg automatisierter, KI-gestützter Angriffsversuche auf unsere Infrastruktur beobachtet und mehrere Exploits bewältigt. Jeder davon wurde eingedämmt, aber das Muster ist eindeutig: Angreifer iterieren inzwischen schneller, als ein Team unserer Größe Lücken finden und schließen kann. Allein in den letzten Tagen haben wir eine drastische Beschleunigung gesehen, und wir glauben nicht, dass sich diese Asymmetrie umkehren wird. Nach Auswertung unserer eigenen jüngsten Sicherheitsscans können wir SATS Routing-Swaps nicht verantwortungsvoll wieder aktivieren, zumal wir aktiv von offenbar mehreren gut ausgestatteten Gruppen ins Visier genommen werden, während wir mit Hochdruck an Fixes arbeiten.",
         suspension_p5:
             "Was wir hier sehen, ist ein grundlegender Paradigmenwechsel für Bitcoin-Dienste, die auf einem Open-Source-Stack laufen, und er erfordert eine sorgfältige Analyse. Erwarte nicht, dass die Swap-Dienste in Kürze zurückkehren.",
         suspension_p6:
-            "Um es deutlich zu sagen: Nutzergelder waren zu keinem Zeitpunkt in Gefahr. Boltz ist von Grund auf non-custodial. Und da wir ein vollständig eigenfinanziertes Unternehmen sind, waren die Verluste allein unsere.",
+            "Um es deutlich zu sagen: Nutzergelder waren zu keinem Zeitpunkt in Gefahr. SATS Routing ist von Grund auf non-custodial. Und da wir ein vollständig eigenfinanziertes Unternehmen sind, waren die Verluste allein unsere.",
         suspension_p7:
             "Wir wissen noch nicht, wie es von hier aus weitergeht, aber wir halten dich auf dem Laufenden, sobald wir Zeit hatten durchzuatmen und eine Entscheidung zu treffen 🙏",
         suspension_date: "3. August 2026 · Auf X ansehen",
@@ -1159,12 +1159,12 @@ const dict = {
         status: "Estado",
         fast: "Rápido",
         l2: "Construido en la Capa 2",
-        l2_sub: "Boltz utiliza tecnologías de segunda capa como la red de Lightning",
-        assets_sub: "Capas de Bitcoin y Stablecoins",
+        l2_sub: "SATS Routing utiliza tecnologías de segunda capa como la red de Lightning",
+        assets_sub: "Capas de Bitcoin",
         safe: "Seguro",
         non_custodial: "Sin Custodia",
         non_custodial_sub:
-            "Los intercambios en Boltz son atomicos, la criptografía garantiza que los usuarios siempre tienen el control de su Bitcoin",
+            "Los intercambios en SATS Routing son atomicos, la criptografía garantiza que los usuarios siempre tienen el control de su Bitcoin",
         node: "Nodos de Lightning",
         error: "Error",
         error_subline: "Respuesta inválida de la API, algo está mal :/",
@@ -1187,7 +1187,7 @@ const dict = {
         help: "Ayuda",
         network_fee: "Comisión de Red",
         swap_fees: "Comisiones del Intercambio",
-        fee: "Comisión de Boltz",
+        fee: "Comisión de SATS Routing",
         denomination: "Denominación",
         send: "Enviar",
         checking_previous_transaction: "Comprobando transacción anterior",
@@ -1259,7 +1259,7 @@ const dict = {
         copy_amount: "Importe",
         copy_bip21: "BIP21",
         rescue_a_swap_subline:
-            "Si enviaste BTC o LBTC a un intercambio Boltz, carga o introduce tu clave de rescate para rescatar un swap que no esté disponible en el historial de swaps de este navegador",
+            "Si enviaste BTC o LBTC a un intercambio SATS Routing, carga o introduce tu clave de rescate para rescatar un swap que no esté disponible en el historial de swaps de este navegador",
         rescue_a_swap_mnemonic:
             "Introduce tu clave de rescate para rescatar un intercambio que no está disponible en el historial de este navegador.",
         refund_past_swaps: "Intercambios anteriores",
@@ -1308,7 +1308,7 @@ const dict = {
         already_refunded: "El intercambio ya ha sido reembolsado!",
         api_offline: "API está offline!",
         api_offline_msg:
-            "No se pudo conectar a la API de Boltz, por favor inténtelo de nuevo más tarde!",
+            "No se pudo conectar a la API de SATS Routing, por favor inténtelo de nuevo más tarde!",
         refund_explainer:
             "Podrás solicitar un reembolso después del tiempo de espera!",
         wasm_not_supported: "Por favor, activa WebAssembly en tu navegador!",
@@ -1318,7 +1318,7 @@ const dict = {
         headline: "Bitcoin Bridge Sin Custodia",
         headline_pro: "Apilar Sats Con Autocustodia",
         subline:
-            "Intercambia entre diferentes capas de Bitcoin y Stablecoins mientras mantienes el control total.",
+            "Intercambia entre diferentes capas de Bitcoin mientras mantienes el control total.",
         subline_pro:
             "Gana sats por intercambiar Bitcoin en direcciones que ayudan a equilibrar nuestra liquidez.",
         start_swapping: "Comenzar a intercambiar",
@@ -1331,7 +1331,7 @@ const dict = {
         num_channels: "Número de canales",
         beta_caution: "BETA - ¡ÚSALO CON PRECAUCIÓN!",
         pro: "pro",
-        pro_banner: "¿Quieres usar Boltz Pro a través de la API?",
+        pro_banner: "¿Quieres usar SATS Routing Pro a través de la API?",
         warning_return:
             "Regresa a esta página después de pagar la factura! El pago puede aparecer como pendiente hasta que vuelvas a esta página.",
         warning_expiry:
@@ -1447,7 +1447,7 @@ const dict = {
         no_wallet_connected: "No hay monedero conectado",
         no_lockup_transaction: "No se encontró ninguna transacción de lockup",
         routing_fee_limit: "Límite Comisión Enrutamiento",
-        download_boltz_rescue_key: "Clave de rescate Boltz",
+        download_boltz_rescue_key: "Clave de rescate SATS Routing",
         download_boltz_rescue_key_subline:
             "Haz una copia de seguridad de todos tus intercambios con una sola clave de rescate 🙌",
         download_boltz_rescue_key_subline_second:
@@ -1463,11 +1463,11 @@ const dict = {
         download_new_key: "Descargar clave de rescate",
         verify_boltz_rescue_key: "Verificar clave de rescate existente",
         verify_boltz_rescue_key_subline:
-            "Por favor, selecciona tu clave de rescate Boltz previamente guardada para verificar su validez.",
+            "Por favor, selecciona tu clave de rescate SATS Routing previamente guardada para verificar su validez.",
         verify_key: "Verificar clave",
         verify_key_failed:
-            "La verificación de la clave de rescate Boltz ha fallado. Recomendamos descargar una nueva clave para continuar.",
-        rescue_key: "Clave de Rescate Boltz",
+            "La verificación de la clave de rescate SATS Routing ha fallado. Recomendamos descargar una nueva clave para continuar.",
+        rescue_key: "Clave de Rescate SATS Routing",
         reset_rescue_key_tooltip:
             "Generar una nueva clave de rescate y borrar todos los datos de intercambios históricos",
         reset_rescue_key_prompt:
@@ -1486,7 +1486,7 @@ const dict = {
         generate_key: "Generar nueva clave",
         show_rescue_key_instead:
             "Mostrar en su lugar la clave de rescate de 12 palabras",
-        backup_boltz_rescue_key: "Backup clave de rescate Boltz",
+        backup_boltz_rescue_key: "Backup clave de rescate SATS Routing",
         backup_boltz_rescue_key_subline_second:
             "Esta nueva clave funciona en cualquier dispositivo y funciona para todas las transacciones creadas con ella.",
         backup_boltz_rescue_key_subline_third:
@@ -1553,28 +1553,28 @@ const dict = {
         products: "Productos",
         products_description:
             "Una suite de productos para interoperabilidad perfecta entre las capas de Bitcoin",
-        products_plugin_title: "Plugin Boltz BTCPay",
+        products_plugin_title: "Plugin SATS Routing BTCPay",
         products_plugin_description:
             "Una solución sin custodia para aceptar fácilmente pagos Lightning sin ejecutar un nodo Lightning",
-        products_client_title: "Cliente Boltz",
+        products_client_title: "Cliente SATS Routing",
         products_client_description:
             "Daemon de intercambios empresarial para integraciones y gestión de liquidez",
-        products_pro_title: "Boltz Pro",
+        products_pro_title: "SATS Routing Pro",
         products_pro_description:
             "Una plataforma que permite ganar sats con intercambios",
         learn_more: "Aprende más",
-        get_started: "Abrir Boltz Pro",
+        get_started: "Abrir SATS Routing Pro",
         documentation: "Documentación",
         view_on_github: "Ver en Github",
         chat_with_us: "Chatea con nosotros",
 
         // Plugin
-        boltz_plugin_name: "Plugin Boltz BTCPay",
+        boltz_plugin_name: "Plugin SATS Routing BTCPay",
         boltz_plugin_description:
             "Solución sin custodia para aceptar fácilmente pagos Lightning",
         boltz_plugin_step_install_title: "Agregar el plugin",
         boltz_plugin_step_install_description:
-            "Instala el plugin Boltz en tu servidor BTCPay",
+            "Instala el plugin SATS Routing en tu servidor BTCPay",
         boltz_plugin_step_setup_title: "Configurar tu monedero",
         boltz_plugin_step_setup_description:
             "Conecta tu monedero externo o crea uno nuevo",
@@ -1595,12 +1595,12 @@ const dict = {
             "Autoswap a Bitcoin mainchain basado en tus preferencias",
         boltz_plugin_feature_self_custodial_title: "Sin custodia",
         boltz_plugin_feature_self_custodial_description:
-            "Mantén el control total de tus Bitcoin, impulsado por Boltz Atomic Swaps",
+            "Mantén el control total de tus Bitcoin, impulsado por SATS Routing Atomic Swaps",
 
         boltz_plugin_questions_title: "¿Preguntas?",
         boltz_plugin_questions_subtitle: "¡Nos encantaría escucharte!",
         // Client
-        boltz_client_name: "Cliente Boltz",
+        boltz_client_name: "Cliente SATS Routing",
         boltz_client_description:
             "Daemon de intercambios empresarial para integraciones y gestión de liquidez",
         boltz_client_features_title: "Construido para Empresas y Profesionales",
@@ -1623,24 +1623,24 @@ const dict = {
             "Sistema de monedero integrado y API completa para una integración perfecta en tu infraestructura.",
         boltz_client_cli_second_paragraph:
             "Monitorea, controla y automatiza con tus propias aplicaciones o a través de la CLI.",
-        boltz_client_cta_title: "¡Agrega Boltz a tu infraestructura!",
+        boltz_client_cta_title: "¡Agrega SATS Routing a tu infraestructura!",
         boltz_client_cta_subtitle:
-            "Únete a la comunidad de empresas y operadores de nodos que usan Boltz Client",
+            "Únete a la comunidad de empresas y operadores de nodos que usan SATS Routing Client",
 
         // Pro
-        boltz_pro_name: "Boltz Pro",
+        boltz_pro_name: "SATS Routing Pro",
         boltz_pro_description:
             "Una plataforma que permite ganar sats con intercambios atómicos",
         boltz_pro_how_it_works_title: "Cómo funciona",
         boltz_pro_how_it_works_description:
             "Te pagamos por hacer intercambios en direcciones que nos ayudan a reequilibrar nuestra liquidez",
-        boltz_pro_chart_title: "Muestra del Historial de comisiones Boltz Pro",
-        boltz_pro_chart_y_axis: "Comisión Boltz Pro",
+        boltz_pro_chart_title: "Muestra del Historial de comisiones SATS Routing Pro",
+        boltz_pro_chart_y_axis: "Comisión SATS Routing Pro",
         boltz_pro_chart_x_axis: "Fecha",
         boltz_pro_negative_fee: "Ganas sats",
         boltz_pro_lower_fee: "Ahorras sats",
-        boltz_pro_regular_fee: "Comisión Regular de Boltz",
-        boltz_pro_target_audience_title: "¿Para quién es Boltz Pro?",
+        boltz_pro_regular_fee: "Comisión Regular de SATS Routing",
+        boltz_pro_target_audience_title: "¿Para quién es SATS Routing Pro?",
         boltz_pro_target_audience_subtitle:
             "Construido para profesionales que quieren ganar sats, no para pagos cotidianos",
         boltz_pro_perfect_for_title: "Construido Para",
@@ -1649,7 +1649,7 @@ const dict = {
         boltz_pro_perfect_for_2:
             "Profesionales que colaboran con operadores de nodos externos para gestionar liquidez",
         boltz_pro_perfect_for_3:
-            "Usuarios que recargan monederos Lightning dentro de los límites de enrutamiento de Boltz Pro",
+            "Usuarios que recargan monederos Lightning dentro de los límites de enrutamiento de SATS Routing Pro",
         boltz_pro_not_designed_for_title: "No Adecuado Para",
         boltz_pro_not_designed_for_1:
             "Pagos Lightning cotidianos, como comprar un café",
@@ -1660,11 +1660,11 @@ const dict = {
         boltz_pro_cta_title: "¡Comienza a ganar sats ahora!",
         boltz_pro_cta_subtitle:
             "Descubre las oportunidades actuales para ganar sats",
-        boltz_pro_options_title: "3 formas de usar Boltz Pro",
+        boltz_pro_options_title: "3 formas de usar SATS Routing Pro",
         boltz_pro_options_subtitle: "Elige lo que mejor te convenga",
-        boltz_pro_option_client_title: "Cliente Boltz",
+        boltz_pro_option_client_title: "Cliente SATS Routing",
         boltz_pro_option_client_description:
-            "Automatiza Boltz Pro completamente con API y CLI",
+            "Automatiza SATS Routing Pro completamente con API y CLI",
         boltz_pro_option_web_title: "Aplicación Web",
         boltz_pro_option_web_description:
             "Observa y ejecuta intercambios con nuestra aplicación web",
@@ -1705,7 +1705,7 @@ const dict = {
             "Requiere clave de rescate y monedero",
         rescue_external_resume: "Reanudar",
         evm_rescue_prompt:
-            'Si enviaste fondos a un intercambio de Boltz en una cadena EVM, usa "Reembolsar intercambio"; si estabas recibiendo fondos desde una cadena EVM, usa "Reanudar intercambio" para rescatar un intercambio que no está disponible en el historial de este navegador.',
+            'Si enviaste fondos a un intercambio de SATS Routing en una cadena EVM, usa "Reembolsar intercambio"; si estabas recibiendo fondos desde una cadena EVM, usa "Reanudar intercambio" para rescatar un intercambio que no está disponible en el historial de este navegador.',
         evm_rescue_refund_title: "Reembolsar intercambio",
         start_scanning: "Iniciar escaneo",
         stop_scanning: "Detener escaneo",
@@ -1723,16 +1723,16 @@ const dict = {
 
         suspension_status: "Servicios de swap deshabilitados",
         suspension_p1:
-            "Actualización: Boltz seguirá deshabilitado hasta nuevo aviso.",
+            "Actualización: SATS Routing seguirá deshabilitado hasta nuevo aviso.",
         suspension_p2:
             "Nuestra API sigue disponible para procesar reembolsos de forma cooperativa. En cualquier caso, los reembolsos unilaterales funcionarán, ya que no dependen de nuestra infraestructura.",
         suspension_p3: "Nuestro equipo de soporte sigue disponible.",
         suspension_p4:
-            "Para que quede claro: esto no es una respuesta a un único incidente. Durante los últimos meses hemos visto un aumento constante de sondeos automatizados y asistidos por IA contra nuestra infraestructura, y hemos lidiado con varios exploits. Cada uno fue contenido, pero el patrón es claro: los atacantes ahora iteran más rápido de lo que un equipo de nuestro tamaño puede detectar y parchear. Solo en los últimos días hemos visto una aceleración drástica, y no creemos que esta asimetría vaya a revertirse. Tras revisar los resultados de nuestros propios análisis de seguridad recientes, no podemos reactivar los swaps de Boltz de forma responsable, especialmente mientras somos objetivo activo de lo que parecen ser varios grupos con muchos recursos, y mientras corremos para desplegar correcciones.",
+            "Para que quede claro: esto no es una respuesta a un único incidente. Durante los últimos meses hemos visto un aumento constante de sondeos automatizados y asistidos por IA contra nuestra infraestructura, y hemos lidiado con varios exploits. Cada uno fue contenido, pero el patrón es claro: los atacantes ahora iteran más rápido de lo que un equipo de nuestro tamaño puede detectar y parchear. Solo en los últimos días hemos visto una aceleración drástica, y no creemos que esta asimetría vaya a revertirse. Tras revisar los resultados de nuestros propios análisis de seguridad recientes, no podemos reactivar los swaps de SATS Routing de forma responsable, especialmente mientras somos objetivo activo de lo que parecen ser varios grupos con muchos recursos, y mientras corremos para desplegar correcciones.",
         suspension_p5:
             "Lo que estamos viendo es un cambio de paradigma importante para los servicios de Bitcoin que operan sobre un stack de código abierto, y requiere un análisis cuidadoso. No esperes que los servicios de swap se reanuden pronto.",
         suspension_p6:
-            "Para ser explícitos: los fondos de los usuarios nunca estuvieron en riesgo. Boltz es non-custodial por diseño. Y como empresa totalmente autofinanciada, las pérdidas fueron solo nuestras.",
+            "Para ser explícitos: los fondos de los usuarios nunca estuvieron en riesgo. SATS Routing es non-custodial por diseño. Y como empresa totalmente autofinanciada, las pérdidas fueron solo nuestras.",
         suspension_p7:
             "Todavía no sabemos cómo continuará todo a partir de aquí, pero te mantendremos informado en cuanto hayamos tenido tiempo de tomar aire y decidir 🙏",
         suspension_date: "3 de agosto de 2026 · Ver en X",
@@ -1743,12 +1743,12 @@ const dict = {
         status: "Estado",
         fast: "Rápido",
         l2: "Construído na Segunda Camada",
-        l2_sub: "A Boltz utiliza tecnologias de segunda camada como a rede Lightning",
-        assets_sub: "Camadas de Bitcoin e Stablecoins",
+        l2_sub: "A SATS Routing utiliza tecnologias de segunda camada como a rede Lightning",
+        assets_sub: "Camadas de Bitcoin",
         safe: "Seguro",
         non_custodial: "Não-Custodial",
         non_custodial_sub:
-            "As trocas na Boltz são atômicas, a criptografia garante que os usuários sempre tenham controle sobre seu Bitcoin",
+            "As trocas na SATS Routing são atômicas, a criptografia garante que os usuários sempre tenham controle sobre seu Bitcoin",
         node: "Nós Lightning",
         error: "Erro",
         error_subline: "Resposta inválida da API, algo deu errado.",
@@ -1771,7 +1771,7 @@ const dict = {
         help: "Suporte",
         network_fee: "Taxa da Rede",
         swap_fees: "Taxas da Troca",
-        fee: "Taxa da Boltz",
+        fee: "Taxa da SATS Routing",
         denomination: "Denominação",
         send: "Enviar",
         checking_previous_transaction: "Verificando transação anterior",
@@ -1843,7 +1843,7 @@ const dict = {
         copy_amount: "Quantia",
         copy_bip21: "BIP21",
         rescue_a_swap_subline:
-            "Se enviou BTC ou LBTC para uma troca Boltz, faça upload ou insira sua chave de resgate para resgatar uma troca que não está no histórico deste navegador.",
+            "Se enviou BTC ou LBTC para uma troca SATS Routing, faça upload ou insira sua chave de resgate para resgatar uma troca que não está no histórico deste navegador.",
         rescue_a_swap_mnemonic:
             "Insira sua chave de resgate para resgatar uma troca que não está no histórico deste navegador.",
         refund_past_swaps: "Trocas passadas",
@@ -1890,7 +1890,7 @@ const dict = {
         already_refunded: "A troca já foi reembolsada",
         api_offline: "A API está offline",
         api_offline_msg:
-            "Não foi possível conectar à API da Boltz, por favor tente novamente mais tarde",
+            "Não foi possível conectar à API da SATS Routing, por favor tente novamente mais tarde",
         refund_explainer:
             "Será possível reembolsar a troca após o prazo de expiração!",
         wasm_not_supported: "Ative o WebAssembly no seu navegador",
@@ -1900,7 +1900,7 @@ const dict = {
         headline: "Bitcoin Bridge Não-Custodial",
         headline_pro: "Acumule Sats Com Autocustódia",
         subline:
-            "Troque entre as diferentes camadas do Bitcoin e Stablecoins, mantendo controle total.",
+            "Troque entre as diferentes camadas do Bitcoin, mantendo controle total.",
         subline_pro:
             "Ganhe sats por trocar Bitcoin em direções que ajudam a balancear nossa liquidez.",
         start_swapping: "Começar a trocar",
@@ -1913,7 +1913,7 @@ const dict = {
         num_channels: "Número de canais",
         beta_caution: "BETA - USE COM CUIDADO!",
         pro: "pro",
-        pro_banner: "Quer usar a Boltz Pro via API?",
+        pro_banner: "Quer usar a SATS Routing Pro via API?",
         warning_return:
             "Volte a esta página após pagar o invoice! O pagamento pode aparecer como pendente até que volte a esta página.",
         warning_expiry:
@@ -2028,7 +2028,7 @@ const dict = {
         no_wallet_connected: "Nenhuma carteira conectada",
         no_lockup_transaction: "Nenhuma transação de lockup encontrada",
         routing_fee_limit: "Limite da Taxa de Roteamento",
-        download_boltz_rescue_key: "Chave de resgate da Boltz",
+        download_boltz_rescue_key: "Chave de resgate da SATS Routing",
         download_boltz_rescue_key_subline:
             "Faça backup de todas as suas trocas com uma única chave de resgate 🙌",
         download_boltz_rescue_key_subline_second:
@@ -2067,7 +2067,7 @@ const dict = {
         generate_key: "Gerar nova chave",
         show_rescue_key_instead:
             "Mostrar a chave de resgate de 12 palavras em vez disso",
-        backup_boltz_rescue_key: "Backup chave de resgate da Boltz",
+        backup_boltz_rescue_key: "Backup chave de resgate da SATS Routing",
         backup_boltz_rescue_key_subline_second:
             "Esta nova chave funciona em qualquer dispositivo e funciona para todas as trocas criadas com ela.",
         backup_boltz_rescue_key_subline_third:
@@ -2132,28 +2132,28 @@ const dict = {
         products: "Produtos",
         products_description:
             "Um conjunto de produtos para integração perfeita entre as camadas do Bitcoin",
-        products_plugin_title: "Boltz BTCPay Plugin",
+        products_plugin_title: "SATS Routing BTCPay Plugin",
         products_plugin_description:
             "Uma solução não-custodial para aceitar pagamentos Lightning facilmente, sem ter um nó Lightning",
-        products_client_title: "Boltz Client",
+        products_client_title: "SATS Routing Client",
         products_client_description:
             "Nosso daemon empresarial de trocas, para integrações em servidores e gestão de liquidez",
-        products_pro_title: "Boltz Pro",
+        products_pro_title: "SATS Routing Pro",
         products_pro_description:
             "Uma plataforma que permite ganhar sats através de trocas",
         learn_more: "Saiba mais",
-        get_started: "Abrir Boltz Pro",
+        get_started: "Abrir SATS Routing Pro",
         documentation: "Documentação",
         view_on_github: "Ver no Github",
         chat_with_us: "Converse conosco",
 
         // Plugin
-        boltz_plugin_name: "Plugin Boltz BTCPay",
+        boltz_plugin_name: "Plugin SATS Routing BTCPay",
         boltz_plugin_description:
             "Solução não-custodial para aceitar pagamentos Lightning facilmente",
         boltz_plugin_step_install_title: "Instale o plugin",
         boltz_plugin_step_install_description:
-            "Instale o plugin Boltz no seu servidor BTCPay",
+            "Instale o plugin SATS Routing no seu servidor BTCPay",
         boltz_plugin_step_setup_title: "Configure sua carteira",
         boltz_plugin_step_setup_description:
             "Conecte sua carteira externa ou crie uma nova",
@@ -2174,12 +2174,12 @@ const dict = {
             "Troca automática para Bitcoin mainchain com base nas suas preferências",
         boltz_plugin_feature_self_custodial_title: "Não-custodial",
         boltz_plugin_feature_self_custodial_description:
-            "Mantenha o controle total dos seus Bitcoin com o poder das trocas atômicas da Boltz",
+            "Mantenha o controle total dos seus Bitcoin com o poder das trocas atômicas da SATS Routing",
 
         boltz_plugin_questions_title: "Dúvidas?",
         boltz_plugin_questions_subtitle: "Adoraríamos ouvir você!",
         // Client
-        boltz_client_name: "Boltz Client",
+        boltz_client_name: "SATS Routing Client",
         boltz_client_description:
             "Daemon empresarial de trocas para integrações em servidores e gestão de liquidez",
         boltz_client_features_title: "Feito para empresas e profissionais",
@@ -2202,24 +2202,24 @@ const dict = {
             "Carteira integrada e API abrangente para integração perfeita na sua infraestrutura.",
         boltz_client_cli_second_paragraph:
             "Monitore, controle e automatize tudo via linha de comando ou com seus próprios apps.",
-        boltz_client_cta_title: "Adicione a Boltz à sua infraestrutura!",
+        boltz_client_cta_title: "Adicione a SATS Routing à sua infraestrutura!",
         boltz_client_cta_subtitle:
-            "Junte-se à comunidade de empresas e operadores de nós que usam o Boltz Client",
+            "Junte-se à comunidade de empresas e operadores de nós que usam o SATS Routing Client",
 
         // Pro
-        boltz_pro_name: "Boltz Pro",
+        boltz_pro_name: "SATS Routing Pro",
         boltz_pro_description:
             "Uma plataforma que permite ganhar sats através de trocas",
         boltz_pro_how_it_works_title: "Como funciona",
         boltz_pro_how_it_works_description:
             "Você é pago por fazer trocas em direções que nos ajudam a reequilibrar nossa liquidez",
-        boltz_pro_chart_title: "Amostra de Histórico de Taxas Boltz Pro",
-        boltz_pro_chart_y_axis: "Taxa Boltz Pro",
+        boltz_pro_chart_title: "Amostra de Histórico de Taxas SATS Routing Pro",
+        boltz_pro_chart_y_axis: "Taxa SATS Routing Pro",
         boltz_pro_chart_x_axis: "Data",
         boltz_pro_negative_fee: "Você ganha sats",
         boltz_pro_lower_fee: "Você economiza sats",
-        boltz_pro_regular_fee: "Taxa Regular Boltz",
-        boltz_pro_target_audience_title: "Para quem é a Boltz Pro?",
+        boltz_pro_regular_fee: "Taxa Regular SATS Routing",
+        boltz_pro_target_audience_title: "Para quem é a SATS Routing Pro?",
         boltz_pro_target_audience_subtitle:
             "Feita para profissionais que querem ganhar sats, não para pagamentos do dia a dia",
         boltz_pro_perfect_for_title: "Feita para",
@@ -2228,7 +2228,7 @@ const dict = {
         boltz_pro_perfect_for_2:
             "Profissionais colaborando com operadores de nós externos para gerenciar liquidez",
         boltz_pro_perfect_for_3:
-            "Usuários recarregando carteiras Lightning dentro dos limites de roteamento da Boltz Pro",
+            "Usuários recarregando carteiras Lightning dentro dos limites de roteamento da SATS Routing Pro",
         boltz_pro_not_designed_for_title: "Não adequada para",
         boltz_pro_not_designed_for_1:
             "Pagamentos Lightning do dia a dia, como comprar um café",
@@ -2239,14 +2239,14 @@ const dict = {
         boltz_pro_cta_title: "Comece a ganhar sats agora!",
         boltz_pro_cta_subtitle:
             "Descubra as oportunidades atuais para ganhar sats",
-        boltz_pro_options_title: "3 maneiras de usar a Boltz Pro",
+        boltz_pro_options_title: "3 maneiras de usar a SATS Routing Pro",
         boltz_pro_options_subtitle: "Escolha a que melhor se adapta a você",
-        boltz_pro_option_client_title: "Boltz Client",
+        boltz_pro_option_client_title: "SATS Routing Client",
         boltz_pro_option_client_description:
-            "Automatize completamente a Boltz Pro com API e CLI",
+            "Automatize completamente a SATS Routing Pro com API e CLI",
         boltz_pro_option_web_title: "App Web",
         boltz_pro_option_web_description:
-            "Observe e execute trocas com nosso app web Boltz Pro",
+            "Observe e execute trocas com nosso app web SATS Routing Pro",
         boltz_pro_option_chat_title: "Bots de chat",
         boltz_pro_option_chat_description_prefix:
             "Receba alertas instantâneos no",
@@ -2284,7 +2284,7 @@ const dict = {
             "Requer chave de resgate e carteira",
         rescue_external_resume: "Continuar",
         evm_rescue_prompt:
-            'Se você enviou fundos para uma troca da Boltz em uma rede EVM, use "Reembolsar troca"; se estava recebendo fundos de uma rede EVM, use "Continuar troca" para resgatar uma troca que não está disponível no histórico deste navegador.',
+            'Se você enviou fundos para uma troca da SATS Routing em uma rede EVM, use "Reembolsar troca"; se estava recebendo fundos de uma rede EVM, use "Continuar troca" para resgatar uma troca que não está disponível no histórico deste navegador.',
         evm_rescue_refund_title: "Reembolsar troca",
         start_scanning: "Iniciar varredura",
         stop_scanning: "Parar varredura",
@@ -2302,16 +2302,16 @@ const dict = {
 
         suspension_status: "Serviços de swap desativados",
         suspension_p1:
-            "Atualização: a Boltz permanecerá desativada até novo aviso.",
+            "Atualização: a SATS Routing permanecerá desativada até novo aviso.",
         suspension_p2:
             "Nossa API continua disponível para processar reembolsos de forma cooperativa. De qualquer forma, os reembolsos unilaterais funcionarão, pois não dependem da nossa infraestrutura.",
         suspension_p3: "Nossa equipe de suporte continua acessível.",
         suspension_p4:
-            "Para deixar claro: esta não é uma resposta a um único incidente. Nos últimos meses vimos um aumento constante de sondagens automatizadas e assistidas por IA na nossa infraestrutura, e lidamos com vários exploits. Cada um foi contido, mas o padrão é claro: os atacantes agora iteram mais rápido do que uma equipe do nosso tamanho consegue encontrar e corrigir. Só nos últimos dias vimos uma aceleração drástica, e não acreditamos que essa assimetria vá se reverter. Depois de revisar os resultados das nossas próprias verificações de segurança recentes, não podemos reativar os swaps da Boltz de forma responsável, especialmente enquanto somos alvo ativo do que parecem ser vários grupos com muitos recursos, e enquanto corremos para implantar correções.",
+            "Para deixar claro: esta não é uma resposta a um único incidente. Nos últimos meses vimos um aumento constante de sondagens automatizadas e assistidas por IA na nossa infraestrutura, e lidamos com vários exploits. Cada um foi contido, mas o padrão é claro: os atacantes agora iteram mais rápido do que uma equipe do nosso tamanho consegue encontrar e corrigir. Só nos últimos dias vimos uma aceleração drástica, e não acreditamos que essa assimetria vá se reverter. Depois de revisar os resultados das nossas próprias verificações de segurança recentes, não podemos reativar os swaps da SATS Routing de forma responsável, especialmente enquanto somos alvo ativo do que parecem ser vários grupos com muitos recursos, e enquanto corremos para implantar correções.",
         suspension_p5:
             "O que estamos vendo é uma grande mudança de paradigma para serviços de Bitcoin que operam sobre uma stack de código aberto, e isso exige uma análise cuidadosa. Não espere que os serviços de swap voltem em breve.",
         suspension_p6:
-            "Para ser explícito: os fundos dos usuários nunca estiveram em risco. A Boltz é non-custodial por design. E, como empresa totalmente autofinanciada, os prejuízos foram só nossos.",
+            "Para ser explícito: os fundos dos usuários nunca estiveram em risco. A SATS Routing é non-custodial por design. E, como empresa totalmente autofinanciada, os prejuízos foram só nossos.",
         suspension_p7:
             "Ainda não sabemos como as coisas seguirão a partir daqui, mas manteremos você informado assim que tivermos tido tempo de respirar e tomar uma decisão 🙏",
         suspension_date: "3 de agosto de 2026 · Ver no X",
@@ -2322,12 +2322,12 @@ const dict = {
         status: "状态",
         fast: "快速",
         l2: "建立在二层网络之上",
-        l2_sub: "Boltz利用像闪电网络这样的二层网络扩展技术",
-        assets_sub: "比特币层和稳定币",
+        l2_sub: "SATS Routing利用像闪电网络这样的二层网络扩展技术",
+        assets_sub: "比特币层",
         safe: "安全",
         non_custodial: "非托管",
         non_custodial_sub:
-            "Boltz上的交换是原子式,密码学确保用户始终掌握自己的资金",
+            "SATS Routing上的交换是原子式,密码学确保用户始终掌握自己的资金",
         node: "闪电网络节点",
         error: "错误",
         error_subline: "API的响应无效，出现异常。",
@@ -2350,7 +2350,7 @@ const dict = {
         help: "支持",
         network_fee: "网络费",
         swap_fees: "交换费用",
-        fee: "Boltz费",
+        fee: "SATS Routing费",
         denomination: "面额",
         send: "发送",
         checking_previous_transaction: "正在检查上一笔交易",
@@ -2412,7 +2412,7 @@ const dict = {
         copy_amount: "金额",
         copy_bip21: "BIP21",
         rescue_a_swap_subline:
-            "如果您向 Boltz 交换发送了 BTC 或 LBTC，请上传或输入您的救援密钥，以恢复在该浏览器的交换历史记录中不可用的交换。",
+            "如果您向 SATS Routing 交换发送了 BTC 或 LBTC，请上传或输入您的救援密钥，以恢复在该浏览器的交换历史记录中不可用的交换。",
         rescue_a_swap_mnemonic:
             "输入您的救援密钥以恢复此浏览器交换历史记录中不存在的交换。",
         refund_past_swaps: "过去的交换",
@@ -2451,7 +2451,7 @@ const dict = {
         locktime_not_satisfied: "未满足锁定时间要求",
         already_refunded: "交换已经退还",
         api_offline: "API离线",
-        api_offline_msg: "无法连接到Boltz API,请稍后重试",
+        api_offline_msg: "无法连接到SATS Routing API,请稍后重试",
         refund_explainer: "您将能够在超时后退款!",
         wasm_not_supported: "请在您的浏览器中激活WebAssembly",
         created: "已创建",
@@ -2459,7 +2459,7 @@ const dict = {
         id: "ID",
         headline: "非托管比特币跨链桥",
         headline_pro: "积累聪，非托管！",
-        subline: "在不同比特币层和稳定币之间交换，同时保持完全控制。",
+        subline: "在不同比特币层之间交换，同时保持完全控制。",
         subline_pro: "通过交换比特币赚取聪，在有助于平衡我们的流动性方向上。",
         start_swapping: "开始交换",
         partners: "合作伙伴",
@@ -2471,7 +2471,7 @@ const dict = {
         num_channels: "通道数",
         beta_caution: "BETA - 谨慎使用！",
         pro: "pro",
-        pro_banner: "想要通过 API 使用 Boltz Pro？",
+        pro_banner: "想要通过 API 使用 SATS Routing Pro？",
         warning_return:
             "重要：支付发票后返回此页面！在您返回此页面之前，付款可能显示为待定。",
         warning_expiry: "确保您的交易在创建此交换后的约24小时内确认！",
@@ -2576,7 +2576,7 @@ const dict = {
         no_wallet_connected: "未连接钱包",
         no_lockup_transaction: "未找到锁仓交易",
         routing_fee_limit: "最大路由费用",
-        download_boltz_rescue_key: "Boltz 救援密钥",
+        download_boltz_rescue_key: "SATS Routing 救援密钥",
         download_boltz_rescue_key_subline: "使用单个救援密钥备份所有交换 🙌",
         download_boltz_rescue_key_subline_second:
             "此密钥可在任何设备上使用，并适用于所有用它创建的交换。",
@@ -2589,10 +2589,10 @@ const dict = {
         download_new_key: "下载救援密钥",
         verify_boltz_rescue_key: "验证博尔茨救援密钥",
         verify_boltz_rescue_key_subline:
-            "请选择您之前保存的 Boltz 救援密钥进行验证。",
+            "请选择您之前保存的 SATS Routing 救援密钥进行验证。",
         verify_key: "验证密钥",
         verify_key_failed:
-            "Boltz 救援密钥验证失败。我们建议下载新的 Boltz 救援密钥以继续。",
+            "SATS Routing 救援密钥验证失败。我们建议下载新的 SATS Routing 救援密钥以继续。",
         rescue_key: "救援密钥",
         reset_rescue_key_tooltip: "生成新的救援密钥并清除所有交换数据",
         reset_rescue_key_prompt:
@@ -2609,7 +2609,7 @@ const dict = {
         pagination_info: "{{ start }} 的 {{ end }} 页",
         generate_key: "生成新密钥",
         show_rescue_key_instead: "改为显示 12 个单词的救援密钥",
-        backup_boltz_rescue_key: "备份 Boltz 救援密钥",
+        backup_boltz_rescue_key: "备份 SATS Routing 救援密钥",
         backup_boltz_rescue_key_subline_second:
             "这个新密钥适用于任何设备，并可用于所有用其创建的兑换操作。",
         backup_boltz_rescue_key_subline_third:
@@ -2668,26 +2668,26 @@ const dict = {
         // Products page
         products: "产品",
         products_description: "一套产品，可实现比特币各层之间的无缝互操作性",
-        products_plugin_title: "Boltz BTCPay 插件",
+        products_plugin_title: "SATS Routing BTCPay 插件",
         products_plugin_description:
             "一种非托管解决方案，无需运行 Lightning 节点即可轻松接受 Lightning 支付",
-        products_client_title: "Boltz 客户端",
+        products_client_title: "SATS Routing 客户端",
         products_client_description:
             "我们的企业级交换守护程序，用于服务器集成和流动性管理",
-        products_pro_title: "Boltz Pro",
+        products_pro_title: "SATS Routing Pro",
         products_pro_description: "通过交换赚取聪的平台",
         learn_more: "了解更多",
-        get_started: "打开 Boltz Pro",
+        get_started: "打开 SATS Routing Pro",
         documentation: "文档",
         view_on_github: "在 Github 上查看",
         chat_with_us: "与我们聊天",
 
         // Plugin
-        boltz_plugin_name: "Boltz BTCPay 插件",
+        boltz_plugin_name: "SATS Routing BTCPay 插件",
         boltz_plugin_description: "非托管解决方案，轻松接受 Lightning 支付",
         boltz_plugin_step_install_title: "添加插件",
         boltz_plugin_step_install_description:
-            "在您的 BTCPay 服务器上安装 Boltz 插件",
+            "在您的 BTCPay 服务器上安装 SATS Routing 插件",
         boltz_plugin_step_setup_title: "设置您的钱包",
         boltz_plugin_step_setup_description: "连接您的外部钱包或创建一个新钱包",
         boltz_plugin_step_paid_title: "接受 Lightning",
@@ -2707,12 +2707,12 @@ const dict = {
             "根据您的偏好自动交换到主链比特币",
         boltz_plugin_feature_self_custodial_title: "非托管",
         boltz_plugin_feature_self_custodial_description:
-            "保持对您的比特币的完全控制，由 Boltz 原子交换提供支持",
+            "保持对您的比特币的完全控制，由 SATS Routing 原子交换提供支持",
 
         boltz_plugin_questions_title: "有问题？",
         boltz_plugin_questions_subtitle: "我们很乐意听取您的意见！",
         // Client
-        boltz_client_name: "Boltz 客户端",
+        boltz_client_name: "SATS Routing 客户端",
         boltz_client_description:
             "企业级交换守护程序，用于服务器集成和流动性管理",
         boltz_client_features_title: "专为企业和专业人士打造",
@@ -2735,23 +2735,23 @@ const dict = {
             "内置钱包系统和全面的 API，可无缝集成到您的基础设施中。",
         boltz_client_cli_second_paragraph:
             "通过您自己的应用程序或 CLI 监控、控制和自动化。",
-        boltz_client_cta_title: "将 Boltz 添加到您的基础设施！",
+        boltz_client_cta_title: "将 SATS Routing 添加到您的基础设施！",
         boltz_client_cta_subtitle:
-            "加入使用 Boltz Client 的企业和节点运营商社区",
+            "加入使用 SATS Routing Client 的企业和节点运营商社区",
 
         // Pro
-        boltz_pro_name: "Boltz Pro",
+        boltz_pro_name: "SATS Routing Pro",
         boltz_pro_description: "通过交换赚取聪的平台",
         boltz_pro_how_it_works_title: "工作原理",
         boltz_pro_how_it_works_description:
             "您通过进行帮助我们再平衡流动性方向的交换而获得报酬",
-        boltz_pro_chart_title: "Boltz Pro 费用历史样本",
-        boltz_pro_chart_y_axis: "Boltz Pro 费用",
+        boltz_pro_chart_title: "SATS Routing Pro 费用历史样本",
+        boltz_pro_chart_y_axis: "SATS Routing Pro 费用",
         boltz_pro_chart_x_axis: "日期",
         boltz_pro_negative_fee: "您赚取聪",
         boltz_pro_lower_fee: "您节省聪",
-        boltz_pro_regular_fee: "常规 Boltz 费用",
-        boltz_pro_target_audience_title: "Boltz Pro 适合谁？",
+        boltz_pro_regular_fee: "常规 SATS Routing 费用",
+        boltz_pro_target_audience_title: "SATS Routing Pro 适合谁？",
         boltz_pro_target_audience_subtitle:
             "专为想要赚取聪的专业人士打造，而不是日常支付",
         boltz_pro_perfect_for_title: "适用于",
@@ -2759,26 +2759,26 @@ const dict = {
             "希望减少过多入站流动性以赚取聪的 Lightning 节点运营商",
         boltz_pro_perfect_for_2: "与外部节点运营商合作管理流动性的专业人士",
         boltz_pro_perfect_for_3:
-            "在 Boltz Pro 路由限制内充值 Lightning 钱包的用户",
+            "在 SATS Routing Pro 路由限制内充值 Lightning 钱包的用户",
         boltz_pro_not_designed_for_title: "不适合",
         boltz_pro_not_designed_for_1: "日常 Lightning 支付，如购买咖啡",
         boltz_pro_not_designed_for_2: "向具有高路由费用的目的地进行可靠支付",
         boltz_pro_not_designed_for_3: "需要保证即时支付执行的场景",
         boltz_pro_cta_title: "立即开始赚取聪！",
         boltz_pro_cta_subtitle: "探索当前赚取聪的机会",
-        boltz_pro_options_title: "使用 Boltz Pro 的 3 种方式",
+        boltz_pro_options_title: "使用 SATS Routing Pro 的 3 种方式",
         boltz_pro_options_subtitle: "选择最适合您的方式",
-        boltz_pro_option_client_title: "Boltz 客户端",
+        boltz_pro_option_client_title: "SATS Routing 客户端",
         boltz_pro_option_client_description:
-            "通过 API 和 CLI 完全自动化 Boltz Pro",
+            "通过 API 和 CLI 完全自动化 SATS Routing Pro",
         boltz_pro_option_web_title: "网络应用",
         boltz_pro_option_web_description:
-            "使用我们的 Boltz Pro 网络应用观察和交换",
+            "使用我们的 SATS Routing Pro 网络应用观察和交换",
         boltz_pro_option_chat_title: "聊天机器人",
         boltz_pro_option_chat_description_prefix: "在",
         boltz_pro_option_chat_description_middle: "或",
         boltz_pro_option_chat_description_suffix:
-            "中接收有关 Boltz Pro 机会的即时提醒。",
+            "中接收有关 SATS Routing Pro 机会的即时提醒。",
 
         balance: "余额",
         display: "显示",
@@ -2806,7 +2806,7 @@ const dict = {
         rescue_external_requires_rescue_key_wallet: "需要救援密钥和钱包",
         rescue_external_resume: "继续",
         evm_rescue_prompt:
-            "如果你向 EVM 链上的 Boltz 交换发送了资金，请使用“退还交换”；如果你正在从 EVM 链接收资金，请使用“继续交换”，以救援一个未在此浏览器交换历史中显示的交换。",
+            "如果你向 EVM 链上的 SATS Routing 交换发送了资金，请使用“退还交换”；如果你正在从 EVM 链接收资金，请使用“继续交换”，以救援一个未在此浏览器交换历史中显示的交换。",
         evm_rescue_refund_title: "退还交换",
         start_scanning: "开始扫描",
         stop_scanning: "停止扫描",
@@ -2822,16 +2822,16 @@ const dict = {
         upload_rescue_key: "选择救援密钥",
 
         suspension_status: "兑换服务已停用",
-        suspension_p1: "更新：Boltz 将持续停用，直至另行通知。",
+        suspension_p1: "更新：SATS Routing 将持续停用，直至另行通知。",
         suspension_p2:
             "我们的 API 仍可用于协作处理退款。无论如何，单方面退款都能正常进行，因为它们不依赖我们的基础设施。",
         suspension_p3: "我们的支持团队仍可联系。",
         suspension_p4:
-            "需要说明的是：这并非针对单一事件的回应。过去几个月，我们看到针对基础设施的自动化、AI 辅助探测持续增加，并处理了多起漏洞利用。每一起都已被控制，但模式已经很清楚：攻击者的迭代速度已超过我们这种规模的团队发现和修补的速度。仅在最近几天，我们就看到了急剧的加速，我们并不认为这种不对称会逆转。在审视了我们自己近期安全扫描的结果后，我们无法负责任地重新启用 Boltz 兑换，尤其是在我们正被看似多个资源充足的团伙主动锁定、而我们仍在争分夺秒部署修复的情况下。",
+            "需要说明的是：这并非针对单一事件的回应。过去几个月，我们看到针对基础设施的自动化、AI 辅助探测持续增加，并处理了多起漏洞利用。每一起都已被控制，但模式已经很清楚：攻击者的迭代速度已超过我们这种规模的团队发现和修补的速度。仅在最近几天，我们就看到了急剧的加速，我们并不认为这种不对称会逆转。在审视了我们自己近期安全扫描的结果后，我们无法负责任地重新启用 SATS Routing 兑换，尤其是在我们正被看似多个资源充足的团伙主动锁定、而我们仍在争分夺秒部署修复的情况下。",
         suspension_p5:
             "我们所看到的，是基于开源技术栈运行的比特币服务所面临的一次重大范式转变，这需要审慎分析。请不要期待兑换服务会很快恢复。",
         suspension_p6:
-            "明确地说：用户资金从未面临风险。Boltz 在设计上就是非托管的。作为一家完全自筹资金的公司，损失全部由我们自己承担。",
+            "明确地说：用户资金从未面临风险。SATS Routing 在设计上就是非托管的。作为一家完全自筹资金的公司，损失全部由我们自己承担。",
         suspension_p7:
             "我们尚不清楚接下来会如何发展，但一旦我们有时间喘口气并做出决定，就会及时告知大家 🙏",
         suspension_date: "2026年8月3日 · 在 X 上查看",
@@ -2842,12 +2842,12 @@ const dict = {
         status: "ステータス",
         fast: "高速",
         l2: "L2技術を活用",
-        l2_sub: "Boltzは、LiquidネットワークやLightningネットワークなどのL2スケーリング技術を利用しています",
-        assets_sub: "ビットコインレイヤーとステーブルコイン",
+        l2_sub: "SATS Routingは、LiquidネットワークやLightningネットワークなどのL2スケーリング技術を利用しています",
+        assets_sub: "ビットコインレイヤー",
         safe: "安全",
         non_custodial: "ノンカストディアル型",
         non_custodial_sub:
-            "Boltzのスワップはノンカストディアル型です。暗号技術により、ユーザーは常に資金を自己管理できます",
+            "SATS Routingのスワップはノンカストディアル型です。暗号技術により、ユーザーは常に資金を自己管理できます",
         node: "ノード",
         error: "エラー",
         error_subline: "APIからの無効な応答です。何かが間違っています",
@@ -2870,7 +2870,7 @@ const dict = {
         help: "ヘルプ",
         network_fee: "ネットワーク手数料",
         swap_fees: "スワップ手数料",
-        fee: "Boltz手数料",
+        fee: "SATS Routing手数料",
         denomination: "単位",
         send: "送信",
         checking_previous_transaction: "前回のトランザクションを確認中",
@@ -2940,7 +2940,7 @@ const dict = {
         copy_amount: "金額をコピー",
         copy_bip21: "BIP21をコピー",
         rescue_a_swap_subline:
-            "BTCまたはLBTCをBoltzスワップに送金した場合、このブラウザのスワップ履歴に表示されないスワップを復旧するには、復旧キーをアップロードまたは入力してください。",
+            "BTCまたはLBTCをSATS Routingスワップに送金した場合、このブラウザのスワップ履歴に表示されないスワップを復旧するには、復旧キーをアップロードまたは入力してください。",
         rescue_a_swap_mnemonic:
             "このブラウザの交換履歴にない交換を復元するには、復元キーを入力してください。",
         refund_past_swaps: "過去のスワップ",
@@ -2987,7 +2987,7 @@ const dict = {
         already_refunded: "スワップはすでに返金されています",
         api_offline: "APIがオフラインです",
         api_offline_msg:
-            "Boltz APIに接続できませんでした。後でもう一度お試しください",
+            "SATS Routing APIに接続できませんでした。後でもう一度お試しください",
         refund_explainer: "タイムアウト後に返金できます!",
         wasm_not_supported: "ブラウザでWebAssemblyを有効にしてください",
         created: "作成済み",
@@ -2997,7 +2997,7 @@ const dict = {
             "プライバシーファースト、ノンカストディアル型のビットコイン取引所",
         headline_pro: "聪を積み上げる、非托管で！",
         subline:
-            "異なるビットコインレイヤーとステーブルコインの間で、完全な管理を保ちながらスワップ。",
+            "異なるビットコインレイヤーの間で、完全な管理を保ちながらスワップ。",
         subline_pro:
             "ビットコインをスワップするためサットを稼ぐ、私たちの流動性を調整する方向で。",
         start_swapping: "取引を開始する",
@@ -3010,7 +3010,7 @@ const dict = {
         num_channels: "チャネルの数",
         beta_caution: "ベータ版の為、ご利用は慎重にお願いします",
         pro: "pro",
-        pro_banner: "API経由でBoltz Proを使用したいですか？",
+        pro_banner: "API経由でSATS Routing Proを使用したいですか？",
         warning_return:
             "重要：インボイスのお支払い後、このページへ戻ってください！このページに戻るまで、支払いは保留中と表示される場合があります。",
         warning_expiry:
@@ -3123,7 +3123,7 @@ const dict = {
         no_wallet_connected: "財布はつながっていない！",
         no_lockup_transaction: "ロックアップトランザクションが見つかりません",
         routing_fee_limit: "ルーティング料金の上限",
-        download_boltz_rescue_key: "Boltzレスキューキー",
+        download_boltz_rescue_key: "SATS Routingレスキューキー",
         download_boltz_rescue_key_subline:
             "1つのレスキューキーですべてのスワップをバックアップ 🙌",
         download_boltz_rescue_key_subline_second:
@@ -3137,12 +3137,12 @@ const dict = {
         download_boltz_rescue_key_subline_warning:
             "そうしないと、**資金の損失**につながる可能性があります。",
         download_new_key: "レスキューキーをダウンロード",
-        verify_boltz_rescue_key: "Boltzレスキューキー検証",
+        verify_boltz_rescue_key: "SATS Routingレスキューキー検証",
         verify_boltz_rescue_key_subline:
-            "以前にダウンロードしたBoltzレスキューキーを選択して確認してください。",
+            "以前にダウンロードしたSATS Routingレスキューキーを選択して確認してください。",
         verify_key: "ベリファイキー",
         verify_key_failed:
-            "Boltzレスキューキーの検証に失敗しました。続行するには、新しいBoltzレスキューキーをダウンロードすることをお勧めします。",
+            "SATS Routingレスキューキーの検証に失敗しました。続行するには、新しいSATS Routingレスキューキーをダウンロードすることをお勧めします。",
         rescue_key: "レスキューキー",
         reset_rescue_key_tooltip:
             "新しいレスキューキーを生成し、すべてのスワップデータを削除",
@@ -3162,7 +3162,7 @@ const dict = {
         pagination_info: "{{ end }} ページ中 {{ start }} ページ目",
         generate_key: "新しいキーを生成",
         show_rescue_key_instead: "代わりに12語のレスキューキーを表示",
-        backup_boltz_rescue_key: "Boltzレスキューキーのバックアップ",
+        backup_boltz_rescue_key: "SATS Routingレスキューキーのバックアップ",
         backup_boltz_rescue_key_subline_second:
             "この新しいキーはどのデバイスでも動作し、このキーで作成されたすべてのスワップに対応します。",
         backup_boltz_rescue_key_subline_third:
@@ -3228,27 +3228,27 @@ const dict = {
         products: "製品",
         products_description:
             "Bitcoinレイヤー間のシームレスな相互運用性を実現する製品スイート",
-        products_plugin_title: "Boltz BTCPayプラグイン",
+        products_plugin_title: "SATS Routing BTCPayプラグイン",
         products_plugin_description:
             "Lightningノードを実行せずに簡単にLightning決済を受け入れるノンカストディアルソリューション",
-        products_client_title: "Boltzクライアント",
+        products_client_title: "SATS Routingクライアント",
         products_client_description:
             "サーバー統合とリクイディティ管理のための当社のエンタープライズグレードのスワップデーモン",
-        products_pro_title: "Boltz Pro",
+        products_pro_title: "SATS Routing Pro",
         products_pro_description: "スワップでsatsを稼げるプラットフォーム",
         learn_more: "詳細を見る",
-        get_started: "Boltz Proを開く",
+        get_started: "SATS Routing Proを開く",
         documentation: "ドキュメント",
         view_on_github: "Githubで見る",
         chat_with_us: "チャットする",
 
         // Plugin
-        boltz_plugin_name: "Boltz BTCPayプラグイン",
+        boltz_plugin_name: "SATS Routing BTCPayプラグイン",
         boltz_plugin_description:
             "Lightning決済を簡単に受け入れるノンカストディアルソリューション",
         boltz_plugin_step_install_title: "プラグインを追加",
         boltz_plugin_step_install_description:
-            "BTCPayサーバーにBoltzプラグインをインストールする",
+            "BTCPayサーバーにSATS Routingプラグインをインストールする",
         boltz_plugin_step_setup_title: "ウォレットを設定",
         boltz_plugin_step_setup_description:
             "外部ウォレットを接続するか、新しいウォレットを作成する",
@@ -3269,12 +3269,12 @@ const dict = {
             "設定に基づいてメインチェーンBitcoinへ自動スワップ",
         boltz_plugin_feature_self_custodial_title: "ノンカストディアル",
         boltz_plugin_feature_self_custodial_description:
-            "Boltz Atomic Swapsによって駆動され、Bitcoinの完全なコントロールを維持",
+            "SATS Routing Atomic Swapsによって駆動され、Bitcoinの完全なコントロールを維持",
 
         boltz_plugin_questions_title: "質問がありますか？",
         boltz_plugin_questions_subtitle: "ぜひお聞かせください！",
         // Client
-        boltz_client_name: "Boltzクライアント",
+        boltz_client_name: "SATS Routingクライアント",
         boltz_client_description:
             "サーバー統合とリクイディティ管理のためのエンタープライズグレードのスワップデーモン",
         boltz_client_features_title: "企業とプロフェッショナル向けに構築",
@@ -3297,23 +3297,23 @@ const dict = {
             "インフラストラクチャへのシームレスな統合のための組み込みウォレットシステムと包括的なAPI。",
         boltz_client_cli_second_paragraph:
             "独自のアプリケーションまたはCLI経由で監視、制御、自動化。",
-        boltz_client_cta_title: "インフラストラクチャにBoltzを追加！",
+        boltz_client_cta_title: "インフラストラクチャにSATS Routingを追加！",
         boltz_client_cta_subtitle:
-            "Boltz Clientを使用している企業やノードランナーのコミュニティに参加",
+            "SATS Routing Clientを使用している企業やノードランナーのコミュニティに参加",
 
         // Pro
-        boltz_pro_name: "Boltz Pro",
+        boltz_pro_name: "SATS Routing Pro",
         boltz_pro_description: "スワップでsatsを稼げるプラットフォーム",
         boltz_pro_how_it_works_title: "仕組み",
         boltz_pro_how_it_works_description:
             "当社のリクイディティの再バランスに役立つ方向にスワップすることで報酬を得る",
-        boltz_pro_chart_title: "Boltz Pro手数料履歴サンプル",
-        boltz_pro_chart_y_axis: "Boltz Pro手数料",
+        boltz_pro_chart_title: "SATS Routing Pro手数料履歴サンプル",
+        boltz_pro_chart_y_axis: "SATS Routing Pro手数料",
         boltz_pro_chart_x_axis: "日付",
         boltz_pro_negative_fee: "satsを獲得",
         boltz_pro_lower_fee: "satsを節約",
-        boltz_pro_regular_fee: "通常のBoltz手数料",
-        boltz_pro_target_audience_title: "Boltz Proは誰のため？",
+        boltz_pro_regular_fee: "通常のSATS Routing手数料",
+        boltz_pro_target_audience_title: "SATS Routing Proは誰のため？",
         boltz_pro_target_audience_subtitle:
             "日常の支払いではなく、satsを稼ぎたいプロフェッショナル向けに構築",
         boltz_pro_perfect_for_title: "最適なのは",
@@ -3322,7 +3322,7 @@ const dict = {
         boltz_pro_perfect_for_2:
             "外部ノードオペレーターと協力してリクイディティを管理するプロフェッショナル",
         boltz_pro_perfect_for_3:
-            "Boltz Proのルーティング制限内でLightningウォレットをチャージするユーザー",
+            "SATS Routing Proのルーティング制限内でLightningウォレットをチャージするユーザー",
         boltz_pro_not_designed_for_title: "適していないのは",
         boltz_pro_not_designed_for_1:
             "コーヒーを買うなどの日常的なLightning決済",
@@ -3332,17 +3332,17 @@ const dict = {
             "即座の支払い実行が保証されることを必要とするシナリオ",
         boltz_pro_cta_title: "今すぐsatsを獲得開始！",
         boltz_pro_cta_subtitle: "現在のsatsを稼ぐ機会を見つける",
-        boltz_pro_options_title: "Boltz Proの3つの使用方法",
+        boltz_pro_options_title: "SATS Routing Proの3つの使用方法",
         boltz_pro_options_subtitle: "最適なものを選択",
-        boltz_pro_option_client_title: "Boltzクライアント",
+        boltz_pro_option_client_title: "SATS Routingクライアント",
         boltz_pro_option_client_description:
-            "APIとCLI経由でBoltz Proを完全に自動化",
+            "APIとCLI経由でSATS Routing Proを完全に自動化",
         boltz_pro_option_web_title: "Webアプリ",
         boltz_pro_option_web_description:
-            "Boltz Pro Webアプリで観察してスワップ",
+            "SATS Routing Pro Webアプリで観察してスワップ",
         boltz_pro_option_chat_title: "チャットボット",
         boltz_pro_option_chat_description_prefix:
-            "Boltz Pro の機会に関する即時通知を",
+            "SATS Routing Pro の機会に関する即時通知を",
         boltz_pro_option_chat_description_middle: "または",
         boltz_pro_option_chat_description_suffix: "で受け取る。",
 
@@ -3376,7 +3376,7 @@ const dict = {
             "レスキューキーとウォレットが必要です",
         rescue_external_resume: "再開",
         evm_rescue_prompt:
-            "EVM チェーン上の Boltz スワップに資金を送金した場合は「スワップを返金」を使用し、EVM チェーンから資金を受け取っていた場合は「スワップを再開」を使用して、このブラウザのスワップ履歴にないスワップを救済してください。",
+            "EVM チェーン上の SATS Routing スワップに資金を送金した場合は「スワップを返金」を使用し、EVM チェーンから資金を受け取っていた場合は「スワップを再開」を使用して、このブラウザのスワップ履歴にないスワップを救済してください。",
         evm_rescue_refund_title: "スワップを返金",
         start_scanning: "スキャンを開始",
         stop_scanning: "スキャンを停止",
@@ -3394,16 +3394,16 @@ const dict = {
 
         suspension_status: "スワップサービス停止中",
         suspension_p1:
-            "お知らせ：Boltz は追って通知があるまで停止したままとなります。",
+            "お知らせ：SATS Routing は追って通知があるまで停止したままとなります。",
         suspension_p2:
             "当社の API は、協調的な返金処理のために引き続き利用可能です。いずれにせよ、一方的な返金は当社のインフラに依存しないため機能します。",
         suspension_p3: "サポートチームには引き続きご連絡いただけます。",
         suspension_p4:
-            "明確にしておきますが、これは単一のインシデントへの対応ではありません。ここ数か月、当社のインフラに対する自動化された AI 支援型の探索が着実に増加しており、複数のエクスプロイトに対処してきました。いずれも封じ込めましたが、傾向は明らかです。攻撃者は、当社の規模のチームが発見して修正できるよりも速く反復するようになりました。ここ数日だけでも急激な加速が見られ、この非対称性が逆転するとは考えていません。当社自身による最近のセキュリティスキャンの結果を検討した上で、Boltz のスワップを責任を持って再開することはできません。とりわけ、修正の展開を急ぐ一方で、潤沢なリソースを持つと見られる複数のグループから積極的に狙われている状況ではなおさらです。",
+            "明確にしておきますが、これは単一のインシデントへの対応ではありません。ここ数か月、当社のインフラに対する自動化された AI 支援型の探索が着実に増加しており、複数のエクスプロイトに対処してきました。いずれも封じ込めましたが、傾向は明らかです。攻撃者は、当社の規模のチームが発見して修正できるよりも速く反復するようになりました。ここ数日だけでも急激な加速が見られ、この非対称性が逆転するとは考えていません。当社自身による最近のセキュリティスキャンの結果を検討した上で、SATS Routing のスワップを責任を持って再開することはできません。とりわけ、修正の展開を急ぐ一方で、潤沢なリソースを持つと見られる複数のグループから積極的に狙われている状況ではなおさらです。",
         suspension_p5:
             "私たちが目にしているのは、オープンソースのスタック上で運用されるビットコインサービスにとっての大きなパラダイムシフトであり、慎重な分析が必要です。スワップサービスがすぐに再開するとは考えないでください。",
         suspension_p6:
-            "はっきりと申し上げます。ユーザーの資金が危険にさらされたことは一度もありません。Boltz は設計上ノンカストディアルです。そして完全に自己資金で運営する企業として、損失はすべて当社が負いました。",
+            "はっきりと申し上げます。ユーザーの資金が危険にさらされたことは一度もありません。SATS Routing は設計上ノンカストディアルです。そして完全に自己資金で運営する企業として、損失はすべて当社が負いました。",
         suspension_p7:
             "ここから先どうなるかはまだわかりませんが、一息ついて判断できる時間が取れ次第、あらためてお知らせします 🙏",
         suspension_date: "2026年8月3日 · X で見る",
