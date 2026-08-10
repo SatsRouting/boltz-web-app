@@ -160,10 +160,13 @@ nav a.active {
 #logo {
     z-index: 1;
 }
-#logo-img {
+#logo #logo-img {
     display: block;
     height: 44px;
     width: auto;
+    max-width: none;
+    padding: 0 8px 0 0;
+    object-fit: contain;
     border-radius: 8px;
 }
 
