@@ -16,10 +16,10 @@ const config = {
     ...baseConfig,
     // Self-hosted: enable swaps in UI (upstream default is true for public site).
     swapsSuspended: false,
-    // Onion di SATS Routing: sostituire con il nostro indirizzo .onion.
-    // Finché è "" il link "Onion" nel footer resta nascosto (Footer usa <Show>).
-    // Originale Boltz: "http://boltzzzbnus4m7mta3cxmflnps4fp7dueu2tgurstbvrbt6xswzcocyd.onion/"
-    torUrl: "",
+    // Onion di SATS Routing: mostrato nel footer come link "Onion" (Footer usa <Show>).
+    // Metti "" per nasconderlo. Originale Boltz:
+    // "http://boltzzzbnus4m7mta3cxmflnps4fp7dueu2tgurstbvrbt6xswzcocyd.onion/"
+    torUrl: "http://esvdbbvdyams2ogjlx2t3tpiebm4dkk5yuielfb4dihseoprenl4mzid.onion/",
     network: "mainnet",
     loglevel: "debug",
     // Self-hosted same-origin API (nginx serves app + /v2 on LAN HTTPS and onion).
