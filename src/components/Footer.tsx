@@ -54,7 +54,8 @@ const Footer = () => {
                         <BsYoutube size={22} color="#22374F" />
                     </ExternalLink>
                 </Show>
-                <Show when={config.email}>
+                {/* Email nascosta per SATS Routing (when={false}) */}
+                <Show when={false}>
                     <ExternalLink
                         title={t("email")}
                         class="email"
