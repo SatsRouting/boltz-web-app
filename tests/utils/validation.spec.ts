@@ -5,7 +5,11 @@ import log from "loglevel";
 import { BTC, LBTC, LN } from "../../src/consts/Assets";
 import { decodeAddress } from "../../src/utils/compat";
 import { ECPair } from "../../src/utils/ecpair";
-import { validateResponse } from "../../src/utils/validation";
+import {
+    isTimeoutSane,
+    maxTimeoutBlocksAhead,
+    validateResponse,
+} from "../../src/utils/validation";
 
 describe("validate responses", () => {
     const getEtherSwap = (code: string) => {
@@ -239,5 +243,50 @@ describe("validate onchain addresses", () => {
         ${LBTC} | ${"lq1qqwdhep7uhzuav78mteywmt6h4lqeu6mq952kj92jvm6t2j3jz2w9j6fgwgfgeetcq2gju8x80md0l98qdgym2cakgvj5qlgjh"}
     `("should throw $address", ({ asset, address }) => {
         expect(() => decodeAddress(asset, address)).toThrow();
+    });
+});
+
+describe("swap timeout sanity bounds", () => {
+    describe("maxTimeoutBlocksAhead", () => {
+        test.each`
+            asset   | expected
+            ${BTC}  | ${Math.ceil((30 * 24 * 60) / 10)}
+            ${LBTC} | ${Math.ceil((30 * 24 * 60) / 1)}
+        `(
+            "bounds $asset by its block time",
+            ({ asset, expected }) => {
+                expect(maxTimeoutBlocksAhead(asset as string)).toBe(
+                    expected as number,
+                );
+            },
+        );
+
+        test("does not bound chains with an unknown block time", () => {
+            expect(maxTimeoutBlocksAhead("UNKNOWN")).toBe(
+                Number.POSITIVE_INFINITY,
+            );
+        });
+    });
+
+    describe("isTimeoutSane", () => {
+        const tip = 1_000;
+        const maxAhead = maxTimeoutBlocksAhead(BTC);
+
+        test("accepts a legitimate near-future timeout", () => {
+            expect(isTimeoutSane(tip, tip + 144, maxAhead)).toBe(true);
+        });
+
+        test("accepts a timeout at the upper bound", () => {
+            expect(isTimeoutSane(tip, tip + maxAhead, maxAhead)).toBe(true);
+        });
+
+        test("rejects a timeout in the past or at the tip", () => {
+            expect(isTimeoutSane(tip, tip, maxAhead)).toBe(false);
+            expect(isTimeoutSane(tip, tip - 1, maxAhead)).toBe(false);
+        });
+
+        test("rejects an absurdly far-future timeout", () => {
+            expect(isTimeoutSane(tip, tip + 500_000, maxAhead)).toBe(false);
+        });
     });
 });

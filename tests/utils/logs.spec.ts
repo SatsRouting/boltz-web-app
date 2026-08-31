@@ -101,6 +101,33 @@ describe("logs", () => {
         expect(formatLogLine(line)).toEqual(`${timestamp} ${expected}`);
     });
 
+    test("should redact secret fields from persisted log lines", () => {
+        const swap = {
+            id: "swap-1",
+            status: "swap.created",
+            refundPrivateKey:
+                "cb9774710e1d1eaa747a38fff23b20cbb5847e1586e97ebdca36489f3a0105d8",
+            claimPrivateKey: "L1aW4aubDFB7yfras2S1mHmY7Zj1zRixiFmR3zZ9cV",
+            preimage:
+                "44789b9c9813e523f0acfa300b8aeff383d21b9aaab6847b6bd6676c6a10518d",
+            preimageHash: "publichash",
+            nested: { mnemonic: "word1 word2 word3", seed: "deadbeef" },
+        };
+
+        const formatted = formatLogLine(["refunding", swap]);
+
+        expect(formatted).not.toContain("cb9774710e1d1eaa");
+        expect(formatted).not.toContain("L1aW4aubDFB7");
+        expect(formatted).not.toContain("44789b9c9813e523");
+        expect(formatted).not.toContain("word1 word2 word3");
+        expect(formatted).not.toContain("deadbeef");
+        expect(formatted).toContain("[redacted]");
+        // Non-secret fields are preserved.
+        expect(formatted).toContain("swap-1");
+        expect(formatted).toContain("swap.created");
+        expect(formatted).toContain("publichash");
+    });
+
     test.each`
         existingLogs
         ${undefined}

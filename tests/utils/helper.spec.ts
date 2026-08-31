@@ -122,6 +122,52 @@ describe("helper", () => {
             expect(mockDerive).not.toHaveBeenCalled();
             expect(ECPair.fromPrivateKey).toHaveBeenCalledTimes(1);
         });
+
+        test("should accept a raw key matching the expected public key (KEY-005)", () => {
+            const secret = secp256k1.utils.randomSecretKey();
+            const publicKey = Buffer.from(secp256k1.getPublicKey(secret, true));
+            vi.mocked(ECPair.fromPrivateKey).mockReturnValueOnce({
+                publicKey,
+            } as never);
+
+            const mockDerive = vi.fn();
+
+            expect(
+                parsePrivateKey(
+                    mockDerive,
+                    BTC,
+                    undefined,
+                    hex.encode(secret),
+                    publicKey,
+                ),
+            ).toEqual({ publicKey });
+        });
+
+        test("should reject a raw key that mismatches the expected public key (KEY-005)", () => {
+            // A preimage or the server's x-only public key parses as a valid
+            // scalar; its derived public key must not match the expected one.
+            const secret = secp256k1.utils.randomSecretKey();
+            const derivedPublicKey = Buffer.from(
+                secp256k1.getPublicKey(secret, true),
+            );
+            vi.mocked(ECPair.fromPrivateKey).mockReturnValueOnce({
+                publicKey: derivedPublicKey,
+            } as never);
+
+            const expectedPublicKey = Buffer.from(
+                secp256k1.getPublicKey(secp256k1.utils.randomSecretKey(), true),
+            );
+
+            expect(() =>
+                parsePrivateKey(
+                    vi.fn(),
+                    BTC,
+                    undefined,
+                    hex.encode(secret),
+                    expectedPublicKey,
+                ),
+            ).toThrow(/does not match the expected key/);
+        });
     });
 
     describe("formatAddress", () => {

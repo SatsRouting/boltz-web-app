@@ -16,18 +16,21 @@ import { createAssetProvider } from "boltz-swaps/evm";
 import { decodeInvoice } from "boltz-swaps/invoice";
 import { AssetKind, SwapType } from "boltz-swaps/types";
 import { createMusig, tweakMusig } from "boltz-swaps/utxo";
+import log from "loglevel";
 import { type Address, keccak256 } from "viem";
 
 import {
     type AssetType,
     BTC,
     LBTC,
+    type blockChainsAssets,
     getKindForAsset,
     isEvmAsset,
 } from "../consts/Assets";
 import { Denomination, Side } from "../consts/Enums";
 import type { deriveKeyFn } from "../context/Global";
 import { erc20SwapCodeHashes, etherSwapCodeHashes } from "../context/Web3";
+import { blockTimeMinutes, getBlockTipHeight } from "./blockchain";
 import { decodeAddress } from "./compat";
 import { formatAmountDenomination } from "./denomination";
 import type { ECKeys } from "./ecpair";
@@ -39,8 +42,68 @@ import type {
     SubmarineSwap,
 } from "./swapCreator";
 
-// TODO: sanity check timeout block height?
 // TODO: buffers for amounts
+
+// A malicious or compromised backend can return a swap timeout arbitrarily far
+// in the future to strand an honest user's uncooperative refund (the only exit
+// that does not require the backend). Boltz timeouts are day-scale, so any
+// user-lockup timeout beyond this generous window is rejected. Kept large to
+// avoid ever rejecting a legitimate swap; easy to tighten.
+const maxTimeoutDays = 30;
+
+export const maxTimeoutBlocksAhead = (asset: string): number => {
+    const minutesPerBlock = blockTimeMinutes[asset as blockChainsAssets];
+    if (minutesPerBlock === undefined || minutesPerBlock <= 0) {
+        // Unknown chain block time: cannot bound safely, do not reject.
+        return Number.POSITIVE_INFINITY;
+    }
+    return Math.ceil((maxTimeoutDays * 24 * 60) / minutesPerBlock);
+};
+
+export const isTimeoutSane = (
+    tipHeight: number,
+    timeoutBlockHeight: number,
+    maxAhead: number,
+): boolean =>
+    timeoutBlockHeight > tipHeight &&
+    timeoutBlockHeight <= tipHeight + maxAhead;
+
+/**
+ * Rejects a user-lockup timeout that is in the past or absurdly far in the
+ * future. Only applied to UTXO chains, where the current tip and block time are
+ * available. Fails open (does not reject) when the tip cannot be fetched so a
+ * flaky explorer never blocks a legitimate swap.
+ */
+const assertSaneTimeout = async (
+    asset: string,
+    timeoutBlockHeight: number,
+): Promise<void> => {
+    const maxAhead = maxTimeoutBlocksAhead(asset);
+    if (!Number.isFinite(maxAhead)) {
+        return;
+    }
+
+    let tip: number;
+    try {
+        tip = Number(await getBlockTipHeight(asset));
+    } catch (e) {
+        log.warn(
+            `could not fetch ${asset} block tip to sanity-check swap timeout, skipping check`,
+            e,
+        );
+        return;
+    }
+
+    if (!Number.isFinite(tip)) {
+        return;
+    }
+
+    if (!isTimeoutSane(tip, timeoutBlockHeight, maxAhead)) {
+        throw new Error(
+            `swap timeout block height ${timeoutBlockHeight} is out of the accepted range (current tip ${tip}, max ${tip + maxAhead})`,
+        );
+    }
+};
 
 const invalidSendAmountMsg = (expected: number, got: number) =>
     `invalid send amount. Expected ${expected}, got ${got}`;
@@ -279,6 +342,8 @@ const validateSubmarine = async (
     );
 
     validateBip21(swap.bip21, swap.address, swap.expectedAmount);
+
+    await assertSaneTimeout(swap.assetSend, swap.timeoutBlockHeight);
 };
 
 const validateChainSwap = async (
@@ -354,6 +419,10 @@ const validateChainSwap = async (
                 throw new Error("missing bip21 for send-side chain validation");
             }
             validateBip21(details.bip21, details.lockupAddress, details.amount);
+
+            // Only the user-lockup (send) leg gates the user's uncooperative
+            // refund, so bound its timeout against the current tip.
+            await assertSaneTimeout(asset, details.timeoutBlockHeight);
         }
     };
 

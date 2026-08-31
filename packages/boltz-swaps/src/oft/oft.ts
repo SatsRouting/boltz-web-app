@@ -11,7 +11,6 @@ import {
     encodePacked,
     getAddress,
     getContract,
-    maxUint256,
     padHex,
     size,
     zeroAddress,
@@ -637,14 +636,16 @@ export const buildOftApprovalCall = async (
             getAddress(owner),
             getAddress(address),
         ]);
-        if (allowance < amount * 10n) {
+        if (allowance < amount) {
+            // Approve exactly the amount being bridged instead of an unlimited
+            // (maxUint256) standing allowance to the third-party OFT contract.
             return {
                 to: tokenContract.address,
                 value: undefined,
                 data: encodeFunctionData({
                     abi: erc20Abi,
                     functionName: "approve",
-                    args: [getAddress(address), maxUint256],
+                    args: [getAddress(address), amount],
                 }),
             };
         }
