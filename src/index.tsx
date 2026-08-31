@@ -20,6 +20,7 @@ import Footer from "./components/Footer";
 import { legacyRescueRedirects } from "./components/LegacyRescueRedirects";
 import Nav from "./components/Nav";
 import Notification from "./components/Notification";
+import RescueFileUnlock from "./components/RescueFileUnlock";
 import { SwapChecker } from "./components/SwapChecker";
 import { SwapExecutionWorker } from "./components/SwapExecutionWorker";
 import { WalletConnect } from "./components/WalletConnect";
@@ -127,6 +128,7 @@ const App = (props: RouteSectionProps) => {
                                     {props.children}
                                 </Show>
                                 <Notification />
+                                <RescueFileUnlock />
                                 <Show when={!isEmbedded}>
                                     <Footer />
                                 </Show>

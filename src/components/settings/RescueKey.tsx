@@ -4,6 +4,8 @@ import log from "loglevel";
 import {
     BiRegularCopy,
     BiRegularDownload,
+    BiRegularLock,
+    BiRegularLockOpen,
     BiRegularTrash,
 } from "solid-icons/bi";
 import { IoCheckmark } from "solid-icons/io";
@@ -30,6 +32,9 @@ const RescueFile = () => {
         notify,
         setLastUsedKey,
         clearLastUsedEvmIndex,
+        rescueEncryptionEnabled,
+        enableRescueEncryption,
+        disableRescueEncryption,
     } = useGlobalContext();
     const { setSendAmount, setReceiveAmount } = useCreateContext();
 
@@ -77,6 +82,57 @@ const RescueFile = () => {
         }
     };
 
+    const handleEncrypt = async () => {
+        const passphrase = window.prompt(t("set_rescue_passphrase_prompt"));
+        if (passphrase === null) {
+            return;
+        }
+        if (passphrase.length === 0) {
+            alert(t("rescue_passphrase_empty"));
+            return;
+        }
+
+        const confirmation = window.prompt(
+            t("confirm_rescue_passphrase_prompt"),
+        );
+        if (confirmation === null) {
+            return;
+        }
+        if (confirmation !== passphrase) {
+            alert(t("rescue_passphrase_mismatch"));
+            return;
+        }
+
+        try {
+            await enableRescueEncryption(passphrase);
+            notify("success", t("encrypt_rescue_key_success"));
+        } catch (error) {
+            alert(t("encrypt_rescue_key_error", { error }));
+            log.error("Failed to encrypt rescue key", error);
+        }
+    };
+
+    const handleDisableEncryption = () => {
+        const confirmText = window.prompt(
+            t("disable_rescue_encryption_prompt"),
+        );
+        if (confirmText === null) {
+            return;
+        }
+        if (confirmText.toLowerCase() !== "confirm") {
+            alert(t("reset_rescue_key_invalid_confirmation"));
+            return;
+        }
+
+        try {
+            disableRescueEncryption();
+            notify("success", t("disable_rescue_encryption_success"));
+        } catch (error) {
+            alert(t("encrypt_rescue_key_error", { error }));
+            log.error("Failed to disable rescue key encryption", error);
+        }
+    };
+
     return (
         <div class="flex" data-testid="rescue-key-download">
             <span class="btn-small" onClick={copy}>
@@ -92,6 +148,26 @@ const RescueFile = () => {
                 onClick={() => downloadRescueFile(rescueFile)}>
                 <BiRegularDownload size={iconSize} />
             </span>
+            &nbsp;
+            <Show
+                when={rescueEncryptionEnabled()}
+                fallback={
+                    <span
+                        class="btn-small"
+                        data-testid="encrypt-rescue-key"
+                        title={t("encrypt_rescue_key")}
+                        onClick={() => void handleEncrypt()}>
+                        <BiRegularLock size={iconSize} />
+                    </span>
+                }>
+                <span
+                    class="btn-small"
+                    data-testid="decrypt-rescue-key"
+                    title={t("decrypt_rescue_key")}
+                    onClick={handleDisableEncryption}>
+                    <BiRegularLockOpen size={iconSize} />
+                </span>
+            </Show>
             &nbsp;
             <span
                 class="btn-small btn-danger"

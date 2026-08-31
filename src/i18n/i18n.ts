@@ -317,6 +317,28 @@ const dict = {
         reset_rescue_key_error:
             "An error occurred while resetting the Rescue Key. Please reload this page and try again.\n\nError: {{ error }}",
         reset_rescue_key_success: "New Rescue Key generated successfully!",
+        encrypt_rescue_key: "Encrypt",
+        decrypt_rescue_key: "Remove encryption",
+        encrypt_rescue_key_tooltip:
+            "Encrypt the Rescue Key at rest with a passphrase. You will need the passphrase to unlock it in this browser.",
+        set_rescue_passphrase_prompt:
+            "Enter a passphrase to encrypt your Rescue Key at rest.\n\nWARNING: if you forget this passphrase and have no Rescue Key backup, your funds are unrecoverable.",
+        confirm_rescue_passphrase_prompt: "Re-enter the passphrase to confirm:",
+        rescue_passphrase_empty: "The passphrase must not be empty.",
+        rescue_passphrase_mismatch:
+            "The passphrases do not match. Please try again.",
+        encrypt_rescue_key_success: "Rescue Key encrypted successfully!",
+        encrypt_rescue_key_error:
+            "An error occurred while encrypting the Rescue Key.\n\nError: {{ error }}",
+        disable_rescue_encryption_prompt:
+            "Remove passphrase encryption and store the Rescue Key in the clear again?\n\nType 'confirm' to proceed:",
+        disable_rescue_encryption_success: "Encryption removed.",
+        unlock_rescue_key_title: "Unlock your Rescue Key",
+        unlock_rescue_key_description:
+            "Your Rescue Key is encrypted. Enter your passphrase to unlock it and continue.",
+        unlock_rescue_key_placeholder: "Passphrase",
+        unlock_rescue_key_button: "Unlock",
+        unlock_rescue_key_invalid: "Invalid passphrase. Please try again.",
         no_swaps_found: "No swaps found",
         rif_extra_fee:
             "Wallet doesn't contain enough RBTC, fee adjusted to include RIF Relay fee!",
@@ -895,6 +917,31 @@ const dict = {
             "Es ist ein Fehler beim Zurücksetzen des Rettungsschlüssels aufgetreten. Bitte versuche es erneut.\n\nFehler: {{ error }}",
         reset_rescue_key_success:
             "Neuer Rettungsschlüssel erfolgreich generiert!",
+        encrypt_rescue_key: "Verschlüsseln",
+        decrypt_rescue_key: "Verschlüsselung entfernen",
+        encrypt_rescue_key_tooltip:
+            "Verschlüsseln Sie den Rettungsschlüssel im Ruhezustand mit einer Passphrase. Sie benötigen die Passphrase, um ihn in diesem Browser zu entsperren.",
+        set_rescue_passphrase_prompt:
+            "Geben Sie eine Passphrase ein, um Ihren Rettungsschlüssel im Ruhezustand zu verschlüsseln.\n\nWARNUNG: Wenn Sie diese Passphrase vergessen und keine Sicherung des Rettungsschlüssels haben, sind Ihre Gelder unwiederbringlich verloren.",
+        confirm_rescue_passphrase_prompt:
+            "Geben Sie die Passphrase zur Bestätigung erneut ein:",
+        rescue_passphrase_empty: "Die Passphrase darf nicht leer sein.",
+        rescue_passphrase_mismatch:
+            "Die Passphrasen stimmen nicht überein. Bitte versuchen Sie es erneut.",
+        encrypt_rescue_key_success:
+            "Rettungsschlüssel erfolgreich verschlüsselt!",
+        encrypt_rescue_key_error:
+            "Beim Verschlüsseln des Rettungsschlüssels ist ein Fehler aufgetreten.\n\nFehler: {{ error }}",
+        disable_rescue_encryption_prompt:
+            "Passphrase-Verschlüsselung entfernen und den Rettungsschlüssel wieder im Klartext speichern?\n\nGeben Sie 'confirm' ein, um fortzufahren:",
+        disable_rescue_encryption_success: "Verschlüsselung entfernt.",
+        unlock_rescue_key_title: "Rettungsschlüssel entsperren",
+        unlock_rescue_key_description:
+            "Ihr Rettungsschlüssel ist verschlüsselt. Geben Sie Ihre Passphrase ein, um ihn zu entsperren und fortzufahren.",
+        unlock_rescue_key_placeholder: "Passphrase",
+        unlock_rescue_key_button: "Entsperren",
+        unlock_rescue_key_invalid:
+            "Ungültige Passphrase. Bitte versuchen Sie es erneut.",
         no_swaps_found: "Keine Swaps gefunden",
         rif_extra_fee:
             "Wallet enthält nicht genug RBTC, Gebühr um RIF-Relay-Gebühr angepasst!",
@@ -1477,6 +1524,31 @@ const dict = {
         reset_rescue_key_error:
             "Ocurrió un error al restablecer la clave de rescate. Por favor, intente de nuevo.\n\nError: {{ error }}",
         reset_rescue_key_success: "¡Nueva clave de rescate generada con éxito!",
+        encrypt_rescue_key: "Cifrar",
+        decrypt_rescue_key: "Quitar cifrado",
+        encrypt_rescue_key_tooltip:
+            "Cifra la clave de rescate en reposo con una frase de contraseña. Necesitarás la frase de contraseña para desbloquearla en este navegador.",
+        set_rescue_passphrase_prompt:
+            "Introduce una frase de contraseña para cifrar tu clave de rescate en reposo.\n\nADVERTENCIA: si olvidas esta frase de contraseña y no tienes una copia de seguridad de la clave de rescate, tus fondos serán irrecuperables.",
+        confirm_rescue_passphrase_prompt:
+            "Vuelve a introducir la frase de contraseña para confirmar:",
+        rescue_passphrase_empty:
+            "La frase de contraseña no puede estar vacía.",
+        rescue_passphrase_mismatch:
+            "Las frases de contraseña no coinciden. Inténtalo de nuevo.",
+        encrypt_rescue_key_success: "¡Clave de rescate cifrada con éxito!",
+        encrypt_rescue_key_error:
+            "Ocurrió un error al cifrar la clave de rescate.\n\nError: {{ error }}",
+        disable_rescue_encryption_prompt:
+            "¿Quitar el cifrado con frase de contraseña y volver a almacenar la clave de rescate en texto plano?\n\nEscribe 'confirm' para continuar:",
+        disable_rescue_encryption_success: "Cifrado eliminado.",
+        unlock_rescue_key_title: "Desbloquea tu clave de rescate",
+        unlock_rescue_key_description:
+            "Tu clave de rescate está cifrada. Introduce tu frase de contraseña para desbloquearla y continuar.",
+        unlock_rescue_key_placeholder: "Frase de contraseña",
+        unlock_rescue_key_button: "Desbloquear",
+        unlock_rescue_key_invalid:
+            "Frase de contraseña no válida. Inténtalo de nuevo.",
         no_swaps_found: "No se encontraron intercambios",
         rif_extra_fee:
             "El monedero no contiene suficientes RBTC, comisión ajustada para incluir comisión de RIF Relay!",
@@ -2058,6 +2130,30 @@ const dict = {
         reset_rescue_key_error:
             "Ocorreu um erro ao redefinir a chave de resgate. Por favor, tente novamente.\n\nErro: {{ error }}",
         reset_rescue_key_success: "Nova chave de resgate gerada com sucesso!",
+        encrypt_rescue_key: "Criptografar",
+        decrypt_rescue_key: "Remover criptografia",
+        encrypt_rescue_key_tooltip:
+            "Criptografe a chave de resgate em repouso com uma senha. Você precisará da senha para desbloqueá-la neste navegador.",
+        set_rescue_passphrase_prompt:
+            "Digite uma senha para criptografar sua chave de resgate em repouso.\n\nAVISO: se você esquecer esta senha e não tiver um backup da chave de resgate, seus fundos serão irrecuperáveis.",
+        confirm_rescue_passphrase_prompt:
+            "Digite a senha novamente para confirmar:",
+        rescue_passphrase_empty: "A senha não pode estar vazia.",
+        rescue_passphrase_mismatch:
+            "As senhas não coincidem. Tente novamente.",
+        encrypt_rescue_key_success:
+            "Chave de resgate criptografada com sucesso!",
+        encrypt_rescue_key_error:
+            "Ocorreu um erro ao criptografar a chave de resgate.\n\nErro: {{ error }}",
+        disable_rescue_encryption_prompt:
+            "Remover a criptografia por senha e armazenar a chave de resgate em texto puro novamente?\n\nDigite 'confirm' para continuar:",
+        disable_rescue_encryption_success: "Criptografia removida.",
+        unlock_rescue_key_title: "Desbloqueie sua chave de resgate",
+        unlock_rescue_key_description:
+            "Sua chave de resgate está criptografada. Digite sua senha para desbloqueá-la e continuar.",
+        unlock_rescue_key_placeholder: "Senha",
+        unlock_rescue_key_button: "Desbloquear",
+        unlock_rescue_key_invalid: "Senha inválida. Tente novamente.",
         no_swaps_found: "Nenhuma troca encontrada",
         rif_extra_fee:
             "A carteira não tem RBTC suficiente, taxa ajustada para incluir taxa do RIF Relay!",
@@ -2602,6 +2698,26 @@ const dict = {
         reset_rescue_key_error:
             "重置救援密钥时出错。请重试。\n\n错误：{{ error }}",
         reset_rescue_key_success: "新的救援密钥已成功生成！",
+        encrypt_rescue_key: "加密",
+        decrypt_rescue_key: "移除加密",
+        encrypt_rescue_key_tooltip:
+            "使用密码短语对静态存储的救援密钥进行加密。您需要密码短语才能在此浏览器中解锁它。",
+        set_rescue_passphrase_prompt:
+            "请输入密码短语以加密静态存储的救援密钥。\n\n警告：如果您忘记此密码短语且没有救援密钥备份，您的资金将无法恢复。",
+        confirm_rescue_passphrase_prompt: "请再次输入密码短语以确认：",
+        rescue_passphrase_empty: "密码短语不能为空。",
+        rescue_passphrase_mismatch: "密码短语不匹配。请重试。",
+        encrypt_rescue_key_success: "救援密钥加密成功！",
+        encrypt_rescue_key_error: "加密救援密钥时发生错误。\n\n错误：{{ error }}",
+        disable_rescue_encryption_prompt:
+            "移除密码短语加密并再次以明文存储救援密钥？\n\n输入 'confirm' 以继续：",
+        disable_rescue_encryption_success: "加密已移除。",
+        unlock_rescue_key_title: "解锁您的救援密钥",
+        unlock_rescue_key_description:
+            "您的救援密钥已加密。请输入密码短语以解锁并继续。",
+        unlock_rescue_key_placeholder: "密码短语",
+        unlock_rescue_key_button: "解锁",
+        unlock_rescue_key_invalid: "密码短语无效。请重试。",
         no_swaps_found: "未找到交换",
         rif_extra_fee: "钱包中没有足够的 RBTC，费用已调整为包括 RIF 中继费！",
         back: "回一页",
@@ -3154,6 +3270,31 @@ const dict = {
             "レスキューキーのリセット中にエラーが発生しました。もう一度お試しください。\n\nエラー：{{ error }}",
         reset_rescue_key_success:
             "新しいレスキューキーが正常に生成されました！",
+        encrypt_rescue_key: "暗号化",
+        decrypt_rescue_key: "暗号化を解除",
+        encrypt_rescue_key_tooltip:
+            "パスフレーズでレスキューキーを保存時に暗号化します。このブラウザでロック解除するにはパスフレーズが必要です。",
+        set_rescue_passphrase_prompt:
+            "レスキューキーを保存時に暗号化するためのパスフレーズを入力してください。\n\n警告：このパスフレーズを忘れ、レスキューキーのバックアップがない場合、資金を復元できなくなります。",
+        confirm_rescue_passphrase_prompt:
+            "確認のためパスフレーズを再入力してください：",
+        rescue_passphrase_empty: "パスフレーズを空にすることはできません。",
+        rescue_passphrase_mismatch:
+            "パスフレーズが一致しません。もう一度お試しください。",
+        encrypt_rescue_key_success:
+            "レスキューキーの暗号化に成功しました！",
+        encrypt_rescue_key_error:
+            "レスキューキーの暗号化中にエラーが発生しました。\n\nエラー：{{ error }}",
+        disable_rescue_encryption_prompt:
+            "パスフレーズによる暗号化を解除し、レスキューキーを再び平文で保存しますか？\n\n'confirm' と入力して続行してください：",
+        disable_rescue_encryption_success: "暗号化を解除しました。",
+        unlock_rescue_key_title: "レスキューキーのロック解除",
+        unlock_rescue_key_description:
+            "レスキューキーは暗号化されています。パスフレーズを入力してロックを解除し、続行してください。",
+        unlock_rescue_key_placeholder: "パスフレーズ",
+        unlock_rescue_key_button: "ロック解除",
+        unlock_rescue_key_invalid:
+            "パスフレーズが無効です。もう一度お試しください。",
         no_swaps_found: "スワップが見つからない",
         rif_extra_fee:
             "ウォレットに十分なRBTCがないため、RIFリレー手数料を含めて手数料を調整！",
