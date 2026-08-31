@@ -6,6 +6,7 @@ import type { PreimageHashMessage } from "./preimageHashes.worker";
 export class PreimageHashesWorker implements PreimageDerivation {
     private worker: Worker;
     isDone = false;
+    private paused = false;
     private batchResolver: (() => void) | undefined;
 
     readonly map: PreimageMap = new Map();
@@ -33,7 +34,9 @@ export class PreimageHashesWorker implements PreimageDerivation {
 
             log.debug(`Derived ${this.map.size} preimage hashes`);
 
+            this.paused = data.paused === true;
             this.batchResolver?.();
+            this.batchResolver = undefined;
 
             if (data.done) {
                 this.terminate();
@@ -51,6 +54,14 @@ export class PreimageHashesWorker implements PreimageDerivation {
     waitForNextBatch = (): Promise<void> => {
         if (this.isDone) {
             return Promise.resolve();
+        }
+        // The previous window finished and the scanner is asking for more (it
+        // only does so while it still has unmatched claims): resume derivation
+        // of the next window. This extends the scan past the first window only
+        // as far as the scanner needs, up to the worker's hard ceiling.
+        if (this.paused) {
+            this.paused = false;
+            this.worker.postMessage({ continue: true });
         }
         return new Promise((resolve) => {
             this.batchResolver = resolve;
