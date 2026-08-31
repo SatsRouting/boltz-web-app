@@ -9,7 +9,6 @@ import {
 } from "./invoice.ts";
 import { fetchLnurl, isLnurl, stripLightningPrefix } from "./lnurl.ts";
 import type { FetchOptions } from "./types.ts";
-import { firstResolvedPreferring } from "./util/promise.ts";
 
 export type ResolveInvoiceResult = { invoice: string; type: InvoiceType };
 
@@ -36,8 +35,13 @@ export const resolveInvoice = async (
         return { invoice, type: InvoiceType.Bolt12 };
     }
 
-    // A Lightning address may be either an LNURL-pay host or a BIP-353 name;
-    // race both and take whichever resolves first.
+    // A Lightning address may be either an LNURL-pay host or a BIP-353 name.
+    // BIP-353 is authenticated by a locally verified DNSSEC proof, whereas LNURL
+    // authenticity rests only on TLS to the (often third-party) host. Prefer the
+    // DNSSEC-verified BIP-353 result whenever it resolves and only fall back to
+    // LNURL when BIP-353 fails. Both are attempted concurrently for latency, but
+    // an LNURL result (or a fast LNURL amount error) never wins over, nor aborts,
+    // a still-pending BIP-353 lookup (FND-001).
     if (p.includes("@") && isLnurl(p)) {
         const raceController = new AbortController();
         const signal =
@@ -45,23 +49,40 @@ export const resolveInvoice = async (
                 ? AbortSignal.any([raceController.signal, opts.signal])
                 : raceController.signal;
         try {
-            const invoice = await firstResolvedPreferring(
-                [
-                    fetchLnurl(p, amountSat, {
-                        signal,
-                        timeoutMs: opts?.timeoutMs,
-                    }),
-                    import("./dnssec/bip353.ts").then((m) =>
-                        m.fetchBip353(p, amountSat, {
-                            dnsOverHttps: opts?.dnsOverHttps,
-                            signal,
-                            timeoutMs: opts?.timeoutMs,
-                        }),
-                    ),
-                ],
-                isLnurlAmountError,
+            const bip353Promise = import("./dnssec/bip353.ts").then((m) =>
+                m.fetchBip353(p, amountSat, {
+                    dnsOverHttps: opts?.dnsOverHttps,
+                    signal,
+                    timeoutMs: opts?.timeoutMs,
+                }),
             );
-            return { invoice, type: decodeInvoice(invoice).type };
+            // Settle-wrap LNURL so its rejection is never unhandled and can
+            // neither short-circuit nor abort the preferred BIP-353 leg.
+            const lnurlSettled = fetchLnurl(p, amountSat, {
+                signal,
+                timeoutMs: opts?.timeoutMs,
+            }).then(
+                (invoice) => ({ ok: true as const, invoice }),
+                (error: unknown) => ({ ok: false as const, error }),
+            );
+
+            try {
+                const invoice = await bip353Promise;
+                return { invoice, type: decodeInvoice(invoice).type };
+            } catch (bip353Error) {
+                const lnurl = await lnurlSettled;
+                if (lnurl.ok) {
+                    return {
+                        invoice: lnurl.invoice,
+                        type: decodeInvoice(lnurl.invoice).type,
+                    };
+                }
+                // Neither channel resolved. Prefer surfacing an LNURL amount
+                // error (actionable for the user) over the BIP-353 failure.
+                throw isLnurlAmountError(lnurl.error)
+                    ? lnurl.error
+                    : (bip353Error ?? lnurl.error);
+            }
         } finally {
             raceController.abort(new Error("resolution race settled"));
         }

@@ -127,7 +127,7 @@ describe("resolveInvoice", () => {
         expect(fetchBip353Mock).not.toHaveBeenCalled();
     });
 
-    test("races LNURL vs BIP-353 for a Lightning address; LNURL wins", async () => {
+    test("falls back to LNURL for a Lightning address when BIP-353 fails", async () => {
         isLnurlMock.mockReturnValue(true);
         fetchLnurlMock.mockResolvedValue("lnbc1fromlnurl");
         fetchBip353Mock.mockRejectedValue(new Error("no dns record"));
@@ -140,13 +140,25 @@ describe("resolveInvoice", () => {
         await vi.waitFor(() => expect(fetchBip353Mock).toHaveBeenCalled());
     });
 
-    test("races LNURL vs BIP-353 for a Lightning address; BIP-353 wins", async () => {
+    test("resolves a Lightning address via BIP-353 when LNURL fails", async () => {
         isLnurlMock.mockReturnValue(true);
         fetchLnurlMock.mockRejectedValue(new Error("no lnurlp host"));
         fetchBip353Mock.mockResolvedValue("lni1frombip353");
 
         const result = await resolveInvoice("user@example.com", 1000);
 
+        expect(result.invoice).toBe("lni1frombip353");
+        expect(result.type).toBe(InvoiceType.Bolt12);
+    });
+
+    test("prefers the DNSSEC-verified BIP-353 result even when LNURL also resolves (FND-001)", async () => {
+        isLnurlMock.mockReturnValue(true);
+        fetchLnurlMock.mockResolvedValue("lnbc1fromlnurl");
+        fetchBip353Mock.mockResolvedValue("lni1frombip353");
+
+        const result = await resolveInvoice("user@example.com", 1000);
+
+        // The authenticated BIP-353 answer must win over the TLS-only LNURL one.
         expect(result.invoice).toBe("lni1frombip353");
         expect(result.type).toBe(InvoiceType.Bolt12);
     });
@@ -326,41 +338,47 @@ describe("resolveInvoice", () => {
         await expect(result).rejects.toThrow("user aborted");
     });
 
-    test("aborts the losing branch once the race settles", async () => {
+    test("aborts the losing LNURL branch once BIP-353 resolves", async () => {
         isLnurlMock.mockReturnValue(true);
-        fetchLnurlMock.mockResolvedValue("lnbc1fromlnurl");
-        let bip353Signal: AbortSignal | undefined;
-        fetchBip353Mock.mockImplementation(
-            (_bip353, _amount, opts: { signal: AbortSignal }) => {
-                bip353Signal = opts.signal;
+        fetchBip353Mock.mockResolvedValue("lni1frombip353");
+        let lnurlSignal: AbortSignal | undefined;
+        fetchLnurlMock.mockImplementation(
+            (_lnurl, _amount, opts: { signal: AbortSignal }) => {
+                lnurlSignal = opts.signal;
                 return new Promise<string>(() => {});
             },
         );
 
-        await resolveInvoice("user@example.com", 1000);
+        const result = await resolveInvoice("user@example.com", 1000);
 
-        await vi.waitFor(() => expect(bip353Signal?.aborted).toBe(true));
+        expect(result.invoice).toBe("lni1frombip353");
+        await vi.waitFor(() => expect(lnurlSignal?.aborted).toBe(true));
     });
 
-    test("rejects with the amount error while the BIP-353 branch is still pending", async () => {
+    test("a fast LNURL amount error does not abort a pending BIP-353 lookup (FND-001)", async () => {
         isLnurlMock.mockReturnValue(true);
-        const amountError = new LnurlAmountError(
-            LnurlAmountErrorKind.Min,
-            5000,
+        fetchLnurlMock.mockRejectedValue(
+            new LnurlAmountError(LnurlAmountErrorKind.Min, 5000),
         );
-        fetchLnurlMock.mockRejectedValue(amountError);
-        let bip353Signal: AbortSignal | undefined;
+        let resolveBip353!: (invoice: string) => void;
         fetchBip353Mock.mockImplementation(
-            (_bip353, _amount, opts: { signal: AbortSignal }) => {
-                bip353Signal = opts.signal;
-                return new Promise<string>(() => {});
-            },
+            () =>
+                new Promise<string>((resolve) => {
+                    resolveBip353 = resolve;
+                }),
         );
 
-        await expect(resolveInvoice("user@example.com", 1)).rejects.toBe(
-            amountError,
-        );
-        await vi.waitFor(() => expect(bip353Signal?.aborted).toBe(true));
+        const resultPromise = resolveInvoice("user@example.com", 1);
+        // The BIP-353 leg starts after a lazy dynamic import; wait for it.
+        await vi.waitFor(() => expect(fetchBip353Mock).toHaveBeenCalled());
+        // The LNURL amount error rejected immediately, but resolution must wait
+        // for the still-pending BIP-353 leg rather than aborting it.
+        resolveBip353("lni1frombip353");
+
+        await expect(resultPromise).resolves.toEqual({
+            invoice: "lni1frombip353",
+            type: InvoiceType.Bolt12,
+        });
     });
 
     test("passes the caller signal through unchanged outside the race", async () => {

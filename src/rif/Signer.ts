@@ -30,6 +30,17 @@ export const GasNeededToClaim = BigInt(35355) * 2n;
 
 export const MaxRelayNonceGap = 10;
 
+// Generous slack over the bare gas cost to tolerate relay margin and estimation
+// variance while still rejecting a fee inflated to drain the claim (SIG-003).
+export const rifFeePremium = 3n;
+
+// Largest relay fee (in wei) the client will authorize for a claim, given the
+// gas the relay says it needs and a trustworthy gas price. Exported for tests.
+export const maxAcceptableRelayFee = (
+    tokenGas: bigint,
+    effectiveGasPrice: bigint,
+): bigint => tokenGas * effectiveGasPrice * rifFeePremium;
+
 const sign = async (signer: Signer, request: EnvelopingRequest) => {
     const chainId = BigInt(await signer.provider.getChainId());
     const callForwarder = request.relayData.callForwarder;
@@ -143,6 +154,35 @@ export const relayClaimTransaction = async (
 
     const estimateRes = await estimate(envelopingRequest, metadata);
     log.debug("RIF gas estimation response", estimateRes);
+
+    // SIG-003: the smart wallet pays `tokenAmount` of native RBTC to the relay's
+    // feesReceiver, and this signed request is the sole authorization for that
+    // payment. Bound the relay-chosen fee before signing so a malicious or
+    // compromised relay cannot make the user authorize (almost) their entire
+    // claimed amount as a "fee".
+    const tokenGas = BigInt(estimateRes.estimation);
+    const tokenAmount = BigInt(estimateRes.requiredTokenAmount);
+    const signedGasPrice = calculateGasPrice(
+        feeData.gasPrice ?? 0n,
+        chainInfo.minGasPrice,
+    );
+    // Reference against the client's own network gas price so a manipulated
+    // server `minGasPrice` cannot inflate the ceiling; fall back to the signed
+    // price only when the provider estimate is unavailable.
+    const referenceGasPrice =
+        feeData.gasPrice !== undefined && feeData.gasPrice > 0n
+            ? feeData.gasPrice
+            : signedGasPrice;
+    const effectiveGasPrice =
+        signedGasPrice < referenceGasPrice ? signedGasPrice : referenceGasPrice;
+    const maxRelayFee = maxAcceptableRelayFee(tokenGas, effectiveGasPrice);
+    const claimWei = satoshiToWei(amount);
+
+    if (tokenAmount > maxRelayFee || tokenAmount >= claimWei) {
+        throw new Error(
+            `RIF relay requested fee ${tokenAmount.toString()} wei exceeds the accepted maximum ${maxRelayFee.toString()} wei (gas ${tokenGas.toString()}, claim ${claimWei.toString()} wei); refusing to sign`,
+        );
+    }
 
     envelopingRequest.request.tokenGas = estimateRes.estimation;
     envelopingRequest.request.tokenAmount = estimateRes.requiredTokenAmount;

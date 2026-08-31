@@ -12,11 +12,15 @@ import {
     type UtxoAsset,
     type UtxoNetwork,
     createMusig,
+    decodeAddress,
+    getNetwork,
     getTransaction,
+    hashForWitnessV1,
     refundUtxos,
     tweakMusig,
     txToId,
 } from "boltz-swaps/utxo";
+import { Transaction as LiquidTransaction } from "liquidjs-lib";
 import log from "loglevel";
 
 import { config } from "../config";
@@ -68,6 +72,9 @@ export const enum RefundType {
     Uncooperative = "uncooperative",
     AssetRescue = "assetRescue",
 }
+
+const equalBytes = (a: Uint8Array, b: Uint8Array): boolean =>
+    a.length === b.length && a.every((byte, index) => byte === b[index]);
 
 export const RescueNoAction = [
     RescueAction.Successful,
@@ -256,6 +263,58 @@ const assetRescueRefund = async <T extends SubmarineSwap | ChainSwap>(
         output.vout,
         refundAddress,
     );
+
+    // SIG-002: the server returns a MuSig2 `message` to sign together with the
+    // rescue `transaction` it claims that message belongs to. Never sign it
+    // blindly: recompute the taproot key-path sighash of the returned
+    // transaction (spending our swap output) and require byte-equality with the
+    // server-supplied message, and verify the transaction actually pays the
+    // user's refund address. Otherwise a malicious/compromised backend could
+    // have the user authorise a spend of the whole swap output to itself.
+    const networkName = config.network as UtxoNetwork;
+    const rescueTx = getTransaction(swap.assetSend).fromHex(setup.transaction);
+    if (!(rescueTx instanceof LiquidTransaction)) {
+        throw new Error("asset rescue is only supported for Liquid");
+    }
+    if (rescueTx.ins.length !== 1) {
+        throw new Error(
+            "unexpected asset rescue transaction: expected exactly one input",
+        );
+    }
+
+    const expectedMessage = hashForWitnessV1(
+        swap.assetSend,
+        getNetwork(swap.assetSend, networkName),
+        [output] as never,
+        rescueTx,
+        0,
+    );
+    if (
+        !equalBytes(
+            Uint8Array.from(expectedMessage),
+            hex.decode(setup.musig.message),
+        )
+    ) {
+        throw new Error(
+            "asset rescue message does not match the returned transaction; refusing to sign",
+        );
+    }
+
+    const refundScript = decodeAddress(
+        swap.assetSend,
+        refundAddress,
+        networkName,
+    ).script;
+    const paysRefundAddress = rescueTx.outs.some(
+        (out) =>
+            out.script !== undefined &&
+            equalBytes(Uint8Array.from(out.script), Uint8Array.from(refundScript)),
+    );
+    if (!paysRefundAddress) {
+        throw new Error(
+            "asset rescue transaction does not pay the refund address; refusing to sign",
+        );
+    }
 
     const withMsg = tweaked.message(hex.decode(setup.musig.message));
     const withNonce = withMsg.generateNonce();
