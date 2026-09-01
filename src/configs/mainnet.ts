@@ -19,7 +19,7 @@ const config = {
     // Onion di SATS Routing: mostrato nel footer come link "Onion" (Footer usa <Show>).
     // Metti "" per nasconderlo. Originale Boltz:
     // "http://boltzzzbnus4m7mta3cxmflnps4fp7dueu2tgurstbvrbt6xswzcocyd.onion/"
-    torUrl: "http://esvdbbvdyams2ogjlx2t3tpiebm4dkk5yuielfb4dihseoprenl4mzid.onion/",
+    torUrl: "http://w2mqd2fcbgiop7oyxoes2ozmdnvgon22oipj7vzh2rquepf7cxauauad.onion/",
     network: "mainnet",
     loglevel: "debug",
     // Self-hosted same-origin API (nginx serves app + /v2 on LAN HTTPS and onion).
