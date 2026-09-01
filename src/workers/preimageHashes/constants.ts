@@ -6,5 +6,5 @@ export const derivationWindow = 100_000;
 // Absolute ceiling across all windows. Bounds work when unmatched lockups can
 // never be matched (e.g. they belong to a different wallet) so the scan cannot
 // derive forever. Raised well above the historical single-pass cap so swaps
-// with a key index beyond the first window are no longer invisible (FND-004).
+// with a key index beyond the first window are no longer invisible.
 export const maxIterations = 1_000_000;

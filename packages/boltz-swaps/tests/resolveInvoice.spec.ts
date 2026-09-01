@@ -151,7 +151,7 @@ describe("resolveInvoice", () => {
         expect(result.type).toBe(InvoiceType.Bolt12);
     });
 
-    test("prefers the DNSSEC-verified BIP-353 result even when LNURL also resolves (FND-001)", async () => {
+    test("prefers the DNSSEC-verified BIP-353 result even when LNURL also resolves", async () => {
         isLnurlMock.mockReturnValue(true);
         fetchLnurlMock.mockResolvedValue("lnbc1fromlnurl");
         fetchBip353Mock.mockResolvedValue("lni1frombip353");
@@ -355,7 +355,7 @@ describe("resolveInvoice", () => {
         await vi.waitFor(() => expect(lnurlSignal?.aborted).toBe(true));
     });
 
-    test("a fast LNURL amount error does not abort a pending BIP-353 lookup (FND-001)", async () => {
+    test("a fast LNURL amount error does not abort a pending BIP-353 lookup", async () => {
         isLnurlMock.mockReturnValue(true);
         fetchLnurlMock.mockRejectedValue(
             new LnurlAmountError(LnurlAmountErrorKind.Min, 5000),

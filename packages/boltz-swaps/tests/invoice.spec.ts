@@ -577,7 +577,7 @@ describe("isInvoice", () => {
     });
 });
 
-describe("verifyBip21Signature (FND-006)", () => {
+describe("verifyBip21Signature", () => {
     const privateKey = secp256k1.utils.randomSecretKey();
     const xOnlyPubkey = schnorr.getPublicKey(privateKey);
     const compressedPubkey = secp256k1.getPublicKey(privateKey, true);

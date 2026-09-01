@@ -1255,7 +1255,7 @@ describe("CreateButton", () => {
                 );
             }
             // No BIP-353 record for this address: the DoH lookup fails fast, so
-            // resolution falls back to the LNURL endpoint (FND-001 prefers a
+            // resolution falls back to the LNURL endpoint (the resolver prefers a
             // successful BIP-353 result and only falls back on its failure).
             return Promise.reject(new Error("no dns record"));
         });

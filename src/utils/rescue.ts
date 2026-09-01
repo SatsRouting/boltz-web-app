@@ -264,7 +264,7 @@ const assetRescueRefund = async <T extends SubmarineSwap | ChainSwap>(
         refundAddress,
     );
 
-    // SIG-002: the server returns a MuSig2 `message` to sign together with the
+    // The server returns a MuSig2 `message` to sign together with the
     // rescue `transaction` it claims that message belongs to. Never sign it
     // blindly: recompute the taproot key-path sighash of the returned
     // transaction (spending our swap output) and require byte-equality with the

@@ -227,7 +227,7 @@ export const parsePrivateKey = (
     // public key) parses as a valid secp256k1 scalar, so a corrupted swap object
     // would otherwise sign with a non-key. When the caller knows the public key
     // that must correspond to this private key, reject any mismatch instead of
-    // silently signing (KEY-005).
+    // silently signing.
     if (expectedPublicKey !== undefined) {
         // Compare on the x-coordinate so a compressed (33-byte) key and an
         // x-only (32-byte) key are treated equivalently.

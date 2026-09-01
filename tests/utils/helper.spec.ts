@@ -123,7 +123,7 @@ describe("helper", () => {
             expect(ECPair.fromPrivateKey).toHaveBeenCalledTimes(1);
         });
 
-        test("should accept a raw key matching the expected public key (KEY-005)", () => {
+        test("should accept a raw key matching the expected public key", () => {
             const secret = secp256k1.utils.randomSecretKey();
             const publicKey = Buffer.from(secp256k1.getPublicKey(secret, true));
             vi.mocked(ECPair.fromPrivateKey).mockReturnValueOnce({
@@ -143,7 +143,7 @@ describe("helper", () => {
             ).toEqual({ publicKey });
         });
 
-        test("should reject a raw key that mismatches the expected public key (KEY-005)", () => {
+        test("should reject a raw key that mismatches the expected public key", () => {
             // A preimage or the server's x-only public key parses as a valid
             // scalar; its derived public key must not match the expected one.
             const secret = secp256k1.utils.randomSecretKey();

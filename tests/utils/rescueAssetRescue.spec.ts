@@ -24,7 +24,7 @@ import type * as HelperModule from "../../src/utils/helper";
 import { RefundType, refund } from "../../src/utils/rescue";
 import type { SubmarineSwap } from "../../src/utils/swapCreator";
 
-// SIG-002 lives in the asset-rescue signing path of `refund`. It recomputes the
+// The asset-rescue signing path of `refund` recomputes the
 // taproot key-path sighash of the rescue transaction the server returns and
 // refuses to sign unless (a) that sighash byte-matches the MuSig2 `message` the
 // server asked us to sign and (b) the transaction actually pays the user's
@@ -153,7 +153,7 @@ let musig: ReturnType<typeof makeMusigStub>;
 const callRefund = () =>
     refund(deriveKey, swap, refundAddress, [{ hex: "00" }], RefundType.AssetRescue);
 
-describe("asset rescue signing (SIG-002)", () => {
+describe("asset rescue signing", () => {
     beforeEach(() => {
         vi.clearAllMocks();
 

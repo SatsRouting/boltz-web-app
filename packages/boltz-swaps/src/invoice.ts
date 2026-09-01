@@ -229,7 +229,7 @@ export const bolt12InvoicePayee = (invoice: string): Uint8Array => {
  * signature over sha256(utf8(address)); the same signature the backend verified
  * at reverse-swap creation is served to payers so they can independently confirm
  * the on-chain destination was chosen by the payee and not substituted by a
- * malicious backend (FND-006).
+ * malicious backend.
  *
  * `payeePublicKey` may be a 32-byte x-only key or a 33-byte compressed key
  * (e.g. the BOLT11 routing-hint node id).

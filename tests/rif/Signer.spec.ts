@@ -1,6 +1,6 @@
 import { maxAcceptableRelayFee, rifFeePremium } from "../../src/rif/Signer";
 
-describe("maxAcceptableRelayFee (SIG-003)", () => {
+describe("maxAcceptableRelayFee", () => {
     test("bounds the fee to the gas cost times the premium", () => {
         const tokenGas = 35_000n;
         const gasPrice = 60_000_000n; // ~0.06 gwei, typical for Rootstock

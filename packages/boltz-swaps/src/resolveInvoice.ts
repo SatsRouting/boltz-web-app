@@ -41,7 +41,7 @@ export const resolveInvoice = async (
     // DNSSEC-verified BIP-353 result whenever it resolves and only fall back to
     // LNURL when BIP-353 fails. Both are attempted concurrently for latency, but
     // an LNURL result (or a fast LNURL amount error) never wins over, nor aborts,
-    // a still-pending BIP-353 lookup (FND-001).
+    // a still-pending BIP-353 lookup.
     if (p.includes("@") && isLnurl(p)) {
         const raceController = new AbortController();
         const signal =

@@ -118,7 +118,7 @@ export const mapClaimableSwap = ({
                       // Never write the server's PUBLIC key into the private-key
                       // field: signing consumes only refundPrivateKeyIndex, and
                       // the raw fallback in parsePrivateKey would otherwise treat
-                      // this public key as a private scalar (KEY-005).
+                      // this public key as a private scalar.
                       lockupDetails: {
                           ...refund,
                           swapTree: refund.tree,
@@ -255,7 +255,7 @@ const ClaimRescue = () => {
                         // the derived value is the PREIMAGE, not a private key, so
                         // it must not be written into claimPrivateKey where the
                         // raw fallback would sign with a scalar that is revealed
-                        // on-chain at claim time (KEY-005).
+                        // on-chain at claim time.
                         preimage: derivedKey,
                         status: swapStatus.status,
                         transaction: {

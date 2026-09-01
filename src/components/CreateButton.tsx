@@ -717,7 +717,7 @@ const CreateButton = () => {
                     // over the address; a malicious backend that substituted its
                     // own address cannot forge it. If the signature is missing
                     // or invalid, fall back to a normal submarine swap so the
-                    // invoice is still paid to the intended payee (FND-006).
+                    // invoice is still paid to the intended payee.
                     const bip21Signature = bip21Response?.signature;
                     let payeePublicKey: Uint8Array | undefined;
                     try {

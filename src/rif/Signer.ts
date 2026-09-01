@@ -31,7 +31,7 @@ export const GasNeededToClaim = BigInt(35355) * 2n;
 export const MaxRelayNonceGap = 10;
 
 // Generous slack over the bare gas cost to tolerate relay margin and estimation
-// variance while still rejecting a fee inflated to drain the claim (SIG-003).
+// variance while still rejecting a fee inflated to drain the claim.
 export const rifFeePremium = 3n;
 
 // Largest relay fee (in wei) the client will authorize for a claim, given the
@@ -155,7 +155,7 @@ export const relayClaimTransaction = async (
     const estimateRes = await estimate(envelopingRequest, metadata);
     log.debug("RIF gas estimation response", estimateRes);
 
-    // SIG-003: the smart wallet pays `tokenAmount` of native RBTC to the relay's
+    // The smart wallet pays `tokenAmount` of native RBTC to the relay's
     // feesReceiver, and this signed request is the sole authorization for that
     // payment. Bound the relay-chosen fee before signing so a malicious or
     // compromised relay cannot make the user authorize (almost) their entire
