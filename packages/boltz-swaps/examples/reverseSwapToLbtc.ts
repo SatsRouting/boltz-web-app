@@ -3,12 +3,12 @@
 // Full Lightning -> L-BTC reverse swap, driven entirely by the SDK.
 //
 // Flow:
-//   1. Create the reverse swap. Boltz returns a hold invoice.
+//   1. Create the reverse swap. SatsRouting returns a hold invoice.
 //   2. You pay that invoice from any Lightning wallet.
-//   3. Boltz locks L-BTC on-chain; watch `swap.watch(id)` for status updates.
+//   3. SatsRouting locks L-BTC on-chain; watch `swap.watch(id)` for status updates.
 //   4. Once the lockup confirms, `swap.reverse.execute(...)` claims the L-BTC
 //      to your address (cooperatively; it falls back to the script path if
-//      Boltz refuses to co-sign). Claiming reveals the preimage, which settles
+//      SatsRouting refuses to co-sign). Claiming reveals the preimage, which settles
 //      the invoice.
 //
 // ── Run ────────────────────────────────────────────────────────────────────

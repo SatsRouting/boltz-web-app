@@ -1,4 +1,4 @@
-# Boltz Web App
+# SatsRouting (Boltz) Web App
 
 This is the source of the satsrouting fork of the official Boltz Web App. It is now served at
 [satsrouting.exchange](https://satsrouting.exchange/). It enables **non-custodial** swaps

@@ -46,7 +46,7 @@ import type {
 
 // A malicious or compromised backend can return a swap timeout arbitrarily far
 // in the future to strand an honest user's uncooperative refund (the only exit
-// that does not require the backend). Boltz timeouts are day-scale, so any
+// that does not require the backend). SatsRouting timeouts are day-scale, so any
 // user-lockup timeout beyond this generous window is rejected. Kept large to
 // avoid ever rejecting a legitimate swap; easy to tighten.
 const maxTimeoutDays = 30;

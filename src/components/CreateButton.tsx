@@ -611,7 +611,7 @@ const CreateButton = () => {
                         ? buildDexDetail(
                               creationData.hops,
                               creationData.hopsPosition,
-                              // Full route amounts: creationData holds the Boltz
+                              // Full route amounts: creationData holds the SatsRouting
                               // leg only, which is the intermediate asset for a
                               // routed swap. Consumers of quoteAmount compare it
                               // against the final DEX output (post) or display it

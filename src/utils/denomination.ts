@@ -206,7 +206,7 @@ export const formatNativeAmountForLog = (
     }
 };
 
-// Boltz swap-denomination amount: sats for BTC-pegged assets (incl. RBTC),
+// SatsRouting swap-denomination amount: sats for BTC-pegged assets (incl. RBTC),
 // token units for ERC20. RBTC differs from formatAssetAmountForLog, which uses
 // on-chain wei.
 export const formatSwapAmountForLog = (

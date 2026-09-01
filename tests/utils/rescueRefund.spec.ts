@@ -14,7 +14,7 @@ import type { SubmarineSwap } from "../../src/utils/swapCreator";
 // from the lockup timeout, and the "non-final" broadcast fallback that surfaces
 // the cooperative error when the timelocked (uncooperative) transaction cannot
 // be broadcast yet. The uncooperative path is the trustless escape hatch that
-// must keep working even if Boltz refuses to co-sign.
+// must keep working even if SatsRouting refuses to co-sign.
 
 const dummyKeys = {
     privateKey: new Uint8Array(32).fill(1),

@@ -2,7 +2,7 @@
 //
 // Full L-BTC -> USDC on Base, driven entirely by the SDK.
 //
-// This composes a Boltz chain swap with a post-claim DEX swap and a CCTP
+// This composes a SatsRouting chain swap with a post-claim DEX swap and a CCTP
 // bridge, all settled in ONE on-chain "router claim":
 //   L-BTC --chain swap--> <BTC-pegged EVM token> --DEX--> USDC --CCTP--> Base
 //
@@ -11,7 +11,7 @@
 //      the via/landing asset (the chain-swap destination), committing the
 //      signer's EOA as the claim address.
 //   2. You fund the returned L-BTC lockup address from any external wallet.
-//   3. Watch `swap.watch(id)` for status; once Boltz has locked the destination,
+//   3. Watch `swap.watch(id)` for status; once SatsRouting has locked the destination,
 //      `route.execute(...)` claims it and, in the same tx, runs the DEX swap and
 //      bridges USDC to your Base address.
 //
@@ -32,7 +32,7 @@
 //   BOLTZ_AMOUNT_SATS        (optional) L-BTC to lock, in sats. Default 250000.
 //   EVM_RPC_URL              (optional) RPC for the via-asset chain (the chain
 //                            the DEX runs on). Defaults to the preset RPC.
-//   ALCHEMY_GAS_SPONSOR_URL  (optional) overrides the default Boltz gas sponsor.
+//   ALCHEMY_GAS_SPONSOR_URL  (optional) overrides the default SatsRouting gas sponsor.
 //   SLIPPAGE                 (optional) fraction (e.g. 0.01 == 1%). Default 0.01.
 //   BOLTZ_PREIMAGE           (optional) 64-hex preimage; random if unset.
 //   BOLTZ_REFUND_PRIVATE_KEY (optional) 64-hex L-BTC refund key; random if unset.
@@ -192,7 +192,7 @@ const main = async () => {
     }
     const signer = buildSigner(account, rpcUrl);
 
-    // 2) Watch the status until Boltz has locked the destination, then claim.
+    // 2) Watch the status until SatsRouting has locked the destination, then claim.
     //    `execute` does the claim only — it does not watch.
     console.log("\nWatching swap status (Ctrl+C to stop)…");
     let lastStatus = "";

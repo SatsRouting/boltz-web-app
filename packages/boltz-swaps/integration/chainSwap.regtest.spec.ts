@@ -244,7 +244,7 @@ describe("chain swap integration (regtest)", () => {
         expect(created.id).toBeTruthy();
 
         // Underpay the lockup: the swap fails (TransactionLockupFailed) and the
-        // server never locks, which is exactly when Boltz cooperatively
+        // server never locks, which is exactly when SatsRouting cooperatively
         // co-signs a chain refund. 20_000 stays well above the dust limit.
         await (from === "BTC"
             ? bitcoinSendToAddress(

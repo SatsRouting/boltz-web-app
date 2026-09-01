@@ -35,7 +35,7 @@ export { GasAbstractionType };
 export type DexDetail = {
     hops: EncodedHop[];
 
-    // Whether hops run pre or post the Boltz swap
+    // Whether hops run pre or post the SatsRouting swap
     position: SwapPosition;
 
     // Expected DEX amount at creation; updated with actual amount after execution.
