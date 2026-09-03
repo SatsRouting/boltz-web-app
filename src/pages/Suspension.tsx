@@ -4,7 +4,8 @@ import ExternalLink from "../components/ExternalLink";
 import { useGlobalContext } from "../context/Global";
 import "../style/suspension.scss";
 
-const tweetUrl = "https://x.com/Boltzhq/status/2084311537502630319";
+// const tweetUrl = "https://x.com/Boltzhq/status/2084311537502630319";
+const tweetUrl = "https://satsrouting.exchange";
 
 const paragraphs = [
     "suspension_p1",
@@ -28,12 +29,12 @@ export const Suspension = () => {
 
             <ExternalLink class="tweet" href={tweetUrl}>
                 <div class="tweet-head">
-                    <img src="/boltz-icon.svg" alt="" />
+                    <img src="/logo.png" alt="" />
                     <div>
                         <div class="tweet-name">
-                            Boltz — Non-Custodial Bitcoin Bridge
+                            SATS Routing — Non-Custodial Bitcoin Bridge
                         </div>
-                        <div class="tweet-handle">@Boltzhq</div>
+                        <div class="tweet-handle">@satsrouting</div>
                     </div>
                 </div>
 

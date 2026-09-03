@@ -5,7 +5,7 @@
 // Flow:
 //   1. Create the chain swap (source = L-BTC, destination = TBTC on Arbitrum).
 //   2. You fund the returned L-BTC lockup address from any external wallet.
-//   3. Watch `swap.watch(id)` for status; once Boltz has locked TBTC,
+//   3. Watch `swap.watch(id)` for status; once SatsRouting has locked TBTC,
 //      `swap.chain.execute(...)` claims it to your Arbitrum address.
 //
 // ── Run ────────────────────────────────────────────────────────────────────
@@ -22,7 +22,7 @@
 //                            Defaults to the signer's own address.
 //   BOLTZ_AMOUNT_SATS        (optional) L-BTC to lock, in sats. Default 250000.
 //   ARBITRUM_RPC_URL         (optional) overrides the preset Arbitrum RPC.
-//   ALCHEMY_GAS_SPONSOR_URL  (optional) overrides the default Boltz gas sponsor.
+//   ALCHEMY_GAS_SPONSOR_URL  (optional) overrides the default SatsRouting gas sponsor.
 //   BOLTZ_PREIMAGE           (optional) 64-hex preimage; random if unset.
 //   BOLTZ_REFUND_PRIVATE_KEY (optional) 64-hex L-BTC refund key; random if unset.
 //
@@ -127,7 +127,7 @@ const main = async () => {
         network: "mainnet",
         referral: "sdk-example",
         // Claims are gas-abstracted through this Alchemy sponsor; defaults to
-        // the Boltz gas sponsor when unset.
+        // the SatsRouting gas sponsor when unset.
         gasSponsor: process.env.ALCHEMY_GAS_SPONSOR_URL,
     });
 
@@ -185,7 +185,7 @@ const main = async () => {
         `\nExpected to receive ~${createdSwap.claimDetails.amount} TBTC base units (18 dec).`,
     );
 
-    // 3) Watch the status until Boltz has locked TBTC, then claim it.
+    // 3) Watch the status until SatsRouting has locked TBTC, then claim it.
     //    `execute` does the claim only — it does not watch.
     console.log("\nWatching swap status (Ctrl+C to stop)…");
     let lastStatus = "";

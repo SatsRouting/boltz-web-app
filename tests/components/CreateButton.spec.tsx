@@ -872,7 +872,7 @@ describe("CreateButton", () => {
         signals.setInvoice(invoice);
         signals.setInvoiceValid(true);
         setPairAssetsWithPairs(usdt0Pairs, USDC, LN);
-        // The Boltz leg alone runs on the intermediate asset
+        // The SatsRouting leg alone runs on the intermediate asset
         signals.pair().creationData = vi.fn().mockResolvedValue({
             type: SwapType.Submarine,
             from: TBTC,
@@ -1254,8 +1254,10 @@ describe("CreateButton", () => {
                     }),
                 );
             }
-            // The racing BIP-353 DoH lookup never settles.
-            return new Promise<Response>(() => {});
+            // No BIP-353 record for this address: the DoH lookup fails fast, so
+            // resolution falls back to the LNURL endpoint (the resolver prefers a
+            // successful BIP-353 result and only falls back on its failure).
+            return Promise.reject(new Error("no dns record"));
         });
         vi.stubGlobal("fetch", fetchMock);
 
@@ -1393,7 +1395,7 @@ describe("buildDexDetail", () => {
     ] as never;
 
     // Full route amounts: the user sends 0.01 BTC and receives 1000 USDT0.
-    // The Boltz leg alone would be ~1e6 sats of TBTC, a different asset and
+    // The SatsRouting leg alone would be ~1e6 sats of TBTC, a different asset and
     // a different unit, so it must never reach quoteAmount.
     const fullRouteSend = BigNumber(1_000_000);
     const fullRouteReceive = BigNumber(1_000_000_000);

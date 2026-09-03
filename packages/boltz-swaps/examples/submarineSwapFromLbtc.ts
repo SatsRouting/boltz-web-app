@@ -5,11 +5,11 @@
 // Flow:
 //   1. Create the submarine swap for the Lightning invoice you want paid.
 //   2. Fund the returned L-BTC lockup address from any external wallet.
-//   3. Boltz pays the invoice, then claims the lockup. Co-signing
-//      (`swap.submarine.signClaim`) lets Boltz claim cooperatively (cheaper /
+//   3. SatsRouting pays the invoice, then claims the lockup. Co-signing
+//      (`swap.submarine.signClaim`) lets SatsRouting claim cooperatively (cheaper /
 //      faster) once it reaches `transaction.claim.pending`; it is otherwise
 //      claimed via the script path.
-//   4. If Boltz cannot pay the invoice, refund the L-BTC with
+//   4. If SatsRouting cannot pay the invoice, refund the L-BTC with
 //      `swap.submarine.refundUtxo(...)` after the timeout.
 //
 // ── Run ────────────────────────────────────────────────────────────────────
@@ -21,7 +21,7 @@
 //   BOLTZ_REFUND_PRIVATE_KEY (optional) 64-hex L-BTC refund key; random if unset.
 //
 // ⚠️  This spends real mainnet L-BTC. The refund key and lockup blinding key
-//     printed below are the only way to refund it if Boltz cannot pay — save
+//     printed below are the only way to refund it if SatsRouting cannot pay — save
 //     them before funding.
 //
 import { secp256k1 } from "@noble/curves/secp256k1.js";
@@ -113,7 +113,7 @@ const main = async () => {
             lastStatus = status;
         }
 
-        // Once Boltz is ready to claim, co-sign so it can claim cooperatively.
+        // Once SatsRouting is ready to claim, co-sign so it can claim cooperatively.
         if (status === SwapStatus.TransactionClaimPending && !coSigned) {
             console.log("  co-signing the cooperative claim…");
             await boltz.swap.submarine.signClaim({

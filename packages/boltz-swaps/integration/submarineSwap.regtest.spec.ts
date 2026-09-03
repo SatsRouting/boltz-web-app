@@ -169,7 +169,7 @@ describe("submarine swap integration (regtest)", () => {
             await sleep(300);
         }
 
-        // Skips the timeout safety check so Boltz co-signs the refund now
+        // Skips the timeout safety check so SatsRouting co-signs the refund now
         await allowSwapRefund(created.id);
 
         const lockup = await getLockupTransaction(
@@ -264,7 +264,7 @@ describe("submarine swap integration (regtest)", () => {
             : getLiquidAddress());
 
         // Mine past the swap timeout so the timelocked (script-path) refund,
-        // which Boltz never co-signs, becomes final and broadcastable.
+        // which SatsRouting never co-signs, becomes final and broadcastable.
         const height = await getBlockCount(from);
         if (height <= created.timeoutBlockHeight) {
             await generateBlocks(from, created.timeoutBlockHeight - height + 1);

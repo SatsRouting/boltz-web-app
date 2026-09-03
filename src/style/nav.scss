@@ -160,6 +160,16 @@ nav a.active {
 #logo {
     z-index: 1;
 }
+#logo #logo-img {
+    display: block;
+    height: 52px;
+    width: auto;
+    max-width: none;
+    padding: 0;
+    margin: -6px 8px -6px 0;
+    object-fit: contain;
+    border-radius: 8px;
+}
 
 #hamburger {
     cursor: pointer;

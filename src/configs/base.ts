@@ -30,23 +30,24 @@ const defaults = {
         normal: "https://sponsor.ccxp.space/",
         tor: "http://bcyxkoqqofgnygmajez5rmpk2ne3bbq3p4l2c6yk57cilvfm4pnbp6ad.onion/",
     },
-    supportUrl: "https://support.boltz.exchange/hc/center",
-    twitterUrl: "https://twitter.com/boltzhq",
-    githubUrl: "https://github.com/BoltzExchange",
-    repoUrl: "https://github.com/BoltzExchange/boltz-web-app",
-    docsUrl: "https://docs.boltz.exchange",
-    blogUrl: "https://blog.boltz.exchange",
-    partnerUrl: "https://partner.boltz.exchange",
-    nostrUrl:
-        "https://primal.net/p/nprofile1qqsqcdcltmv4qanpx3p7svcufdsg9rkk00x7l2sknra4e6whkv59l7clgcdzj",
-    statusUrl: "https://status.boltz.exchange",
-    youtubeUrl:
-        "https://www.youtube.com/playlist?list=PLkqOa9SGBeZfAEHvKkGKjeRIASeu6bNO3",
-    brandingUrl: "https://github.com/BoltzExchange/logo",
-    regtestUrl: "https://github.com/BoltzExchange/regtest/",
-    email: "hi@bol.tz",
+    // Link esterni personalizzati SATS Routing.
+    // Lasciati "" = nascosti nell'UI (Nav/Footer con <Show>). Reinserire l'URL
+    // proprio per riattivarli. A destra l'originale Boltz come riferimento.
+    supportUrl: "", // "https://support.boltz.exchange/hc/center"
+    twitterUrl: "", // "https://twitter.com/boltzhq"
+    githubUrl: "", // "https://github.com/BoltzExchange"
+    repoUrl: "", // "https://github.com/BoltzExchange/boltz-web-app"
+    docsUrl: "", // "https://docs.boltz.exchange"
+    blogUrl: "", // "https://blog.boltz.exchange"
+    partnerUrl: "", // "https://partner.boltz.exchange"
+    nostrUrl: "", // "https://primal.net/p/nprofile1qqsqcdcltmv4qanpx3p7svcufdsg9rkk00x7l2sknra4e6whkv59l7clgcdzj"
+    statusUrl: "", // "https://status.boltz.exchange"
+    youtubeUrl: "", // "https://www.youtube.com/playlist?list=PLkqOa9SGBeZfAEHvKkGKjeRIASeu6bNO3"
+    brandingUrl: "", // "https://github.com/BoltzExchange/logo"
+    regtestUrl: "", // "https://github.com/BoltzExchange/regtest/"
+    email: "hi@satsrouting.exchange",
     dnsOverHttps: "https://1.1.1.1/dns-query",
-    chatwootUrl: "https://support.boltz.exchange",
+    chatwootUrl: "", // "https://support.boltz.exchange"
     preimageValidation: "https://validate-payment.com",
     layerZeroExplorerUrl: "https://layerzeroscan.com",
     cctpExplorerUrl: "https://ccxp.space",

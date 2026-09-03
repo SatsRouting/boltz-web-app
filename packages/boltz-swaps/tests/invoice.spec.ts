@@ -1,4 +1,4 @@
-import { secp256k1 } from "@noble/curves/secp256k1.js";
+import { schnorr, secp256k1 } from "@noble/curves/secp256k1.js";
 import { sha256 } from "@noble/hashes/sha2.js";
 import { hex } from "@scure/base";
 import bolt11 from "bolt11";
@@ -11,6 +11,7 @@ import {
     isBolt12Offer,
     isInvoice,
     validateInvoiceForOffer,
+    verifyBip21Signature,
 } from "boltz-swaps/invoice";
 
 describe("decodeInvoice bolt11 millisatoshi rounding", () => {
@@ -573,5 +574,61 @@ describe("isInvoice", () => {
         test("returns false for a number", () => {
             expect(isInvoice(123 as never)).toBe(false);
         });
+    });
+});
+
+describe("verifyBip21Signature", () => {
+    const privateKey = secp256k1.utils.randomSecretKey();
+    const xOnlyPubkey = schnorr.getPublicKey(privateKey);
+    const compressedPubkey = secp256k1.getPublicKey(privateKey, true);
+    const address = "bc1qexampleaddresspayeeendorsed000000000000";
+
+    const signAddress = (addr: string): string =>
+        hex.encode(
+            schnorr.sign(sha256(new TextEncoder().encode(addr)), privateKey),
+        );
+
+    test("accepts a payee signature over the address (x-only key)", () => {
+        expect(
+            verifyBip21Signature(address, signAddress(address), xOnlyPubkey),
+        ).toBe(true);
+    });
+
+    test("accepts a compressed (33-byte) payee key", () => {
+        expect(
+            verifyBip21Signature(
+                address,
+                signAddress(address),
+                compressedPubkey,
+            ),
+        ).toBe(true);
+    });
+
+    test("rejects a signature over a different address (substituted destination)", () => {
+        const attackerAddress = "bc1qattackercontrolledaddr0000000000000000";
+        expect(
+            verifyBip21Signature(
+                attackerAddress,
+                signAddress(address),
+                xOnlyPubkey,
+            ),
+        ).toBe(false);
+    });
+
+    test("rejects a signature from a different key", () => {
+        const otherKey = secp256k1.getPublicKey(
+            secp256k1.utils.randomSecretKey(),
+            true,
+        );
+        expect(
+            verifyBip21Signature(address, signAddress(address), otherKey),
+        ).toBe(false);
+    });
+
+    test("returns false instead of throwing on a malformed signature", () => {
+        expect(verifyBip21Signature(address, "not-hex", xOnlyPubkey)).toBe(
+            false,
+        );
+        expect(verifyBip21Signature(address, "00", xOnlyPubkey)).toBe(false);
     });
 });

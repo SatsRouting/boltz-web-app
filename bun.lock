@@ -174,7 +174,7 @@
     "@vulpemventures/secp256k1-zkp": "^3.2.1",
     "bignumber.js": "^11.1.5",
     "bolt11": "^1.4.1",
-    "bolt12-utils": "^0.1.2",
+    "bolt12-utils": "0.1.2",
     "boltz-core": "^4.0.5",
     "liquidjs-lib": "^6.0.2-liquid.38",
     "tronweb": "^6.4.0",

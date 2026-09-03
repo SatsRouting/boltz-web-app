@@ -7,21 +7,27 @@ const mainnetPreset = buildMainnetConfig({
     rpcUrls: envRpcUrls,
     canSend: usdt0CanSendOverrides,
     btcMempoolApiUrl: import.meta.env.VITE_MEMPOOL_API_URL || undefined,
-    // The SDK exposes the Arkade chain-swap source (asset id "ARK"), but the web
-    // app has no Arkade wallet support yet, so keep it out of the app's asset
-    // list (selector and `sendAsset`/`receiveAsset` URL params).
-    filterAssets: (asset) => asset !== "ARK",
+    // Self-hosted: only BTC (on-chain + LN in UI) and L-BTC. Hide EVM/stablecoins
+    // (RBTC, WBTC, USDT0, USDC, CCTP/OFT variants, ARK, …).
+    filterAssets: (asset) => asset === "BTC" || asset === "L-BTC",
 });
 
 const config = {
     ...baseConfig,
-    swapsSuspended: true,
-    torUrl: "http://boltzzzbnus4m7mta3cxmflnps4fp7dueu2tgurstbvrbt6xswzcocyd.onion/",
+    // Self-hosted: enable swaps in UI (upstream default is true for public site).
+    swapsSuspended: false,
+    // Onion di SATS Routing: mostrato nel footer come link "Onion" (Footer usa <Show>).
+    // Metti "" per nasconderlo. Originale Boltz:
+    // "http://boltzzzbnus4m7mta3cxmflnps4fp7dueu2tgurstbvrbt6xswzcocyd.onion/"
+    torUrl: "http://w2mqd2fcbgiop7oyxoes2ozmdnvgon22oipj7vzh2rquepf7cxauauad.onion/",
     network: "mainnet",
     loglevel: "debug",
+    // Self-hosted same-origin API (nginx serves app + /v2 on LAN HTTPS and onion).
+    // Empty string: fetch/WS use current origin. Both normal and tor must be ""
+    // because isTor() switches to apiUrl.tor on *.onion hostnames.
     apiUrl: {
-        normal: "https://api.boltz.exchange",
-        tor: "http://boltzzzbnus4m7mta3cxmflnps4fp7dueu2tgurstbvrbt6xswzcocyd.onion/api",
+        normal: "",
+        tor: "",
     },
     cctpApiUrl: mainnetPreset.cctpApiUrl,
     solburnUrl: mainnetPreset.solburnUrl,

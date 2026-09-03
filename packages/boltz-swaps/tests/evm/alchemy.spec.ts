@@ -342,6 +342,152 @@ describe("Alchemy", () => {
             });
         });
 
+        const makeLocalSigner = (): Signer => {
+            const privateKey =
+                "0x0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef";
+            const account = privateKeyToAccount(privateKey);
+            const walletClient = createWalletClient({
+                account,
+                transport: custom({
+                    request: () =>
+                        Promise.reject(
+                            new Error("unexpected wallet rpc request"),
+                        ),
+                }),
+            });
+            return Object.assign(walletClient, {
+                address: account.address,
+                provider: createPublicClient({
+                    transport: custom({
+                        request: () =>
+                            Promise.reject(
+                                new Error("unexpected public rpc request"),
+                            ),
+                    }),
+                }),
+                rdns: "test",
+            }) as Signer;
+        };
+
+        const arrayPrepareResponse = (
+            authChainId: string,
+            uoChainId: string,
+        ) => ({
+            id: 1,
+            jsonrpc: "2.0",
+            result: {
+                type: "array",
+                data: [
+                    {
+                        type: "eip-7702-authorization",
+                        data: { authorization: true },
+                        chainId: authChainId,
+                        signatureRequest: {
+                            rawPayload: `0x${"11".repeat(32)}`,
+                        },
+                    },
+                    {
+                        type: "user-operation-v070",
+                        data: { userOperation: true },
+                        chainId: uoChainId,
+                        signatureRequest: {
+                            data: { raw: `0x${"22".repeat(32)}` },
+                        },
+                    },
+                ],
+            },
+        });
+
+        test.each`
+            label                          | authChainId | uoChainId
+            ${"chain-agnostic (chainId 0)"} | ${"0x0"}    | ${"0x1e"}
+            ${"wrong authorization chain"} | ${"0x1"}    | ${"0x1e"}
+            ${"wrong user operation chain"} | ${"0x1e"}  | ${"0x1"}
+        `(
+            "should refuse to sign and never send when the $label",
+            async ({ authChainId, uoChainId }) => {
+                const signer = makeLocalSigner();
+                const fetchMock = vi
+                    .spyOn(globalThis, "fetch")
+                    .mockImplementation((_url, init) => {
+                        const body = parseRequestBody(init);
+                        if (body.method !== "wallet_prepareCalls") {
+                            throw new Error(
+                                `unexpected method ${body.method} — chainId guard should fire first`,
+                            );
+                        }
+                        return Promise.resolve(
+                            Response.json(
+                                arrayPrepareResponse(
+                                    authChainId as string,
+                                    uoChainId as string,
+                                ),
+                            ),
+                        );
+                    });
+
+                await expect(
+                    sendAlchemyTransaction(signer, 30n, [
+                        {
+                            to: "0x1000000000000000000000000000000000000000",
+                            data: "0x1234",
+                        },
+                    ]),
+                ).rejects.toThrow(
+                    /does not match the requested chain 30; refusing to sign/,
+                );
+
+                const sentPrepared = fetchMock.mock.calls
+                    .map(([, init]) => parseRequestBody(init))
+                    .some((body) => body.method === "wallet_sendPreparedCalls");
+                expect(sentPrepared).toBe(false);
+            },
+        );
+
+        test("should refuse to sign a single user operation on a mismatched chain", async () => {
+            const signer = makeLocalSigner();
+            const fetchMock = vi
+                .spyOn(globalThis, "fetch")
+                .mockImplementation((_url, init) => {
+                    const body = parseRequestBody(init);
+                    if (body.method !== "wallet_prepareCalls") {
+                        throw new Error(
+                            `unexpected method ${body.method} — chainId guard should fire first`,
+                        );
+                    }
+                    return Promise.resolve(
+                        Response.json({
+                            id: 1,
+                            jsonrpc: "2.0",
+                            result: {
+                                type: "user-operation-v070",
+                                data: { userOperation: true },
+                                chainId: "0x1",
+                                signatureRequest: {
+                                    data: { raw: `0x${"22".repeat(32)}` },
+                                },
+                            },
+                        }),
+                    );
+                });
+
+            await expect(
+                sendAlchemyTransaction(signer, 30n, [
+                    {
+                        to: "0x1000000000000000000000000000000000000000",
+                        data: "0x1234",
+                    },
+                ]),
+            ).rejects.toThrow(
+                /does not match the requested chain 30; refusing to sign/,
+            );
+
+            const sentPrepared = fetchMock.mock.calls
+                .map(([, init]) => parseRequestBody(init))
+                .some((body) => body.method === "wallet_sendPreparedCalls");
+            expect(sentPrepared).toBe(false);
+        });
+
         test("should reject 7702 authorization signing for non-local signers", async () => {
             // JSON-RPC signers must not sign raw 32-byte digests (no EIP-191 prefix).
             const jsonRpcSigner = {

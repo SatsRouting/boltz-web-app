@@ -34,6 +34,13 @@ import { detectLanguage } from "../i18n/detect";
 import dict, { type DictKey } from "../i18n/i18n";
 import { type ECKeys, ECPair } from "../utils/ecpair";
 import { formatError } from "../utils/errors";
+import { evmIndexStorageKey, nextEvmIndexForChain } from "../utils/evmIndex";
+import {
+    type EncryptedRescueFile,
+    decryptMnemonic,
+    encryptMnemonic,
+    isEncryptedRescueFile,
+} from "../utils/rescueEncryption";
 import { getRegularReferral, isMobile } from "../utils/helper";
 import { deleteOldLogs, injectLogWriter } from "../utils/logs";
 import { migrateStorage } from "../utils/migration";
@@ -143,7 +150,12 @@ export type GlobalContextType = {
     setLastUsedEvmIndex: (currency: string, value: number) => Promise<number>;
     clearLastUsedEvmIndex: () => Promise<void>;
     rescueFile: Accessor<RescueFile | null>;
-    setRescueFile: Setter<RescueFile | null>;
+    setRescueFile: (value: RescueFile | null) => void;
+    rescueFileLocked: Accessor<boolean>;
+    rescueEncryptionEnabled: Accessor<boolean>;
+    enableRescueEncryption: (passphrase: string) => Promise<void>;
+    disableRescueEncryption: () => void;
+    unlockRescueFile: (passphrase: string) => Promise<void>;
     rescueFileBackupDone: Accessor<boolean>;
     setRescueFileBackupDone: Setter<boolean>;
 };
@@ -214,13 +226,112 @@ const GlobalProvider = (props: {
         },
     );
 
-    const [rescueFile, setRescueFile] = makePersisted(
+    // Value persisted at rest under "rescueFile". It is either the plaintext
+    // mnemonic (default, unchanged behaviour) or an encrypted blob when the user
+    // opted into passphrase encryption. Existing plaintext localStorage entries
+    // keep loading transparently.
+    const [storedRescueFile, setStoredRescueFile] = makePersisted(
         // eslint-disable-next-line solid/reactivity
-        createSignal<RescueFile | null>(null),
+        createSignal<RescueFile | EncryptedRescueFile | null>(null),
         {
             name: "rescueFile",
         },
     );
+
+    // In-memory only: the decrypted mnemonic for the current session and the
+    // passphrase used to re-encrypt it when it changes. Never persisted, so a
+    // stolen browser profile only ever contains the encrypted blob.
+    const [unlockedRescueFile, setUnlockedRescueFile] =
+        createSignal<RescueFile | null>(null);
+    const [sessionPassphrase, setSessionPassphrase] = createSignal<
+        string | null
+    >(null);
+
+    const rescueEncryptionEnabled = createMemo(() =>
+        isEncryptedRescueFile(storedRescueFile()),
+    );
+
+    // The plaintext rescue file available to the rest of the app. When the vault
+    // is encrypted this is null until the user unlocks it with the passphrase.
+    const rescueFile = createMemo<RescueFile | null>(() => {
+        const stored = storedRescueFile();
+        if (stored === null) {
+            return null;
+        }
+        if (isEncryptedRescueFile(stored)) {
+            return unlockedRescueFile();
+        }
+        return stored;
+    });
+
+    const rescueFileLocked = createMemo(
+        () => rescueEncryptionEnabled() && unlockedRescueFile() === null,
+    );
+
+    const setRescueFile = (value: RescueFile | null): void => {
+        if (value === null) {
+            setUnlockedRescueFile(null);
+            setSessionPassphrase(null);
+            setStoredRescueFile(null);
+            return;
+        }
+
+        setUnlockedRescueFile(value);
+
+        // Without an active session passphrase the vault is unencrypted, so the
+        // plaintext is persisted as before. When encryption is active the
+        // re-encryption effect below persists the encrypted blob instead.
+        if (sessionPassphrase() === null) {
+            setStoredRescueFile(value);
+        }
+    };
+
+    // Re-encrypt and persist whenever the plaintext changes while encryption is
+    // active (e.g. after a reset or import), so the mnemonic is never written to
+    // disk in the clear once the user opted in.
+    createEffect(() => {
+        const passphrase = sessionPassphrase();
+        const rf = unlockedRescueFile();
+        if (passphrase === null || rf === null) {
+            return;
+        }
+        void encryptMnemonic(rf.mnemonic, passphrase)
+            .then((encrypted) => setStoredRescueFile(encrypted))
+            .catch((error) =>
+                log.error("Failed to re-encrypt rescue file", error),
+            );
+    });
+
+    const enableRescueEncryption = async (passphrase: string): Promise<void> => {
+        const rf = rescueFile();
+        if (rf === null) {
+            throw new Error("rescue file is not available to encrypt");
+        }
+        const encrypted = await encryptMnemonic(rf.mnemonic, passphrase);
+        setUnlockedRescueFile(rf);
+        setSessionPassphrase(passphrase);
+        setStoredRescueFile(encrypted);
+    };
+
+    const disableRescueEncryption = (): void => {
+        const rf = rescueFile();
+        if (rf === null) {
+            throw new Error("unlock the rescue file before disabling encryption");
+        }
+        setSessionPassphrase(null);
+        setUnlockedRescueFile(rf);
+        setStoredRescueFile(rf);
+    };
+
+    const unlockRescueFile = async (passphrase: string): Promise<void> => {
+        const stored = storedRescueFile();
+        if (!isEncryptedRescueFile(stored)) {
+            return;
+        }
+        const mnemonic = await decryptMnemonic(stored, passphrase);
+        setUnlockedRescueFile({ mnemonic });
+        setSessionPassphrase(passphrase);
+    };
 
     const [lastUsedKey, setLastUsedKey] = makePersisted(
         // eslint-disable-next-line solid/reactivity
@@ -239,7 +350,11 @@ const GlobalProvider = (props: {
     );
 
     createEffect(() => {
-        if (rescueFile() === null) {
+        // Only generate when there is nothing stored at all. When the vault is
+        // encrypted `rescueFile()` is null until unlocked, but `storedRescueFile`
+        // holds the encrypted blob - regenerating here would overwrite it and
+        // lose the user's keys.
+        if (storedRescueFile() === null) {
             log.debug("Generating rescue file");
             setRescueFile(generateRescueFile());
         }
@@ -274,8 +389,32 @@ const GlobalProvider = (props: {
 
     const newKey = async (asset: AssetType) => {
         if (isEvmAsset(asset)) {
-            const index = await getLastUsedEvmIndex(asset);
-            await setLastUsedEvmIndex(asset, index + 1);
+            const chainId = config.assets?.[asset]?.network?.chainId;
+            if (chainId === undefined) {
+                throw new Error(`missing chainId for EVM asset ${asset}`);
+            }
+
+            // Index the counter by chainId (not asset symbol): the derivation
+            // path is scoped by chainId only, so two assets on the same chain
+            // would otherwise derive identical keys and preimages at the same
+            // per-asset index.
+            const assetChainIds = Object.fromEntries(
+                Object.entries(config.assets ?? {}).map(
+                    ([symbol, assetConfig]) => [
+                        symbol,
+                        assetConfig?.network?.chainId,
+                    ],
+                ),
+            );
+            const index = await nextEvmIndexForChain(
+                chainId,
+                assetChainIds,
+                (key) => lastUsedEvmIndexForage.getItem<number>(key),
+            );
+            await lastUsedEvmIndexForage.setItem(
+                evmIndexStorageKey(chainId),
+                index + 1,
+            );
             return {
                 index,
                 key: deriveKeyWrapper(index, asset),
@@ -660,6 +799,11 @@ const GlobalProvider = (props: {
                 newKey,
                 rescueFile,
                 setRescueFile,
+                rescueFileLocked,
+                rescueEncryptionEnabled,
+                enableRescueEncryption,
+                disableRescueEncryption,
+                unlockRescueFile,
                 setLastUsedKey,
                 getLastUsedEvmIndex,
                 setLastUsedEvmIndex,

@@ -39,7 +39,7 @@
         <meta name="twitter:description" content="${boltzDescription}" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:image" content="${boltzUrl}/boltz-preview.jpg" />
-        <meta name="twitter:site" content="@boltzhq" />
+        <!-- <meta name="twitter:site" content="@boltzhq" /> -->
 
         <meta name="description" content="${boltzDescription}" />
         <meta name="mobile-web-app-capable" content="yes" />
@@ -60,23 +60,33 @@
                     transform: translate(-50%, -50%) scale(1);
                 }
             }
-            body > svg {
+            body > svg,
+            body > img.app-loading-logo {
                 display: none;
             }
             .loading {
                 background: var(--backgroundColor);
             }
-            .loading > svg {
+            .loading > img.app-loading-logo {
                 position: absolute;
                 top: 50%;
                 left: 50%;
                 transform: translate(-50%, -50%);
                 display: block;
+                width: 180px;
+                max-width: 60vw;
+                border-radius: 16px;
                 animation: boltzing 3s infinite;
             }
         </style>
     </head>
     <body class="loading">
+        <!-- Splash SATS Routing. Il vecchio wordmark "boltz" SVG resta sotto
+        ma non è più visibile (nascosto da body > svg { display:none }). -->
+        <img
+            class="app-loading-logo"
+            src="${assetsPath}/logo.png"
+            alt="SATS Routing" />
         <noscript>You need to enable JavaScript to run this app.</noscript>
         <svg
             width="46.626mm"

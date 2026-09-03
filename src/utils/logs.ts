@@ -24,7 +24,28 @@ export const parseDate = (date: string): Date => {
     return parsed;
 };
 
-const replaceBigInt = (_key: string, value: unknown) => {
+// Keys whose values are secret and must never be written to the persistent log
+// store (which can be exported to support / Chatwoot). "preimage" is redacted
+// but "preimageHash" is kept because it is public.
+const isSecretLogKey = (key: string): boolean => {
+    const lower = key.toLowerCase();
+    return (
+        lower.includes("privatekey") ||
+        lower.includes("mnemonic") ||
+        lower.includes("seed") ||
+        lower === "preimage"
+    );
+};
+
+const sanitizeLogValue = (key: string, value: unknown) => {
+    if (
+        isSecretLogKey(key) &&
+        value !== undefined &&
+        value !== null &&
+        value !== ""
+    ) {
+        return "[redacted]";
+    }
     return typeof value === "bigint" ? value.toString() : value;
 };
 
@@ -60,7 +81,7 @@ export const formatLogLine = (message: unknown[]) => {
                     return entry;
                 }
                 if (typeof entry === "object") {
-                    return JSON.stringify(entry, replaceBigInt);
+                    return JSON.stringify(entry, sanitizeLogValue);
                 }
 
                 return entry;

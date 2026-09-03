@@ -1164,7 +1164,7 @@ describe("Pair", () => {
         expect(creationData?.hopsPosition).toBe(SwapPosition.Post);
         // What the user actually receives: USDT0 base units
         expect(fullRouteReceive.toNumber()).toBe(1_000_000_000);
-        // The Boltz leg alone settles in TBTC sats, so creation amounts must
+        // The SatsRouting leg alone settles in TBTC sats, so creation amounts must
         // never be persisted as the route quote (see buildDexDetail)
         expect(creationData!.receiveAmount.toNumber()).toBe(1_000_000);
     });

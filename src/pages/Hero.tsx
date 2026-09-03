@@ -106,19 +106,42 @@ export const Hero = () => {
                                 alt="Liquid Bitcoin"
                                 class="padded"
                             />
-                            <img
-                                src={rbtc}
-                                alt="Rootstock Bitcoin"
-                                class="rbtc"
-                            />
-                            <div class="hero-icons-break" />
-                            <img src={tbtc} alt="tBTC" class="full-bleed" />
-                            <img src={wbtc} alt="WBTC" class="full-bleed" />
-                            <img src={usdt} alt="USDT" class="full-bleed" />
-                            <img src={usdc} alt="USDC" class="full-bleed" />
+                            {/* Self-host: solo Lightning, Bitcoin e Liquid.
+                            Gli altri asset sono nascosti (when={false}). */}
+                            <Show when={false}>
+                                <img
+                                    src={rbtc}
+                                    alt="Rootstock Bitcoin"
+                                    class="rbtc"
+                                />
+                                <div class="hero-icons-break" />
+                                <img
+                                    src={tbtc}
+                                    alt="tBTC"
+                                    class="full-bleed"
+                                />
+                                <img
+                                    src={wbtc}
+                                    alt="WBTC"
+                                    class="full-bleed"
+                                />
+                                <img
+                                    src={usdt}
+                                    alt="USDT"
+                                    class="full-bleed"
+                                />
+                                <img
+                                    src={usdc}
+                                    alt="USDC"
+                                    class="full-bleed"
+                                />
+                            </Show>
                         </div>
                     </div>
                 </div>
+                {/* Self-host: sezioni Lightning Nodes, Integrations e Partners
+                nascoste (when={false}). Codice conservato. */}
+                <Show when={false}>
                 <h2 class="headline">{t("node")}</h2>
                 <div id="numbers">
                     <div class="number">
@@ -313,6 +336,7 @@ export const Hero = () => {
                         <ExternalLink href="https://usdt0.to/" class="usdt0" />
                     </div>
                 </div>
+                </Show>
             </Show>
         </div>
     );

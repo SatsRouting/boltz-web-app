@@ -204,6 +204,7 @@ export const parsePrivateKey = (
     asset: AssetType,
     keyIndex?: number,
     privateKeyHex?: string,
+    expectedPublicKey?: Uint8Array,
 ): ECKeys => {
     if (keyIndex !== undefined) {
         return deriveKey(keyIndex, asset);
@@ -212,14 +213,36 @@ export const parsePrivateKey = (
         throw new Error("missing private key for parsePrivateKey");
     }
 
+    let keys: ECKeys;
     try {
-        return ECPair.fromPrivateKey(hex.decode(privateKeyHex));
+        keys = ECPair.fromPrivateKey(hex.decode(privateKeyHex));
 
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (e) {
         // When the private key is not HEX, we try to decode it as WIF
-        return ECPair.fromWIF(privateKeyHex);
+        keys = ECPair.fromWIF(privateKeyHex);
     }
+
+    // Defense in depth: a raw 32-byte value (e.g. a preimage or an x-only server
+    // public key) parses as a valid secp256k1 scalar, so a corrupted swap object
+    // would otherwise sign with a non-key. When the caller knows the public key
+    // that must correspond to this private key, reject any mismatch instead of
+    // silently signing.
+    if (expectedPublicKey !== undefined) {
+        // Compare on the x-coordinate so a compressed (33-byte) key and an
+        // x-only (32-byte) key are treated equivalently.
+        const xOnly = (key: Uint8Array): Buffer => {
+            const buf = Buffer.from(key);
+            return buf.length === 33 ? buf.subarray(1) : buf;
+        };
+        if (!xOnly(keys.publicKey).equals(xOnly(expectedPublicKey))) {
+            throw new Error(
+                "parsePrivateKey: derived public key does not match the expected key",
+            );
+        }
+    }
+
+    return keys;
 };
 
 export const getDestinationAddress = (

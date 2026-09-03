@@ -1451,7 +1451,7 @@ export default class Pair {
                 : sendAmount;
 
         for (const hop of routeToQuote) {
-            // Cache the amount that will be sent into the Boltz hop for this quote.
+            // Cache the amount that will be sent into the SatsRouting hop for this quote.
             if (
                 shouldCacheBoltzSwapSendAmount &&
                 boltzHop !== undefined &&
@@ -1623,7 +1623,7 @@ export default class Pair {
             firstHop.type === SwapType.Dex &&
             this.boltzSwapSendAmountFromLatestQuote(sendAmount) === undefined
         ) {
-            // Reuse the exact Boltz input from the latest reverse quote when available.
+            // Reuse the exact SatsRouting input from the latest reverse quote when available.
             // Requoting the DEX hop forward can round down by 1 and drift from swap creation.
             boltzSendAmount = await this.calculateReceiveAmount(
                 boltzSendAmount,

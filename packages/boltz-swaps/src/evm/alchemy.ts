@@ -224,9 +224,44 @@ const signAuthorizationDigest = async (
     return await signer.account.sign({ hash });
 };
 
+/**
+ * Rejects a prepared entry whose chainId does not match the chain the client
+ * actually requested. The gas-abstraction signer signs opaque server-provided
+ * digests (an EIP-7702 authorization and a UserOperation hash); without this
+ * check the sponsor could return an authorization for a different chain - or a
+ * chain-agnostic one (chainId 0, valid on every chain) - and the client would
+ * blindly sign it, handing over durable control of the per-chain EOA. Binding
+ * every signed entry to the requested chainId removes that cross-chain vector.
+ */
+const assertEntryChainId = (
+    entryChainId: string | undefined,
+    expectedChainId: bigint,
+    label: string,
+): void => {
+    if (entryChainId === undefined) {
+        throw new Error(`Alchemy prepareCalls ${label} is missing chainId`);
+    }
+
+    let parsed: bigint;
+    try {
+        parsed = BigInt(entryChainId);
+    } catch {
+        throw new Error(
+            `Alchemy prepareCalls ${label} has an invalid chainId "${entryChainId}"`,
+        );
+    }
+
+    if (parsed !== expectedChainId) {
+        throw new Error(
+            `Alchemy prepareCalls ${label} chainId ${parsed} does not match the requested chain ${expectedChainId}; refusing to sign`,
+        );
+    }
+};
+
 const signPreparedCalls = async (
     signer: Signer,
     prepareCallsResponse: PrepareCallsResponse,
+    chainId: bigint,
 ): Promise<SignedEntry[] | SignedEntry> => {
     const { result } = prepareCallsResponse;
 
@@ -251,6 +286,10 @@ const signPreparedCalls = async (
                 `signPreparedCalls: entries[1].type expected "user-operation-v070", got "${uoEntry.type}"`,
             );
         }
+
+        // Never sign a digest bound to a different (or chain-agnostic) chain.
+        assertEntryChainId(authEntry.chainId, chainId, "authorization");
+        assertEntryChainId(uoEntry.chainId, chainId, "user operation");
 
         // Sign the 7702 authorization as a raw digest (no EIP-191 prefix).
         const authPayload = authEntry.signatureRequest.rawPayload;
@@ -293,6 +332,8 @@ const signPreparedCalls = async (
     }
 
     // Subsequent transactions: sign only the user operation.
+    assertEntryChainId(result.chainId, chainId, "user operation");
+
     const payload = result.signatureRequest?.data?.raw;
     if (payload === undefined) {
         throw new Error(
@@ -303,14 +344,12 @@ const signPreparedCalls = async (
         account: signer.account,
         message: { raw: payload as Hex },
     });
-    if (result.chainId === undefined) {
-        throw new Error("Alchemy prepareCalls response is missing chainId");
-    }
 
     return {
         type: result.type,
+        // assertEntryChainId above guarantees chainId is defined.
         data: result.data,
-        chainId: result.chainId,
+        chainId: result.chainId!,
         signature: { type: "secp256k1", data: signature },
     };
 };
@@ -426,7 +465,7 @@ export const sendAlchemyTransaction = async (
         prefix0x(chainId.toString(16)),
         normalizedCalls,
     );
-    const signed = await signPreparedCalls(signer, prepared);
+    const signed = await signPreparedCalls(signer, prepared, chainId);
     const callId = await sendPreparedCalls(signed);
     await options.onPreparedCallId?.(callId);
     return waitForTransactionHash(callId);

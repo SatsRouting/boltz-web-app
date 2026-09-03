@@ -322,7 +322,7 @@ const SendToBridge = (props: {
         // a fixed source amount, e.g. for sweeping the wallet.
         let sourceAmount = BigInt(bridgeRoute.sourceAmount ?? 0);
 
-        // `props.amount` is the amount Boltz needs to arrive on the destination
+        // `props.amount` is the amount SatsRouting needs to arrive on the destination
         // chain (it was computed by the pair/DEX step on the far side). Bridges
         // that charge fees in the bridged asset (CCTP) must burn more than
         // that so the arrival matches. OFT typically returns `amount`

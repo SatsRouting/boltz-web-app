@@ -212,6 +212,49 @@ export const isBolt12Offer = (offer: string): boolean => {
     }
 };
 
+// x-only public key of the node that signed a BOLT12 invoice (its payee). Used
+// to authenticate the Magic Routing Hint bip21 address the server returns for a
+// BOLT12 payment.
+export const bolt12InvoicePayee = (invoice: string): Uint8Array => {
+    const { fields } = decodeBolt12Invoice(invoice);
+    if (fields.invoice_node_id === undefined) {
+        throw new Error("bolt12 invoice is missing the node id");
+    }
+    return normalizeBolt12NodeId(fields.invoice_node_id);
+};
+
+/**
+ * Verifies that a Magic Routing Hint / BOLT12 bip21 address returned by the
+ * server is endorsed by the invoice payee. The payee produces a BIP-340 schnorr
+ * signature over sha256(utf8(address)); the same signature the backend verified
+ * at reverse-swap creation is served to payers so they can independently confirm
+ * the on-chain destination was chosen by the payee and not substituted by a
+ * malicious backend.
+ *
+ * `payeePublicKey` may be a 32-byte x-only key or a 33-byte compressed key
+ * (e.g. the BOLT11 routing-hint node id).
+ */
+export const verifyBip21Signature = (
+    address: string,
+    signatureHex: string,
+    payeePublicKey: Uint8Array,
+): boolean => {
+    const xOnly =
+        payeePublicKey.length === compressedPubkeyLength
+            ? compressedPubkeyToXOnly(payeePublicKey)
+            : payeePublicKey;
+
+    try {
+        return schnorr.verify(
+            hex.decode(signatureHex),
+            sha256(new TextEncoder().encode(address)),
+            xOnly,
+        );
+    } catch {
+        return false;
+    }
+};
+
 // Verifies a bolt12 invoice is signed by the offer it claims to settle.
 export const validateInvoiceForOffer = (
     offer: string,

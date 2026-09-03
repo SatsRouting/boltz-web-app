@@ -1,4 +1,5 @@
 import { useNavigate } from "@solidjs/router";
+import { hex } from "@scure/base";
 import BigNumber from "bignumber.js";
 import { bridgeRegistry } from "boltz-swaps/bridge";
 import {
@@ -7,7 +8,12 @@ import {
 } from "boltz-swaps/client";
 import { isLnurlAmountError } from "boltz-swaps/errors";
 import { isKnownTokenAddress } from "boltz-swaps/evm";
-import { InvoiceType, decodeInvoice } from "boltz-swaps/invoice";
+import {
+    InvoiceType,
+    bolt12InvoicePayee,
+    decodeInvoice,
+    verifyBip21Signature,
+} from "boltz-swaps/invoice";
 import { resolveInvoice } from "boltz-swaps/resolveInvoice";
 import { SwapPosition, SwapType } from "boltz-swaps/types";
 import log from "loglevel";
@@ -605,7 +611,7 @@ const CreateButton = () => {
                         ? buildDexDetail(
                               creationData.hops,
                               creationData.hopsPosition,
-                              // Full route amounts: creationData holds the Boltz
+                              // Full route amounts: creationData holds the SatsRouting
                               // leg only, which is the intermediate asset for a
                               // routed swap. Consumers of quoteAmount compare it
                               // against the final DEX output (post) or display it
@@ -680,10 +686,11 @@ const CreateButton = () => {
                         ? findMagicRoutingHint(invoice())
                         : undefined;
 
-                    const bip21 =
+                    const bip21Response =
                         magicRoutingHint || isBolt12
-                            ? (await fetchBip21Invoice(invoice()))?.bip21
+                            ? await fetchBip21Invoice(invoice())
                             : undefined;
+                    const bip21 = bip21Response?.bip21;
 
                     const bip21Decoded = bip21 ? new URL(bip21) : undefined;
 
@@ -703,6 +710,45 @@ const CreateButton = () => {
                     }
 
                     const chainAddress = bip21Decoded.pathname;
+
+                    // Authenticate the server-provided on-chain destination
+                    // against the invoice payee before upgrading to a chain
+                    // swap. The backend returns the payee's schnorr signature
+                    // over the address; a malicious backend that substituted its
+                    // own address cannot forge it. If the signature is missing
+                    // or invalid, fall back to a normal submarine swap so the
+                    // invoice is still paid to the intended payee.
+                    const bip21Signature = bip21Response?.signature;
+                    let payeePublicKey: Uint8Array | undefined;
+                    try {
+                        payeePublicKey = isBolt12
+                            ? bolt12InvoicePayee(invoice())
+                            : magicRoutingHint?.pubkey !== undefined
+                              ? hex.decode(magicRoutingHint.pubkey)
+                              : undefined;
+                    } catch (e) {
+                        log.warn(
+                            "Could not determine invoice payee for MRH bip21 verification",
+                            e,
+                        );
+                    }
+
+                    if (
+                        bip21Signature === undefined ||
+                        payeePublicKey === undefined ||
+                        !verifyBip21Signature(
+                            chainAddress,
+                            bip21Signature,
+                            payeePublicKey,
+                        )
+                    ) {
+                        log.warn(
+                            "BIP21 payee signature verification failed; creating submarine swap instead of an MRH chain swap",
+                        );
+                        await createSubmarineSwap();
+                        break;
+                    }
+
                     const bip21Amount = BigNumber(
                         bip21Decoded.searchParams.get("amount") ?? 0,
                     );
