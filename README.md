@@ -60,7 +60,6 @@ All audit findings relevant to our operational scope (BTC on-chain, Lightning/LN
 
 ## Resources
 
-- Read the Docs: [Docs Home](https://docs.boltz.exchange/)
-- Read our Blog: [Substack](https://blog.boltz.exchange/)
+- Read the Docs: [API Docs](https://github.com/SatsRouting/satsrouting-api-docs)
 - Open a Lightning channel with us:
   [LND](https://amboss.space/node/0317235909659a67918dde7786b4986319c68165b72893877e0ff64a973bc62395)
